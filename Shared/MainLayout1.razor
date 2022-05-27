@@ -51,6 +51,7 @@
             </div>
         </div>
     </div>
+    
     <div id="content">
         <div class="grid wide">
             <div class="row">
@@ -59,16 +60,16 @@
                     <div class="sideNav">
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/home.svg" alt="">
-                            <NavLink class = "nav-link"  href="@customerid">
+                            <a class = "nav-link"  href="@customerid">
                             <span aria-hidden = "true"></span> Trang chủ
                             
-                            </NavLink>
+                            </a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/clock.svg" alt="">
-                            <NavLink class="nav-link" href="counter">
-                <span aria-hidden="true"></span> Counter
-            </NavLink>
+                            <a class="nav-link" href="/@customerid/lichsumuahang">
+                <span aria-hidden="true"></span> Lịch sử mua hàng
+            </a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/location-pin.png" alt="">
@@ -89,7 +90,9 @@
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/user_solid.svg" alt="">
-                            <a href="">Tài khoản của bạn</a>
+                            <a class = "nav-link" href ="/@customerid/taikhoancuatoi" >
+
+                             <span aria-hidden = "true"></span>Tài khoản của bạn</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/message-square.svg" alt="">
@@ -97,7 +100,10 @@
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/edit.svg" alt="">
-                            <a href="">Góp ý - Phản hồi</a>
+                            <a class = "nav-link" href ="/@customerid/phanhoi" >
+
+                             <span aria-hidden = "true"></span>
+                            Góp ý - Phản hồi</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/log-out.svg" alt="">
@@ -105,10 +111,8 @@
                         </div>
                     </div>
                 </div>
-                <div> 
                 @Body
                 </div>
-            </div>
     </div>
     </div>
 
@@ -117,12 +121,12 @@
 @code {
     Customer customer = new Customer();
 
-    
 
-   
+
+
 
     [Parameter]
-    public string customerid { get; set; }
+    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
 
    
 }

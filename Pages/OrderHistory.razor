@@ -1,0 +1,41 @@
+﻿@page "/{customerid}/lichsumuahang"    
+@layout MainLayout1   
+        
+        
+        <div class="col c-10 mt-16">
+            <div class="history">
+                <div class="history__manage_title">
+                    <p>QUẢN LÝ ĐƠN HÀNG</p>
+                </div>
+                <div class="history__search">
+                    <div class="box__all">
+                        <button>Tất cả</button>
+                    </div>
+                    <div class="box__search">
+                        <div class="box__searchbar">
+                            <img class="search__img" src="./assets/imgs/svg/magnifying-glass-solid.svg" alt="">
+                            <input type="search" name="" id="" placeholder="Tìm đơn hàng">
+                        </div>
+                    </div>
+                </div>   
+                <div class="history__order">
+                    <div class="history__order_header">
+                        <div>Mã vận chuyển</div>
+                        <div>Mã online</div>
+                        <div>Tình trạng</div>
+                        <div>Ngày đặt</div>
+                        <div>Tổng tiền</div>
+                    </div>
+                    <div class="history__order_list">
+                            Hiển thị danh sách đơn đặt hàng
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+@code {
+    [Parameter]
+    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
+
+}

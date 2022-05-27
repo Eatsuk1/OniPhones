@@ -1,0 +1,20 @@
+﻿@page "/{customerid}/phanhoi"    
+@layout MainLayout1   
+    
+    <div class="col c-10 mt-16">
+            <div class="response">
+                <div class="title">
+                    <p>Đánh giá</p>
+                    <p>Mời bạn phản hồi về các chương trình của cửa hàng. Hãy cho chúng mình thêm góp ý để cải thiện tốt hơn</p>    
+                </div>
+                <div class="form">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScmn2RD8YriXDXxbOXbW_dhwCO6qEGeQulaYhTx7f5DL4ZBaQ/viewform?embedded=true" width="640" height="1285" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
+                </div>
+        
+            </div>
+    </div>
+
+@code {
+    [Parameter]
+    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
+}

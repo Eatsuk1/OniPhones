@@ -1,0 +1,53 @@
+﻿@page "/{customerid}/taikhoancuatoi"
+@using DoAn1.Data
+@layout MainLayout1      
+    
+    <div class="col c-10 mt-16">
+        <div class="member">
+            <div class="member__info">
+                <div class="member__info--img">
+                    <img src="./assets/imgs/svg/1200px-User_icon-cp.png" alt="">
+                    <p>Xin chào</p>
+                </div>
+                <div class="member__info--name">
+                    <p>Dự Nguyễn Trọng</p>
+                </div>
+            </div>
+            <div class="member__section">
+                <div class="member__section--item">
+                    <p>Sinh nhật</p>
+                    <img src="./assets/imgs/svg/cake.png" alt="">
+                    <p>Chưa cập nhật</p>
+                </div>
+                <div class="member__section--item">
+                    <p>Số điện thoại</p>
+                    <img src="./assets/imgs/svg/smartphone.png" alt="">
+                    <p>Chưa cập nhật</p>
+                </div>
+                <div class="member__section--item">
+                    <p>Hạng thành viên</p>
+                    <img src="./assets/imgs/svg/award_48px.svg" alt="">
+                    <p>Chưa có hạng</p>
+                </div>
+                <div class="member__section--item">
+                    <p>Ngày tham gia</p>
+                    <img src="./assets/imgs/svg/calendar.svg" alt="">
+                    <p>17/05/2022</p>
+                </div>                            
+                <div class="member__section--item">
+                    <p>Coin tích lũy</p>
+                    <img src="./assets/imgs/svg/credit-card.svg" alt="">
+                    <p>0đ</p>
+                </div>
+            </div>
+            <div class="member__update">
+                <button type="button">Cập nhật thông tin</button>
+            </div>
+        </div>
+    </div>   
+            
+
+@code {
+    [Parameter]
+    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
+}
