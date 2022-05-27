@@ -1,0 +1,40 @@
+﻿@page "/{customerid}/diachikhachhang"
+@using DoAn1.Data
+@inject DoAn1.Service.CustomerService CustomerIService
+@layout MainLayout1
+
+<h3>CustomerAddress</h3>
+
+
+    @foreach(string address in Cus_Address.address)
+{
+    <p>@address</p>
+    
+}
+
+
+
+
+
+@code {
+    Customer Cus_Address = new Customer();
+
+
+
+
+    [Parameter]
+    public string customerid { get; set; } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetCustomerAddress();
+    }
+
+    private void GetCustomerAddress()
+    {
+        Cus_Address = CustomerIService.GetCustomerAddress(customerid);
+        
+
+    }
+
+}
