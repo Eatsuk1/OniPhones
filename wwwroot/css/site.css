@@ -14,54 +14,6 @@ html {
     --color-1: rgb(240, 18, 35);
 }
 
-.grid {
-    width: 100%;
-    display: block;
-    padding: 0;
-}
-
-.grid.wide {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -4px;
-    margin-right: -4px;
-}
-
-.col {
-    padding-left: 4px;
-    padding-right: 4px;
-}
-
-
-.c-1 {
-    flex: 0 0 11.11111%;
-    max-width: 11.11111%;
-}
-
-.c-2 {
-    flex: 0 0 16.66667%;
-    max-width: 16.66667%;
-}
-
-.c-3 {
-    flex: 0 0 19.44444%;
-    max-width: 19.44444%;
-}
-
-.c-5 {
-    flex: 0 0 41.66667%;
-    max-width: 41.66667%;
-}
-
-.c-10 {
-    flex: 0 0 83.33333%;
-    max-width: 83.33333%;
-}
 
 .mt-16 {
     margin-top: 16px;
@@ -185,6 +137,7 @@ html {
     padding: 8px;
     margin-bottom: 6px;
     align-items: center;
+    justify-content: flex-start;
     border-radius: 12px;
 }
 .sideNav__item:hover {
@@ -197,11 +150,11 @@ html {
 
 
 .sideNav__item a {
-    font-size: 13px;
+    font-size: 12px;
     text-decoration: none;
     color: #333;
     opacity: 0.8;
-    margin-left: 8px;
+    margin-left: 4px;
 }
 /*  */
 .member {
@@ -271,7 +224,6 @@ html {
 
 
 .contentSection {
-    height: 300px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -325,12 +277,15 @@ html {
     color: var(--color-1);
     font-size: 18px;
 }
+    .contentSection__item--btn p {
+        margin: 0 !important;
+    }
 
-.contentSection__item--btn:hover {
-    box-shadow: 4px 8px 8px #ccc;
-    cursor: pointer;
-    opacity: 0.6;
-}
+    .contentSection__item--btn:hover {
+        box-shadow: 4px 8px 8px #ccc;
+        cursor: pointer;
+        opacity: 0.6;
+    }
 /*shipment_manage*/
 .history{
     background-image: url('../assets/imgs/Rectangle(2).ef29e10.png');
