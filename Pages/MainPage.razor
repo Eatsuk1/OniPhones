@@ -1,0 +1,191 @@
+﻿@page "/0"
+@using DoAn1.Data
+@inject DoAn1.Service.CustomerService CustomerIService
+@layout MainLayout0
+
+
+<div id="content">
+    <div class="grid wide">
+        <div class="row">
+
+            <!--Left main menu-->
+            <div class="col c-2 mt-16">
+                <div class="left_menu">
+                    <div class="dropdown_menu">
+                        <a class="#">
+                            Điện thoại
+                            <div class="dropdown_container">
+                                <a href="#">Apple</a>
+                                <a href="#">Samsung</a>
+                                <a href="#">Xiaomi</a>
+                                <a href="#">Oppo</a>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div class="dropdown_menu">
+                        <p>Máy tính bảng</p>
+                        <div class="dropdown_container">
+                            <a href="#">Apple</a>
+                            <a href="#">Samsung</a>
+                            <a href="#">Xiaomi</a>
+
+                        </div>
+
+                    </div>
+
+                    <a href="#">Laptop</a>
+                    <a href="#">Đồng hồ</a>
+                    <a href="#">Phụ kiện</a>
+
+
+                </div>
+            </div>
+
+            <!--Advertisement-->
+            <div class="col c-7 mt-16">
+                <div class="Advertisement">
+
+                    <div class="w3-content w3-display-container">
+                        <img class="mySlides" src="./assets/imgs/img_mountains_wide.jpg">
+                        <img class="mySlides" src="./assets/imgs/img_nature_wide.jpg">
+                        <img class="mySlides" src="./assets/imgs/img_snow_wide.jpg">
+                        <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle">
+                            <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+                            <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+                            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+                            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+                            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+            <!--Ad2-->
+            <div class="col c-3 mt-16">
+                <a>Ad2</a>
+            </div>
+
+            <!---->
+            <div class="col c-12 mt16">
+                <div class="product"></div>
+                <div class="product_title">
+                    <a href="#" class="c-5 box-title_title">
+                        <h2>Điện thoại nổi bật nhất</h2>
+                    </a>
+                    <div class="c-5 box-related-tag">
+                        <div class="list-related-tag">
+                            <a href="">Apple</a>
+                            <a href="">Samsung</a>
+                            <a href="">Tất cả</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="product_list">
+                    <div class="list-product">
+                        <div id="01" class="item-product">
+                            <div class="item-product_image">
+                                <a href="#">
+                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                </a>
+                            </div>
+                            <div class="item-product_name"></div>
+                            <a href="#">
+                                <p>iPhone 13 Promax</p>
+                            </a>
+                            <div class="item-product_price">
+                                <p>18.000.000</p>
+                            </div>
+                            <div class="item-product_rating">
+                                <p>Đánh giá</p>
+                            </div>
+                        </div>
+                        <div id="02" class="item-product">
+                            <div class="item-product_image">
+                                <a href="#">
+                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                </a>
+                            </div>
+                            <div class="item-product_name"></div>
+                            <a href="#">
+                                <p>iPhone 13 Promax</p>
+                            </a>
+                            <div class="item-product_price">
+                                <p>18.000.000</p>
+                            </div>
+                            <div class="item-product_rating">
+                                <p>Đánh giá</p>
+                            </div>
+                        </div>
+                        <div id="03" class="item-product">
+                            <div class="item-product_image">
+                                <a href="#">
+                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                </a>
+                            </div>
+                            <div class="item-product_name"></div>
+                            <a href="#">
+                                <p>iPhone 13 Promax</p>
+                            </a>
+                            <div class="item-product_price">
+                                <p>18.000.000</p>
+                            </div>
+                            <div class="item-product_rating">
+                                <p>Đánh giá</p>
+                            </div>
+                        </div>
+                        <div id="04" class="item-product">
+                            <div class="item-product_image">
+                                <a href="#">
+                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                </a>
+                            </div>
+                            <div class="item-product_name"></div>
+                            <a href="#">
+                                <p>iPhone 13 Promax</p>
+                            </a>
+                            <div class="item-product_price">
+                                <p>18.000.000</p>
+                            </div>
+                            <div class="item-product_rating">
+                                <p>Đánh giá</p>
+                            </div>
+                        </div>
+                        <div id="05" class="item-product">
+                            <div class="item-product_image">
+                                <a href="#">
+                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                </a>
+                            </div>
+                            <div class="item-product_name"></div>
+                            <a href="#">
+                                <p>iPhone 13 Promax</p>
+                            </a>
+                            <div class="item-product_price">
+                                <p>18.000.000</p>
+                            </div>
+                            <div class="item-product_rating">
+                                <p>Đánh giá</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+}
