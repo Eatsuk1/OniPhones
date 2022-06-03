@@ -1,7 +1,7 @@
 ﻿@page "/Trangchu"
 @using DoAn1.Data
 @inject DoAn1.Service.ProductService ProductIService
-@layout MainLayout1
+@layout MainLayout0
 
 
  @foreach(var device in smartphone)
@@ -9,11 +9,17 @@
     <div>
 		<p>@device.device_name</p>
 		</div> 
-	<div>
-		<img scr="@device.device_image"  style="height:100px">
+	<div class="image">
+		<img scr="@device.device_image">
 		</div>
 		<p>@device.display_size</p>
 }
+
+<style>
+	.image img{
+		height: 160px;
+	}
+</style>
 
 @code {
 	List<Smartphone> smartphone = new List<Smartphone>();

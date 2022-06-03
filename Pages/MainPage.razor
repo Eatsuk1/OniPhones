@@ -1,7 +1,8 @@
 ﻿@page "/0"
 @using DoAn1.Data
-@inject DoAn1.Service.CustomerService CustomerIService
+@inject DoAn1.Service.ProductService ProductIService
 @layout MainLayout0
+
 
 
 <div id="content">
@@ -59,7 +60,7 @@
                             <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
                         </div>
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -156,23 +157,28 @@
                                 <p>Đánh giá</p>
                             </div>
                         </div>
-                        <div id="05" class="item-product">
-                            <div class="item-product_image">
+
+                        @foreach (var device in smartphone)
+                        {
+                            <div id="05" class="item-product">
+                                <div class="item-product_image">
+                                    <a href="#">
+                                        <img src="@device.device_image">
+                                    </a>
+                                </div>
+                                <div class="item-product_name"></div>
                                 <a href="#">
-                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                    <p>@device.device_name</p>
                                 </a>
+                                <div class="item-product_price">
+                                    <p>@device.price</p>
+                                </div>
+                                <div class="item-product_rating">
+                                    <p>Đánh giá</p>
+                                </div>
                             </div>
-                            <div class="item-product_name"></div>
-                            <a href="#">
-                                <p>iPhone 13 Promax</p>
-                            </a>
-                            <div class="item-product_price">
-                                <p>18.000.000</p>
-                            </div>
-                            <div class="item-product_rating">
-                                <p>Đánh giá</p>
-                            </div>
-                        </div>
+
+                        }
 
                     </div>
 
@@ -186,6 +192,19 @@
     </div>
 </div>
 
-@code {
 
+
+
+   @code {
+            List<Smartphone> smartphone = new List<Smartphone>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
+    }
+
+    private void GetSmartphone()
+    {
+        smartphone = ProductIService.GetSmartphones();
+    }
 }
