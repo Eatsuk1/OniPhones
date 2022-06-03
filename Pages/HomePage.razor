@@ -1,0 +1,30 @@
+﻿@page "/Trangchu"
+@using DoAn1.Data
+@inject DoAn1.Service.ProductService ProductIService
+@layout MainLayout1
+
+
+ @foreach(var device in smartphone)
+{
+    <div>
+		<p>@device.device_name</p>
+		</div> 
+	<div>
+		<img scr="@device.device_image"  style="height:100px">
+		</div>
+		<p>@device.display_size</p>
+}
+
+@code {
+	List<Smartphone> smartphone = new List<Smartphone>();
+
+	protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
+    }
+
+	private void GetSmartphone()
+	{
+		smartphone = ProductIService.GetSmartphones();
+	}
+}
