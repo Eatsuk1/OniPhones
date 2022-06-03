@@ -1,0 +1,19 @@
+
+/* mobile */
+@media (max-width: 48em) {
+    
+}
+
+/* ipad  */
+@media (min-width: 48em) and (max-width: 75em) {
+    .footer2 {
+        display: block ;
+    }
+}
+/* PC */
+@media (min-width: 75em) {
+    .footer1 {
+        display: block ;
+    }
+}
+
