@@ -386,10 +386,10 @@ html {
     border-radius: 25px;
     border: 1px solid #7e7e7e;
 }
-.title{
+.response .title{
     margin: 20px 0 20px 0;
 }
-.title p:first-child{
+.response .title p:first-child{
     font-weight: 650;
 }
 .form{
@@ -408,7 +408,7 @@ html {
     /*overflow-x: hidden;*/
 }
 
-    .left_menu a, p {
+.left_menu a, p {
         padding: 6px 8px 6px 16px;
         text-decoration: none;
         font-size: 16px;
