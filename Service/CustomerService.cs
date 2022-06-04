@@ -7,18 +7,14 @@ namespace DoAn1.Service
 {
     public class CustomerService
     {
-        private MongoClient _client;
-        private IMongoDatabase _database;
+        private ClassDB db = new ClassDB();
         private IMongoCollection<Customer> _collection;
-        public string CustomerId { get; set; } = "627e792d5571cc484d050b6e";
-
-
+        
 
         public CustomerService()
         {
-            _client = new MongoClient("mongodb+srv://anhlee:xV7YI1Ztks9hxBYN@demo.d96zs.mongodb.net/?retryWrites=true&w=majority");
-            _database = _client.GetDatabase("cphones");
-            _collection = _database.GetCollection<Customer>("customers");
+
+            _collection = db.GetConnection().GetCollection<Customer>("customers");
         }
 
         
