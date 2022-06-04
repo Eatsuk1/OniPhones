@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+::placeholder {
+    font-size: 18px;
+    font-style: italic;
+    opacity: 0.4;
+}
+.background-login {
+    background-image: linear-gradient(to right, rgb(240, 18, 85), #8d0081);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-box {
+    display: flex;
+    background-color: rgb(240, 251, 255);
+    padding: 100px;
+    border-radius: 25px;
+    justify-content: space-evenly;
+    height: 70vh;
+    width: 60%;
+}
+
+.login-box h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.login-box p {
+    padding-bottom: 32px;
+    font-size: 24px;
+    font-style: italic;
+    opacity: 0.4;
+}
+
+.signup-box {
+    display: flex;
+    flex-direction: column;
+    border: #333;
+}
+.login-box input {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    outline: none;
+    padding: 4px 12px;
+}
+
+.signin-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.signin-box a {
+    font-style: italic;
+    color: #61b3e2;
+}
+
+.buttonLoginbox {
+    display: flex;
+    justify-content: center;
+}
+.buttonLoginbox button {
+    border-radius: 25px;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    width: 80%;
+    margin-top: 16px;
+    background-color: #619de2;
+    color: #fff;
+    font-weight: 700;
+}
+
+.buttonLoginbox button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.input1 {
+    margin-bottom: 30px !important;
+}

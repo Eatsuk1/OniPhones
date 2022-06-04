@@ -1,18 +1,64 @@
-﻿@page "/{customerid}/phanhoi"    
-@layout MainLayout1   
-    
-    <div class="col c-10 mt-16">
-            <div class="response">
-                <div class="title">
-                    <p>Đánh giá</p>
-                    <p>Mời bạn phản hồi về các chương trình của cửa hàng. Hãy cho chúng mình thêm góp ý để cải thiện tốt hơn</p>    
-                </div>
-                <div class="form">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScmn2RD8YriXDXxbOXbW_dhwCO6qEGeQulaYhTx7f5DL4ZBaQ/viewform?embedded=true" width="640" height="1285" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
-                </div>
-        
+﻿@page "/{customerid}/phanhoi"
+@layout MainLayout1
+
+<div class="col c-10 mt-16">
+<div class="support">
+
+    <div class="support-content-box">
+        <div class="support-content">
+            <div class="support-content-icon">
+                <img src="./assets/imgs/svg/earphone.svg" alt="">
             </div>
+            <div class="support-content-text">
+                <p>Tư vấn mua hàng (8h00 - 22h00)</p>
+                <p>Miền Bắc:<a href="tel:1800xxxx">1800.xxxx</a></p>
+                <p>Miền Nam:<a href="tel:1800xxxx">1800.xxxx</a></p>
+            </div>
+        </div>
+        <div class="support-content">
+            <div class="support-content-icon">
+                <img src="./assets/imgs/svg/fix.svg" alt="">
+            </div>
+            <div class="support-content-text">
+                <p>Bảo hành (8h00 - 22h00)</p>
+                <a href="tel:1800xxxx">1800.xxxx</a>
+            </div>
+        </div>
     </div>
+
+    <div class="support-content-box">
+        <div class="support-content">
+            <div class="support-content-icon">
+                <img src="./assets/imgs/svg/report.svg" alt="">
+            </div>
+            <div class="support-content-text">
+                <p>Khiếu nại (8h00 - 22h00)</p>
+                <a href="tel:1800xxxx">1800.xxxx</a>
+            </div>
+        </div>
+        <div class="support-content">
+            <div class="support-content-icon">
+                <img src="./assets/imgs/svg/envelope-solid.svg" alt="">
+            </div>
+            <div class="support-content-text">
+                <p>Email</p>
+                <a href="mailto: cskh@oniphone.vn">cskh@oniphone.vn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="response">
+        <div class="title">
+            <p>Đánh giá</p>
+            <p>Mời bạn phản hồi về các chương trình của cửa hàng. Hãy cho chúng mình thêm góp ý để cải thiện tốt hơn</p>
+        </div>
+        <div class="form">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScmn2RD8YriXDXxbOXbW_dhwCO6qEGeQulaYhTx7f5DL4ZBaQ/viewform?embedded=true" width="640" height="1285" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
+        </div>
+
+    </div>
+</div>
 
 @code {
     [Parameter]
