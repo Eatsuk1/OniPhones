@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization;   
 
 namespace DoAn1.Data
 {
@@ -12,7 +12,7 @@ namespace DoAn1.Data
     public class Customer
     {
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string Id { get; set; }      
 
         [BsonElement("name")]
         public string Name { get; set; }
