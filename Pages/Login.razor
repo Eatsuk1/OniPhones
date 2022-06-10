@@ -1,0 +1,43 @@
+﻿@page "/login"
+@using DoAn1.Data
+@layout MainLayout0
+
+<div class="background-login">
+    <div class="login-box row">
+        <div class="signup-box pd20px">
+            <h2>ĐĂNG KÝ!</h2>
+            <p>Tell us more about you!</p>
+            <input placeholder="Nhập họ và tên" type="text" name="signup" id="signup" />
+            <input class="input1"
+                   placeholder="Nhập số điện thoại"
+                   type="text"
+                   name="signup"
+                   id="signup" />
+            <input placeholder="Nhập mật khẩu" type="text" name="signup" id="signup" />
+            <input placeholder="Nhập lại mật khẩu" type="text" name="signup" id="signup" />
+            <div class="buttonLoginbox">
+                <button>ĐĂNG KÝ</button>
+            </div>
+        </div>
+        <hr />
+        <div class="signin-box pd20px">
+            <h2>ĐĂNG NHẬP!</h2>
+            <p>Happy to see you again!</p>
+            <input placeholder="Nhập số điện thoại của bạn"
+                   type="text"
+                   name="signin"
+                   id="signin" />
+            <input placeholder="Nhập mật khẩu" type="text" name="signin" id="signin" />
+            <a href="to:quenmatkhau">Quên mật khẩu?</a>
+            <div class="buttonLoginbox">
+                <button>ĐĂNG NHẬP</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+}
