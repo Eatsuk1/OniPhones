@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 namespace DoAn1.Service
 {
-	public class ProductService
-	{
-		ClassDB db = new ClassDB();
-		private IMongoCollection<Smartphone> _collection;
+    public class ProductService
+    {
+        ClassDB db = new ClassDB();
+        private IMongoCollection<Smartphone> _collection;
 
-		public ProductService()
-		{
-			_collection = db.GetConnection().GetCollection<Smartphone>("smartphone");
-		}
+        public ProductService()
+        {
+            _collection = db.GetConnection().GetCollection<Smartphone>("smartphone");
+        }
 
-		public List<Smartphone> GetSmartphones()
-		{
+        public List<Smartphone> GetSmartphones()
+        {
 
-			return _collection.Find(_ => true).Limit(5).ToList();
-		}
-	}
+            return _collection.Find(_ => true).Limit(5).ToList();
+        }
+    }
 }

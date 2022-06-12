@@ -3,23 +3,26 @@
 @inject DoAn1.Service.ProductService ProductIService
 @layout MainLayout0
 
-
- @foreach(var device in smartphone)
-{
-    <div>
-		<p>@device.device_name</p>
-		</div> 
-	<div class="image">
-		<img scr="@device.device_image">
+<AuthorizeView>
+	<Authorized>
+	@foreach (var device in smartphone)
+	{
+		<div>
+			<p>@device.device_name</p>
+		</div>
+		<div class="image">
+			<img scr="@device.device_image">
 		</div>
 		<p>@device.display_size</p>
-}
-
-<style>
-	.image img{
-		height: 160px;
 	}
-</style>
+
+	<style>
+		.image img {
+			height: 160px;
+		}
+	</style>
+	</Authorized>
+</AuthorizeView>
 
 @code {
 	List<Smartphone> smartphone = new List<Smartphone>();

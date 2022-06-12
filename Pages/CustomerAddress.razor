@@ -21,9 +21,9 @@
 
 
 
-
-    [Parameter]
-    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
+	[Parameter]
+	public string Customerid { get; set; }
+    
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,9 +34,8 @@
 
     private void GetCustomerAddress()
     {
-        Cus_Address = CustomerIService.GetCustomerAddress(customerid);
         
-
+        Cus_Address = CustomerIService.GetCustomerAddress(Customerid);
     }
 
 }

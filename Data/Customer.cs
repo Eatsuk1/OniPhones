@@ -12,7 +12,10 @@ namespace DoAn1.Data
     public class Customer
     {
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }      
+        public string Id { get; set; }
+
+        [BsonElement("user_id")]
+        public string UserId { get; set; }      
 
         [BsonElement("name")]
         public string Name { get; set; }
@@ -24,8 +27,10 @@ namespace DoAn1.Data
         public string JoinedDay { get; set; }
         [BsonElement("phone number")]
         public string PhoneNumber { get; set; }
-        [BsonElement("password")]
-        public string Password { get; set; }
+        [BsonElement("birthday")]
+        public string Birthday { get; set; }
+        [BsonElement("email")]
+        public string Email { get; set; }
 
     }
 
