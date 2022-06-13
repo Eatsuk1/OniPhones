@@ -216,6 +216,7 @@ html {
 .member__section--item p {
     font-size: 18px;
     padding: 8px 0;
+    text-align:center;
 }
 
 .member__section--item p:last-child {
@@ -522,7 +523,13 @@ a.box-title_title {
 .list-product {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    
+}
+.item-product {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
 .item-product .item-product_image {

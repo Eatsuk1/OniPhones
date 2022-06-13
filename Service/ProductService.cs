@@ -17,7 +17,7 @@ namespace DoAn1.Service
         public List<Smartphone> GetSmartphones()
         {
 
-            return _collection.Find(_ => true).Limit(5).ToList();
+            return _collection.Find(_ => true).ToList();
         }
     }
 }

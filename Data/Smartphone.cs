@@ -27,7 +27,7 @@ namespace DoAn1.Data
         public string body { get; set; }
         public string os_type { get; set; }
         public string storage { get; set; }
-        public string price { get; set; }
+        public string prices { get; set; }
         public List<string> pictures { get; set; }
 
 

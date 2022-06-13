@@ -1,7 +1,12 @@
-﻿@page "/{customerid}/diachikhachhang"
+﻿@page "/Account/Address"
 @using DoAn1.Data
+@using System.Security.Claims
 @inject DoAn1.Service.CustomerService CustomerIService
 @layout MainLayout1
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using DoAn1.Pages
+
+
 
 <h3>CustomerAddress</h3>
 
@@ -21,21 +26,35 @@
 
 
 
-	[Parameter]
-	public string Customerid { get; set; }
-    
+    [Parameter]
+    public string Customerid { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
         GetCustomerAddress();
     }
 
-    
+
 
     private void GetCustomerAddress()
     {
         
+        _ = GetClaims();
         Cus_Address = CustomerIService.GetCustomerAddress(Customerid);
     }
+
+    public async Task GetClaims()
+	{
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+	    var userClaims = authState.User.Claims;
+	    foreach (var claim in userClaims)
+	    {
+	        if (claim.Type == ClaimTypes.NameIdentifier)
+	        {
+		        Customerid= claim.Value;
+	        }
+	    }
+	}
 
 }

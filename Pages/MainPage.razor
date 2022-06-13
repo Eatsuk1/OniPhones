@@ -4,8 +4,7 @@
 @layout MainLayout0
 
 
-<AuthorizeView>
-	<Authorized>
+
 <div id="content">
     <div class="grid wide">
         <div class="row">
@@ -88,9 +87,9 @@
 
                 </div>
 
-                <div class="product_list">
-                    <div class="list-product">
-                        <div id="01" class="item-product">
+                <div class="product_list grid wide">
+                    <div class="list-product row">
+                        @*<div id="01" class="item-product">
                             <div class="item-product_image">
                                 <a href="#">
                                     <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
@@ -157,22 +156,22 @@
                             <div class="item-product_rating">
                                 <p>Đánh giá</p>
                             </div>
-                        </div>
+                        </div>*@
 
                         @foreach (var device in smartphone)
                         {
-                            <div id="05" class="item-product">
+                            <div id="05" class="col c-2-4 item-product">
                                 <div class="item-product_image">
-                                    <a href="#">
+                                    <a href="@device.device_name">
                                         <img src="@device.device_image">
-                                    </a>
+                                    </a>                                    
                                 </div>
                                 <div class="item-product_name"></div>
-                                <a href="#">
+                                <a href="@device.device_name">
                                     <p>@device.device_name</p>
                                 </a>
                                 <div class="item-product_price">
-                                    <p>@device.price</p>
+                                    <p>@device.prices</p>
                                 </div>
                                 <div class="item-product_rating">
                                     <p>Đánh giá</p>
@@ -193,8 +192,7 @@
     </div>
 </div>
 
-	</Authorized>
-</AuthorizeView>
+
 
 
 
