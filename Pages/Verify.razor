@@ -1,0 +1,47 @@
+﻿@page "/verify"
+@using System.Security.Claims
+@using DoAn1.Service
+@inject CustomerService CustomerIService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@layout MainLayout0
+
+@code {
+
+    protected override Task OnInitializedAsync()
+    {
+        _ = GetClaims();
+        return Task.CompletedTask;
+    }
+
+    public async Task GetClaims()
+    {
+        string _check ="";
+        string _name = "";
+        string _email = "";
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userClaims = authState.User.Claims;
+        foreach (var claim in userClaims)
+        {
+            if (claim.Type == ClaimTypes.NameIdentifier)
+            {
+                _check = claim.Value;
+            }else if (claim.Type == "nickname")
+            {
+                _name = claim.Value;
+            }else if (claim.Type == ClaimTypes.Email)
+            {
+                _email = claim.Value;
+            }
+        }
+        if (CustomerIService.VerifyCustomer(_check))
+        {
+            navigationManager.NavigateTo($"/");
+        }
+        else
+        {
+            await CustomerIService.AddCustomer(_check, _name, _email);
+            navigationManager.NavigateTo($"/");
+        }
+    }
+}

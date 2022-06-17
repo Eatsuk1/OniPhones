@@ -1,15 +1,8 @@
-﻿@page "/"
+﻿@page "/phone/{key}"
 @using DoAn1.Data
-@using System.Security.Claims
 @using DoAn1.Service
-@inject DoAn1.Service.ProductService ProductIService
-@inject CustomerService CustomerIService
+@inject ProductService ProductIService
 @layout MainLayout0
-@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
-@inject AuthenticationStateProvider AuthenticationStateProvider
-
-
-
 
 <div id="content">
     <div class="grid wide">
@@ -22,8 +15,8 @@
                         <a class="#">
                             Điện thoại
                             <div class="dropdown_container">
-                                <a href="/phone/Apple">Apple</a>
-                                <a href="/phone/Samsung">Samsung</a>
+                                <a href="/category/phone/Apple">Apple</a>
+                                <a href="#">Samsung</a>
                                 <a href="#">Xiaomi</a>
                                 <a href="#">Oppo</a>
                             </div>
@@ -178,9 +171,7 @@
                                     </a>
                                     </div>
                                 <div class="item-product_price">
-                                    <p>@device.prices.p128GB</p>
-                                    <p>@device.prices.p256GB</p>
-                                    <p>@device.prices.p512GB</p>
+                                    <p>@device.default_price</p>
                                 </div>
                                 <div class="item-product_rating">
                                     <p>Đánh giá</p>
@@ -188,6 +179,7 @@
                             </div>
 
                         }
+                        
 
                     </div>
 
@@ -201,25 +193,23 @@
     </div>
 </div>
 
+@code
+{
+    [Parameter]
+    public string key { get; set; }
 
+    List<Smartphone> smartphone = new List<Smartphone>();
 
+    
 
-
-
-   @code {
-       List<Smartphone> smartphone = new List<Smartphone>();
-       
-       protected override async Task OnInitializedAsync()
-       {
-           
-         GetSmartphone();
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
     }
 
     private void GetSmartphone()
     {
-        smartphone = ProductIService.GetSmartphones();
+        smartphone = ProductIService.GetSmartphonesFilter(key);
     }
 
-       
-
-   }
+}
