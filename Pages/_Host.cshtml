@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="./css/librarylayout.css" />
     <link href="./css/site.css" rel="stylesheet" />
     <link rel=" stylesheet" href="./css/responsive.css" />
-    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/products.css" />
 </head>
 <body>
     <app>
@@ -63,6 +63,30 @@
             x[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " w3-white";
         }
+    </script>
+    <script>
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+
+        const selectBox1 = $$(".section2_selectBox1");
+        const selectBox2 = $$(".section2_selectBox2");
+
+        console.log(selectBox1);
+        console.log(selectBox2);
+
+        selectBox1.forEach((box, index) => {
+            box.onclick = function () {
+        $(".section2_selectBox1.active").classList.remove("active");
+        this.classList.add("active");
+        };
+        };
+
+        selectBox2.forEach((box, index) => {
+        box.onclick = function () {
+        $(".section2_selectBox2.active").classList.remove("active");
+        this.classList.add("active");
+         };
+        };
     </script>
 </body>
 </html>
