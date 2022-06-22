@@ -18,6 +18,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
+using BlazorStrap;
 
 namespace DoAn1
 {
@@ -104,6 +105,8 @@ namespace DoAn1
          }
      };
  });
+            
+            services.AddBlazorStrap();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

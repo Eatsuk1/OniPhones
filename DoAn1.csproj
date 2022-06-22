@@ -6,8 +6,45 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\imgs\svg\award.svg" />
+    <None Include="wwwroot\assets\imgs\svg\award_48px.svg" />
+    <None Include="wwwroot\assets\imgs\svg\calendar.svg" />
+    <None Include="wwwroot\assets\imgs\svg\clock.svg" />
+    <None Include="wwwroot\assets\imgs\svg\credit-card.svg" />
+    <None Include="wwwroot\assets\imgs\svg\earphone.svg" />
+    <None Include="wwwroot\assets\imgs\svg\edit.svg" />
+    <None Include="wwwroot\assets\imgs\svg\envelope-solid.svg" />
+    <None Include="wwwroot\assets\imgs\svg\fix.svg" />
+    <None Include="wwwroot\assets\imgs\svg\gift.svg" />
+    <None Include="wwwroot\assets\imgs\svg\home-red.svg" />
+    <None Include="wwwroot\assets\imgs\svg\home.svg" />
+    <None Include="wwwroot\assets\imgs\svg\icons_menubar-11.svg" />
+    <None Include="wwwroot\assets\imgs\svg\location-pin.svg" />
+    <None Include="wwwroot\assets\imgs\svg\location.svg" />
+    <None Include="wwwroot\assets\imgs\svg\log-out.svg" />
+    <None Include="wwwroot\assets\imgs\svg\magnifying-glass-solid.svg" />
+    <None Include="wwwroot\assets\imgs\svg\message-square.svg" />
+    <None Include="wwwroot\assets\imgs\svg\phone-solid.svg" />
+    <None Include="wwwroot\assets\imgs\svg\phone.svg" />
+    <None Include="wwwroot\assets\imgs\svg\report.svg" />
+    <None Include="wwwroot\assets\imgs\svg\shield.svg" />
+    <None Include="wwwroot\assets\imgs\svg\shopping-cart.svg" />
+    <None Include="wwwroot\assets\imgs\svg\smartphone.svg" />
+    <None Include="wwwroot\assets\imgs\svg\user.svg" />
+    <None Include="wwwroot\assets\imgs\svg\users.svg" />
+    <None Include="wwwroot\assets\imgs\svg\user_solid.svg" />
+    <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
+    <PackageReference Include="BlazorStrap" Version="5.0.105.4262022" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
