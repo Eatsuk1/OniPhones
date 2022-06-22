@@ -12,18 +12,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DoAn1</title>
     <base href="~/" />
-    @*<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/librarylayout.css" />
     <link href="./css/site.css" rel="stylesheet" />
     <link rel=" stylesheet" href="./css/responsive.css" />
     <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/products.css" />
+    
+
+   
+    <link href="DoAn1.styles.css" rel="stylesheet">
 </head>
 <body>
     <app>
         <component type="typeof(App)" render-mode="ServerPrerendered" />
     </app>
+    
 
-    <div id="blazor-error-ui">
+
+<div id="blazor-error-ui">
         <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
         </environment>
@@ -36,7 +43,9 @@
 
     <script src="_framework/blazor.server.js"></script>
     
-    <script>
+    <script src="js/product.js"></script>
+
+<script>
         var slideIndex = 1;
         showDivs(slideIndex);
 
@@ -64,6 +73,9 @@
             dots[slideIndex - 1].className += " w3-white";
         }
     </script>
+    <script src="_content/BlazorStrap/popper.min.js"></script>
+<script src="_content/BlazorStrap/blazorstrap.js"></script>
+
 </body>
 </html>
 

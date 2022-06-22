@@ -1,0 +1,338 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --color-1: rgb(240, 18, 35);
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+/* header */
+#header {
+    top: 0;
+    position: fixed;
+    height: 64px;
+    background-color: var(--color-1);
+    width: 100%;
+    z-index: 999;
+}
+
+.header__logo {
+    margin-top: 18px;
+    cursor: pointer;
+}
+.header__searchbar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    height: 65%;
+    width: 100%;
+    margin: 14px 0 0 0;
+    border-radius: 12px;
+}
+
+.header__searchbar img {
+    margin: 0 12px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.header__searchbar input {
+    width: 90%;
+    height: 90%;
+    outline: transparent none;
+    border: none;
+    font-size: 16px;
+}
+.header__phone {
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+    cursor: pointer;
+    padding-top: 6px;
+}
+.header__section:hover,
+.header__phone:hover {
+    background-color: #db4052;
+    opacity: 0.9;
+}
+
+.header__phone--icon {
+    margin-right: 4px;
+}
+
+.header__phone--sub {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 1.4;
+    font-size: 13px;
+}
+.header__phone--sub a {
+    color: white;
+    text-decoration: none;
+}
+
+.header__phone--number {
+    font-weight: 550;
+    letter-spacing: 1.5px;
+}
+
+.header__section {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.header__section img {
+    padding-top: 4px;
+}
+
+.header__section a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}
+.sub-header {
+    margin-top: 64px;
+    height: 28px;
+}
+
+/* subheader */
+#subheader {
+    background-color: #fff;
+    z-index: 999;
+    position: fixed;
+    top: 64px;
+    height: 32px;
+    width: 100%;
+    box-shadow: 0px 1px 4px #ccc;
+}
+.subheader__list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.subheader__list img {
+    padding-right: 6px;
+    transform: translateY(2px);
+}
+.subheader__list a {
+    line-height: 32px;
+    font-size: 12px;
+    padding: 0 8px;
+    text-decoration: none;
+    font-weight: 300;
+    color: #333;
+}
+.subheader__list a::after {
+    content: ">";
+    margin-left: 8px;
+    font-weight: 700;
+}
+/* productName */
+#productName {
+    margin-top: 96px;
+    padding: 14px 0;
+    box-shadow: 0px 1px 4px #ccc;
+}
+#productName h4 {
+    padding: 0 8px;
+    font-size: 18px;
+}
+#productName p {
+    font-weight: 700;
+}
+/* Content */
+#content {
+}
+
+/* section 1 */
+.section1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.section1__img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-top: 16px;
+}
+.section1__img---image {
+    width: 78%;
+    height: 100%;
+    border-radius: 25px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.section1__list {
+    width: 100%;
+    height: 100px;
+    justify-content: space-around;
+    margin-top: 8px;
+}
+
+.section1__list--item {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+}
+.section1__infoProduct {
+    margin-top: 16px;
+    border-radius: 15px;
+    box-shadow: 0px 1px 4px #ccc;
+    width: 100%;
+}
+.section1__infoProduct h4 {
+    text-align: center;
+    padding: 16px 0;
+}
+.section1__infoProduct p {
+    font-size: 16px;
+    margin: 0 16px;
+}
+.section1__infoProduct img {
+    margin-right: 8px;
+}
+/* section2 */
+.section2 {
+    padding-top: 28px;
+    width: 100%;
+}
+.section2_Price {
+    margin-top: 8px;
+    margin-left: 20px;
+}
+.section2_Price > p {
+    border: 1px solid #db4052;
+    display: inline-block;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 8px;
+    color: #db4052;
+    background-color: #fef2f2;
+}
+.section2_Price h3 {
+    margin-top: 16px;
+    display: block;
+    color: #db4052;
+    font-size: 24px;
+    position: relative;
+    padding-bottom: 26px;
+}
+.section2_Price h3::after {
+    content: "đ";
+    font-size: 14px;
+    position: absolute;
+    margin-left: 4px;
+}
+
+.section2 h5 {
+    margin-left: 20px;
+    padding: 12px 0 4px 0;
+}
+.section2_Select {
+    padding-bottom: 20px;
+}
+.section2_SelectColor {
+}
+.section2_selectBox1,
+.section2_selectBox2 {
+    width: 30%;
+    flex: 0 0 30%;
+    border: 1px solid #ccc;
+    height: 50px;
+    border-radius: 10px;
+    margin: 1.66666%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+.section2_selectBox1.active,
+.section2_selectBox2.active {
+    border: 2px solid #db4052;
+}
+.section2_selectBox1 p {
+    font-size: 14px;
+    text-align: center;
+    line-height: 50px;
+    margin-left: 30%;
+}
+.section2_selectBox2 span {
+    font-size: 14px;
+    margin-left: 4px;
+}
+.selectColor {
+    height: 48px;
+    width: 36px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.buyBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 16px;
+    height: 55px;
+    border-radius: 15px;
+    width: 90%;
+    background-color: #ea2427;
+}
+.buyBtn a {
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+.buyBtn a:hover {
+    opacity: 0.8;
+}
+
+/* section3 */
+.section3 {
+    box-shadow: 0px 1px 4px #ccc;
+    margin-top: 16px;
+    border-radius: 15px;
+}
+.section3 h4 {
+    padding: 12px;
+    font-size: 18px;
+}
+.section3__List {
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 8px 0;
+}
