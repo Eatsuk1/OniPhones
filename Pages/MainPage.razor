@@ -1,7 +1,13 @@
-﻿@page "/0"
+﻿@page "/"
 @using DoAn1.Data
+@using System.Security.Claims
+@using DoAn1.Service
 @inject DoAn1.Service.ProductService ProductIService
+@inject CustomerService CustomerIService
 @layout MainLayout0
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
 
 
 
@@ -15,8 +21,8 @@
                         <div class="dropdown_menu">
                             <a class="#">Điện thoại
                             <div class="dropdown_container">
-                                <a href="#">Apple</a>
-                                <a href="#">Samsung</a>
+                                <a href="/phone/Apple">Apple</a>
+                                <a href="/phone/Samsung">Samsung</a>
                                 <a href="#">Xiaomi</a>
                                 <a href="#">Oppo</a>
                             </div>
@@ -412,15 +418,19 @@
 
 
    @code {
-    //        List<Smartphone> smartphone = new List<Smartphone>();
+       List<Smartphone> smartphone = new List<Smartphone>();
+       
+       protected override async Task OnInitializedAsync()
+       {
+           
+         GetSmartphone();
+    }
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    GetSmartphone();
-    //}
+    private void GetSmartphone()
+    {
+        smartphone = ProductIService.GetSmartphones();
+    }
 
-    //private void GetSmartphone()
-    //{
-    //    smartphone = ProductIService.GetSmartphones();
-    //}
-}
+       
+
+   }

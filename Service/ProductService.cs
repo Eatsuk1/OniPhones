@@ -1,6 +1,8 @@
 ﻿using DoAn1.Data;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 namespace DoAn1.Service
 {
@@ -19,5 +21,12 @@ namespace DoAn1.Service
 
             return _collection.Find(_ => true).ToList();
         }
+
+        public List<Smartphone> GetSmartphonesFilter(string _key)
+        {
+            var filter = Builders<Smartphone>.Filter.Regex("key", new BsonRegularExpression(_key));
+            return _collection.Find(filter).ToList();
+        }
+
     }
 }

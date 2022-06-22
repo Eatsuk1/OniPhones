@@ -1,19 +1,31 @@
 ﻿@inherits LayoutComponentBase
 @using DoAn1.Pages
 @using DoAn1.Data
+@using DoAn1.Models
 @inject DoAn1.Service.CustomerService CustomerIService
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
     <!-- Top Bar -->
     
 <div id="header">
         <div class="grid wide">
             <div class="row">
                 <div class="col header__logo c-2">
-                    <img src="./assets/imgs/Logo-oniphone.png" alt="logo">
+                    <a href = "/0"><img src="./assets/imgs/Logo-oniphone.png" alt="logo">
+                    </a>
                 </div>
                 <div class="col c-6">
                     <div class="header__searchbar">
                         <img src="./assets/imgs/svg/magnifying-glass-solid.svg" alt="">
-                        <input type="search" name="" id="" placeholder="Bạn cần tìm gì?">
+                       @* <input type="search" name="q" id="device_name" bind = "@device_name" placeholder="Bạn cần tìm gì?" >
+                        <input type = "button" onclick = "@NavigateToComponent" value = "submit"/>*@
+                        <EditForm Model="_Search" OnValidSubmit="NavigateToComponent" class="header__searchbar">
+                            
+                            <input @onkeydown="a" type="text" placeholder="Bạn cần tìm gì?" @bind="key">
+
+                            @*<button value="search" type="submit"></button>*@
+                        </EditForm>
+
                     </div>
                 </div>
                 <div class="col header__phone c-2">
@@ -67,6 +79,26 @@
     
     
 
-    @code {
+@code {
+
+    public Models.Search _Search = new();
+
+    [Parameter]
+    public string key { get; set; }
+
+    private void NavigateToComponent()
+    {
+        navigationManager.NavigateTo($"/phone/{key}");
+    }
+
+    private void a(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            NavigateToComponent();
+        }
+    }
+
+
 
     }
