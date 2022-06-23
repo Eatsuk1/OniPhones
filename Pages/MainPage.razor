@@ -51,26 +51,41 @@
 
                 <!--Advertisement-->
                                
-                <div class="col c-7 mt-16">
-                    <div class="slider-container">
+                @*<div class="col c-7 mt-16">
+                  <div style="width: 690px; overflow: hidden">
+                     <div class="slider-container">
                         <div class="slider__imgs">
-                            <input type="radio" name="inputslider" id="img1">
-                            <input type="radio" name="inputslider" id="img2">
-                            <input type="radio" name="inputslider" id="img3">
-                                                
-                            <img src="./assets/imgs/s22.png" alt="img1" class="imgslider1">                                       
-                            <img src="./assets/imgs/Xiaomi LP.png" alt="img2" class="imgslider2">                       
-                            <img src="./assets/imgs/ipad mini 6.png" alt="img3" class="imgslider3">
+                           <img src="./assets/imgs/s22.png" alt="img1" class="imgslider1" />
+                        </div>
+                        <div class="slider__imgs">
+                           <img src="./assets/imgs/Xiaomi LP.png" alt="img1" class="imgslider1" />
+                        </div>
+                        <div class="slider__imgs">
+                           <img src="./assets/imgs/ipad mini 6.png" alt="img1" class="imgslider1" />
+                        </div>
+                     </div>
+                  </div>
+               </div>*@
 
-                        </div>
-                    
-                        <div class="labelslider">
-                            <label for="img1" class="bar"></label>
-                            <label for="img2" class="bar"></label>
-                            <label for="img3" class="bar"></label>                        
-                        </div>
+               <BSCarousel HasControls="true"> 
+                    <BSCarouselItem>
+                    <div>
+                        <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8.jpg">
                     </div>
-                </div>
+                </BSCarouselItem>
+                <BSCarouselItem>
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#666"></rect>
+                        <text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text>
+                    </svg>
+                </BSCarouselItem>
+                <BSCarouselItem>
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#555"></rect>
+                        <text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text>
+                    </svg>
+                </BSCarouselItem>
+                </BSCarousel>
             
                 <!--Ad2-->
                 <div class="col c-3 mt-16">
@@ -359,58 +374,84 @@
                         </div>
 
                 </div>
-                
-                <div class="col c-12 mt16">
-                    <div class="footer">
-                        <div class="footer-container">
-                            <div class="footer-box c-4">
-                                <ul class="box-info">
-                                    <li>Gọi mua hàng 1800.2097 (8h00 - 22h00)</li>
-                                    <li>Gọi bảo hành 1800.2064 (8h00 - 22h00)</li>
-                                    <li>Gọi khiếu nại 1800.2063 (8h00 - 22h00)</li>
-                                </ul>
-
-                            </div>
-
-                            <div class="footer-box c-4">
-                                <ul class="box-info">
-                                    <li>Mua hàng và thanh toán Online</li>
-                                    <li>Mua hàng trả góp Online</li>
-                                    <li>Tra thông tin đơn hàng</li>
-                                    <li>Tra điểm tích</li>
-                                    <li>Tra thông tin bảo hành</li>
-                                    <li>Tra cứu hóa đơn điện tử</li>
-                                    <li>Trung tâm bảo hành chính hãng</li>
-                                    <li>Quy định về việc sao lưu dữ liệu</li>
-                                    <li>Dịch vụ bảo hành điện thoại</li>
-                                </ul>
-
-                            </div>
-
-                            <div class="footer-box c-4">
-                                <ul class="box-info">
-                                    <li>Quy chế hoạt động</li>
-                                    <li>Chính sách bảo hành</li>
-                                    <li>Liên hệ hợp tác kinh doanh</li>
-                                    <li>Khách hàng doanh nghiệp</li>
-                                    <li>Ưu đãi thanh toán</li>
-                                    <li>Tuyển dụng</li>
-                                </ul>
-
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-                </div>
-
+                                                    
 
             </div>
 
         </div>
  </div>
+
+ <footer>
+    <div class="grid wide">
+        <div class="row">
+            <div class="col c-12 mt16">
+                <div class="footer">
+                    <div class="footer-container">
+                        <div class="footer-box c-4">
+                            <ul class="box-info">
+                                <li>Gọi mua hàng 1800.2097 (8h00 - 22h00)</li>
+                                <li>Gọi bảo hành 1800.2064 (8h00 - 22h00)</li>
+                                <li>Gọi khiếu nại 1800.2063 (8h00 - 22h00)</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="footer-box c-4">
+                            <ul class="box-info">
+                                <li>Mua hàng và thanh toán Online</li>
+                                <li>Mua hàng trả góp Online</li>
+                                <li>Tra thông tin đơn hàng</li>
+                                <li>Tra điểm tích</li>
+                                <li>Tra thông tin bảo hành</li>
+                                <li>Tra cứu hóa đơn điện tử</li>
+                                <li>Trung tâm bảo hành chính hãng</li>
+                                <li>Quy định về việc sao lưu dữ liệu</li>
+                                <li>Dịch vụ bảo hành điện thoại</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="footer-box c-4">
+                            <ul class="box-info">
+                                <li>Quy chế hoạt động</li>
+                                <li>Chính sách bảo hành</li>
+                                <li>Liên hệ hợp tác kinh doanh</li>
+                                <li>Khách hàng doanh nghiệp</li>
+                                <li>Ưu đãi thanh toán</li>
+                                <li>Tuyển dụng</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <BSCarousel HasControls="true"> 
+    <BSCarouselItem>
+        <div>
+            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8.jpg">
+        </div>
+    </BSCarouselItem>
+    <BSCarouselItem>
+        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="#666"></rect>
+            <text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text>
+        </svg>
+    </BSCarouselItem>
+    <BSCarouselItem>
+        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="#555"></rect>
+            <text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text>
+        </svg>
+    </BSCarouselItem>
+</BSCarousel>
+</footer>
 
 
 
