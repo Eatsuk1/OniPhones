@@ -1,0 +1,53 @@
+﻿h1 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #707070;
+}
+
+.block-result__header {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+#search-content {
+    background-color: #fff;
+    z-index: 999;
+    position: fixed;
+    top: 64px;
+    height: 32px;
+    width: 100%;
+    box-shadow: 0px 1px 4px #ccc;
+}
+
+.box-title p.box-title__title {
+    margin-bottom: 10px;
+    flex: 1;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #444444;
+}
+
+.block-product{
+    margin-top: 20px;
+}
+
+.product_info {
+    margin-top: 20px;
+}
+
+.product_info-container {
+    width: auto;
+    padding: 10px;
+    margin-right: 10px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    margin-bottom: 10px;
+}
+
+.item-product_name a, p {
+    text-decoration: none;
+}
