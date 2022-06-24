@@ -780,15 +780,21 @@ a.box-title_title {
 
 .box-info li {
     list-style-type: none;
-}
-
-font-size: 18px;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .support-content-text p:first-child {
     font-size: 20px;
     padding-bottom: 8px;
+}
+
+/*fix mid add*/
+.mid-add {
+    border-width: 0;
+    border-style: none;
+    border-color: none;
+    border-image: none;
 }
