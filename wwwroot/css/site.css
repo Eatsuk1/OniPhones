@@ -393,10 +393,10 @@ html {
         }
 
 /*Response*/
-.response {
+/*.response {
     text-align: center;
     border-radius: 25px;
-    /* border: 1px solid #7e7e7e; */
+    /* border: 1px solid #7e7e7e; 
     box-shadow: 1px 1px 2px #ccc;
     background-color: #f6fbfc;
 }
@@ -412,14 +412,14 @@ html {
 
 .form {
     margin-bottom: 20px;
-}
+}*/
 
-/* support */
+/* support 
 .support {
     text-align: center;
     padding-top: 30px;
     border-radius: 25px;
-    /* border: 1px solid #7e7e7e; */
+    /* border: 1px solid #7e7e7e; 
     margin-bottom: 10px;
     background-color: #f6fbfc;
     box-shadow: 1px 1px 2px #ccc;
@@ -476,6 +476,7 @@ html {
         font-size: 20px;
         padding-bottom: 8px;
     }
+*/
 
 /*Main page*/
 
@@ -650,12 +651,12 @@ a.box-title_title {
     text-decoration: none;
 }
 
-/* support */
+/* support 
 .support {
     text-align: center;
     padding-top: 30px;
     border-radius: 25px;
-    /* border: 1px solid #7e7e7e; */
+    /* border: 1px solid #7e7e7e; 
     margin-bottom: 10px;
     background-color: #f6fbfc;
     box-shadow: 1px 1px 2px #ccc;
@@ -712,7 +713,7 @@ a.box-title_title {
         font-size: 20px;
         padding-bottom: 8px;
     }
-
+*/
 /**/
 .slider-container {
     width: 100%;
