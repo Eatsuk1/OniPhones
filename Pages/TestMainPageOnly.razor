@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/testmainpage"
 @using DoAn1.Data
 @using System.Security.Claims
 @using DoAn1.Service
@@ -122,114 +122,31 @@
                         <div class="product_list">
                             <div class="list-product">
                                 
-                                <div id="01" class="product_info-container c-2">
+                               
+                                @foreach(var phone in smartphone)
+                                { <div id="01" class="product_info-container c-2">
                                     <div class="product_info">
                                     <a href="#" class="product_link">
                                     <div class="item-product_image">
                                         <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                            <img src="@phone.device_image">
                                         </a>
                                     </div>
                                     <div class="item-product_name"></div>
                                         <a href="#">
-                                            <p>iPhone 13 Promax</p>
+                                            <p>@phone.device_name</p>
                                         </a>
                                     <div class="item-product_price">
-                                        <p>20.290.000</p>
+                                        <p>@phone.default_price</p>
                                     </div>
                                     <div class="item-product_rating">
                                         <!-- <p>Đánh giá</p> -->
                                     </div>
                                     </a>
                                     </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-z-fold3-5g.jpg">
-                                        </a>
                                     </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy Z Fold 3</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>32.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a73-5g.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy A73</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>12.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s22-ultra-5g.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy S22 Ultra</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>30.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/xiaomi-12.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Xiaomi 12</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>14.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
+                                }
+                            </div>
                                 </div>
                                           
 
@@ -378,8 +295,7 @@
 
             </div>
 
-        </div>
- </div>
+ 
 
  <footer>
     <div class="grid wide">
@@ -432,25 +348,7 @@
         </div>
     </div>
 
-    <BSCarousel HasControls="true"> 
-    <BSCarouselItem>
-        <div>
-            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8.jpg">
-        </div>
-    </BSCarouselItem>
-    <BSCarouselItem>
-        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="#666"></rect>
-            <text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text>
-        </svg>
-    </BSCarouselItem>
-    <BSCarouselItem>
-        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="#555"></rect>
-            <text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text>
-        </svg>
-    </BSCarouselItem>
-</BSCarousel>
+  
 </footer>
 
 

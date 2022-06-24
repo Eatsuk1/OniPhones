@@ -19,12 +19,12 @@ namespace DoAn1.Service
         public List<Smartphone> GetSmartphones()
         {
 
-            return _collection.Find(_ => true).ToList();
+            return _collection.Find(_ => true).Limit(5).ToList();
         }
 
         public List<Smartphone> GetSmartphonesFilter(string _key)
         {
-            var filter = Builders<Smartphone>.Filter.Regex("key", new BsonRegularExpression(_key));
+            var filter = Builders<Smartphone>.Filter.Regex("key", new BsonRegularExpression(_key, "i"));
             return _collection.Find(filter).ToList();
         }
 
