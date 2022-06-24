@@ -1,4 +1,4 @@
-﻿@page "/Product"
+﻿@page "/{Product_key}"
 @using DoAn1.Data
 @inject IJSRuntime JSRuntime
 @layout MainLayout0
@@ -21,9 +21,7 @@
 <div id="productName">
     <div class="grid wide"
         <div class="row">
-            <h4>iPhone 13 Pro Max 128GB</h4>
-            <p>|</p>
-            <h4>Chinh hang VN/A</h4>
+            <h4>iPhone 13 Pro Max 128GB | Chính hãng VN/A</h4>
         </div>
     </div>
 </div>
@@ -63,54 +61,45 @@
             <!-- section2 -->
             <div class="col c-4 section2">
                 <div class="section2_Price">
-                     <p>Tra gop 0%</p>
+                     <p style="width:30%">Tra gop 0%</p>
                      <h3>29.390.000</h3>
                 </div>
                 
                 <!-- Chon bo nho -->
                 <h5>Chọn dung lượng</h5>
                 <div class="row section2_Select">
-                    <div class="col section2_selectBox1 active">
+                    <BSButton Color="BSColor.Danger" IsOutlined="true">
                         <p value="512">512<span>GB</span></p>
-                    </div>
-                    <div class="col section2_selectBox1">
-                        <p>256GB</p>
-                    </div>
-                    <div class="col section2_selectBox1">
-                        <p>128GB</p>
-                    </div>
+                    </BSButton>
+              
+                    <BSButton Color="BSColor.Danger" IsOutlined="true">
+                        <p value="256">256<span>GB</span></p>
+                    </BSButton>
+                    <BSButton Color="BSColor.Danger" IsOutlined="true">
+                        <p value="128">128<span>GB</span></p>
+                    </BSButton>
                 </div>
                
                 <!-- Chon mau -->
                 <h5>Chọn màu</h5>
                     <div class="row section2_Select">
-                        <div class="col section2_selectBox2 active">
+                        <BSButton Color="BSColor.Danger" IsOutlined="true">
                             <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"></div>
-                            <span>Bạc</span>
-                        </div>
-                        <div class="col section2_selectBox2">
-                            <div class="selectColor" style=" background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-max-gold-1-600x600.jpg');"></div>
-                            <span>Vàng</span>
-                        </div>
-                        <div class="col section2_selectBox2">
+                        <span>Bạc</span>
+                        </BSButton>
+                        <BSButton Color="BSColor.Danger" IsOutlined="true">
                             <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/ip13-pro-black.jpg');"></div>
                             <span>Đen</span>
-                        </div>
-                        <div class="col section2_selectBox2">
-                            <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg');" ></div>
-                            <span>Xanh dương</span>
-                        </div>
-                        <div class="col section2_selectBox2">
-                            <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-max-green.jpg');"></div>
-                            <span>Xanh lá</span>
-                        </div>
+                        </BSButton>
                     </div>
                 <!--Nut mua --!>
-                <div class="buyBtn">
-                    <a href="">
+                <div class=buyBtn>
+                <BSButton Color="BSColor.Danger" style="border-radius:20px" >
+                    <a href="" style="color:#FFFFFF">
                         <h3>MUA NGAY</h3>
-                        <p>(Giao tận nơi hoặc lấy tại cửa hàng</p>
+                        <small>(Giao tận nơi hoặc lấy tại cửa hàng</small>
                     </a>
+                </BSButton>
                 </div>
             </div>
             <!-- section3 -->
