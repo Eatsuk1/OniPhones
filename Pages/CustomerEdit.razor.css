@@ -1,0 +1,135 @@
+﻿.member {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 4px #ccc;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.member__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+}
+
+.member__info--img {
+    height: 50%;
+    text-align: center;
+}
+
+    .member__info--img p {
+        margin-top: 4px;
+        opacity: 0.8;
+    }
+
+    .member__info--img img {
+        height: 80%;
+        border-radius: 50px;
+        box-shadow: 1px 1px 1px rgb(247, 247, 247);
+    }
+
+.member__info--name {
+    justify-self: flex-start;
+    text-transform: uppercase;
+    color: var(--color-1);
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 28px;
+}
+
+.member__section {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.member__section--item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .member__section--item p {
+        font-size: 18px;
+        padding: 8px 0;
+    }
+
+        .member__section--item p:last-child {
+            font-weight: 600;
+        }
+
+.contentSection {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contentSection__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: inherit;
+    width: 32%;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.contentSection__item--img {
+    height: 32%;
+    width: 32%;
+    border-radius: 50px;
+    margin-top: 16px;
+}
+
+.contentSection__item img {
+    width: 60%;
+    margin: 12% 20%;
+}
+
+.contentSection__item--text {
+    margin-top: 16px;
+    font-size: 20px;
+    text-align: center;
+}
+
+    .contentSection__item--text p:first-child {
+        font-weight: 550;
+        color: var(--color-1);
+    }
+
+    .contentSection__item--text p:last-child {
+        opacity: 0.6;
+        margin-top: 12px;
+        font-size: 18px;
+    }
+
+
+.member__update {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+    .member__update button {
+        font-size: 20px;
+        color: #ff1c1c;
+        background-color: #fff;
+        padding: 4px;
+        border-radius: 25px;
+        border: 1px solid #ff1c1c;
+        margin-bottom: 1.5rem;
+    }
+
+        .member__update button:hover {
+            color: #fff;
+            background-color: #ff1c1c;
+        }
