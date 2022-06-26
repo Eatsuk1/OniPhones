@@ -6,6 +6,8 @@
 @inject ProductService ProductIService
 @layout MainLayout0
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@inject ProtectedLocalStorage ProtectedLocalStore
+
 
 
 <!-- subHeader -->
@@ -265,7 +267,7 @@
         Cart._Smartphone = new Smartphone();
         Cart._Smartphone = smartphone;
         Cart.quantity = 1;
-        Cart.totalprice = 1;
+        Cart.price = 1;
     }
 
 

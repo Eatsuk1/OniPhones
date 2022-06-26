@@ -2,7 +2,10 @@
 @using DoAn1.Models
 @using DoAn1.Data
 @inject List<Cart> _Cart
+
 @layout MainLayout0
+@inject ProtectedLocalStorage ProtectedLocalStorage
+
 
 <div>
 <p>
@@ -11,7 +14,7 @@
         <a>
             @item._Smartphone.key
             @item.quantity
-            @item.totalprice
+            @item.price
             
         </a>
     }
@@ -23,9 +26,17 @@
     public List<Cart> listcart { get; set; }
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
+    {
+        setCart();
+        var result = await ProtectedLocalStorage.GetAsync<List<Cart>>("cart");
+        listcart = result.Success ? result.Value : null;
+    }
+
+    private async Task setCart()
     {
         listcart = _Cart;
+        await ProtectedLocalStorage.SetAsync("cart", _Cart);
     }
 
 }

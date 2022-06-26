@@ -9,6 +9,6 @@ namespace DoAn1.Models
 
         public int quantity { get; set; }
 
-        public int totalprice { get; set; }
+        public int price { get; set; }
     }
 }
