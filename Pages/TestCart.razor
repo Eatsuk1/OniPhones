@@ -1,0 +1,29 @@
+﻿@page "/Cart"
+@using DoAn1.Models
+@using DoAn1.Data
+@inject Cart _Cart
+@layout MainLayout0
+
+<div>
+<p>
+    @foreach(var item in listdevice)
+    {
+        <a>
+            @item.key
+            
+        </a>
+    }
+</p>
+</div>
+@code {
+
+
+    
+    public List<Smartphone> listdevice { get; set; }
+
+    protected override void OnInitialized()
+    {
+        listdevice = _Cart._Smartphone;
+    }
+
+}

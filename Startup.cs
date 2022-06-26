@@ -1,6 +1,7 @@
 using DoAn1.Areas.Identity;
 using DoAn1.Data;
 using DoAn1.Service;
+using DoAn1.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -46,6 +47,7 @@ namespace DoAn1
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<CustomerService>();
             services.AddScoped<ProductService>();
+            services.AddScoped<Cart>();
             //services.AddAuthentication().AddGoogle(googleOptions =>
             //{
             //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
