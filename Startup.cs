@@ -18,7 +18,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
-
+using System.Collections.Generic;
 using BlazorStrap;
 
 namespace DoAn1
@@ -48,6 +48,7 @@ namespace DoAn1
             services.AddScoped<CustomerService>();
             services.AddScoped<ProductService>();
             services.AddScoped<Cart>();
+            services.AddScoped<List<Cart>>();
             //services.AddAuthentication().AddGoogle(googleOptions =>
             //{
             //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];

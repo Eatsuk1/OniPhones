@@ -240,7 +240,7 @@
     [Parameter]
     public string device_key { get; set; }
 
-    
+
 
 
 
@@ -251,7 +251,7 @@
     protected override async Task OnInitializedAsync()
     {
         GetSmartphone();
-        
+
     }
 
     private void GetSmartphone()
@@ -262,7 +262,8 @@
 
     private async Task AddtoCart()
     {
-        Cart._Smartphone = new List<Smartphone>(){smartphone};
+        Cart._Smartphone = new Smartphone();
+        Cart._Smartphone = smartphone;
         Cart.quantity = 1;
         Cart.totalprice = 1;
     }

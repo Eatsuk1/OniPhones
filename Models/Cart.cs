@@ -5,7 +5,7 @@ namespace DoAn1.Models
 {
     public class Cart
     {
-        public List<Smartphone> _Smartphone { get; set; }
+        public Smartphone _Smartphone { get; set; }
 
         public int quantity { get; set; }
 
