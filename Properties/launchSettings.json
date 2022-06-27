@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:7609",
+      "applicationUrl": "http://localhost:7609;https://cphones.herokuapp.com/",
       "sslPort": 44310
     }
   },
