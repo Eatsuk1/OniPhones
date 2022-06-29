@@ -1,10 +1,12 @@
 ﻿@page "/Cart"
 @using DoAn1.Data
+@using DoAn1.Models
 @inject IJSRuntime JSRuntime
+
 @layout MainLayout0
 
 <div class="cart-page">
- <!-- Cart header -->
+    <!-- Cart header -->
     <div class="cart-header">
         <div class="cart-header__subline"></div>
         <div class="cart-header__goback">
@@ -15,7 +17,7 @@
         </div>
     </div>
 
-<!-- Cart items  -->
+    <!-- Cart items  -->
     <table>
         <tr>
             <th>Product</th>
@@ -29,7 +31,7 @@
                         <div
                             class="cart-info_img---image"
                             style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
-                           <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
                         </div>
                     </div>
                     <div>
@@ -52,7 +54,7 @@
                         <div
                             class="cart-info_img---image"
                             style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
-                           <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
                         </div>
                     </div>
                     <div>
@@ -75,7 +77,7 @@
                         <div
                             class="cart-info_img---image"
                             style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
-                           <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
                         </div>
                     </div>
                     <div>
@@ -99,7 +101,7 @@
                 <span>104.990.000 &nbsp;đ </span>
             </div>
         </div>
-<!--Buy Button-->
+        <!--Buy Button-->
         <div class="buy-button">
             <BSButton Color="BSColor.Danger">
                 @*<a href="">*@
@@ -118,6 +120,8 @@
     </div>
 </div>
 
-@code {
 
+
+@code {
+   
 }

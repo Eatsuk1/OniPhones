@@ -6,7 +6,6 @@
 @inject ProductService ProductIService
 @layout MainLayout0
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
-@inject ProtectedLocalStorage ProtectedLocalStore
 
 
 
@@ -140,7 +139,7 @@
                             </div>
                         </div>
                         <div class=buyBtn>
-                <BSButton Color="BSColor.Danger" style="border-radius:20px" @onclick="AddtoCart">
+                <BSButton Color="BSColor.Danger" style="border-radius:20px" >
                     <a href="/Cart" style="color:#FFFFFF">
                         <h3>MUA NGAY</h3>
                         <small>(Giao tận nơi hoặc lấy tại cửa hàng</small>
@@ -262,13 +261,6 @@
 
     }
 
-    private async Task AddtoCart()
-    {
-        Cart._Smartphone = new Smartphone();
-        Cart._Smartphone = smartphone;
-        Cart.quantity = 1;
-        Cart.price = 1;
-    }
-
+    
 
 }
