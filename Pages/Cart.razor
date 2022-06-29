@@ -1,0 +1,123 @@
+﻿@page "/Cart"
+@using DoAn1.Data
+@inject IJSRuntime JSRuntime
+@layout MainLayout0
+
+<div class="cart-page">
+ <!-- Cart header -->
+    <div class="cart-header">
+        <div class="cart-header__subline"></div>
+        <div class="cart-header__goback">
+            <a href="">Quay lại</a>
+        </div>
+        <div class="cart-header__title">
+            <h1>Giỏ hàng</h1>
+        </div>
+    </div>
+
+<!-- Cart items  -->
+    <table>
+        <tr>
+            <th>Product</th>
+            <th class="cart-page-quantity">Quantity</th>
+            <th class="text-center">Subtotal</th>
+        </tr>
+        <tr>
+            <td class="col c-8 section">
+                <div class="cart-info">
+                    <div class="cart-info_img">
+                        <div
+                            class="cart-info_img---image"
+                            style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
+                           <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Iphone 13 Pro Max Chính hãng (VN/A)</h3>
+                        <small>34.990.000đ</small>
+                        <a href="Remove"></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="number" value="1" />
+            </td>
+            <td class="text-center">34.990.000đ</td>
+        </tr>
+
+        <tr>
+            <td class="col c-8 section">
+                <div class="cart-info">
+                    <div class="cart-info_img">
+                        <div
+                            class="cart-info_img---image"
+                            style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
+                           <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Iphone 13 Pro Max Chính hãng (VN/A)</h3>
+                        <small>34.990.000đ</small>
+                        <a href="Remove"></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="number" value="1" />
+            </td>
+            <td class="text-center">34.990.000đ</td>
+        </tr>
+    
+        <tr>
+            <td class="col c-8 section">
+                <div class="cart-info">
+                    <div class="cart-info_img">
+                        <div
+                            class="cart-info_img---image"
+                            style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
+                           <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Iphone 13 Pro Max Chính hãng (VN/A)</h3>
+                        <small>34.990.000đ</small>
+                        <a href="Remove"></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="number" value="1" />
+            </td>
+            <td class="text-center">34.990.000đ</td>
+        </tr>
+    </table>
+    
+    <div class="payment-details">
+        <div class="total-price">
+            <h4>Tổng tiền tạm tính:</h4>
+            <div class="total">
+                <span>104.990.000 &nbsp;đ </span>
+            </div>
+        </div>
+<!--Buy Button-->
+        <div class="buy-button">
+            <BSButton Color="BSColor.Danger">
+                <a href="">
+                    <h3>TIẾN HÀNH ĐẶT HÀNG</h3>
+                </a>
+            </BSButton>
+        </div>
+
+        <div class="buy-button">
+            <BSButton Color="BSColor.Danger" IsOutlined="true">
+                <a href="">
+                    <h3>CHỌN THÊM SẢN PHẨM KHÁC</h3>
+                </a>
+            </BSButton>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}
