@@ -4,7 +4,7 @@
 @inject List<Cart> _Cart
 
 @layout MainLayout0
-@inject ProtectedLocalStorage ProtectedLocalStorage
+
 
 
 <div>
@@ -28,15 +28,15 @@
 
     protected override async Task OnInitializedAsync()
     {
+
         setCart();
-        var result = await ProtectedLocalStorage.GetAsync<List<Cart>>("cart");
-        listcart = result.Success ? result.Value : null;
+
     }
 
     private async Task setCart()
     {
         listcart = _Cart;
-        await ProtectedLocalStorage.SetAsync("cart", _Cart);
+        
     }
 
 }
