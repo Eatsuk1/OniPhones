@@ -1,6 +1,12 @@
-﻿@page "/test2"
-
+﻿@page "/{device_key}"
+@using DoAn1.Data
+@using DoAn1.Service
+@using DoAn1.Models
+@inject Cart Cart
+@inject ProductService ProductIService
 @layout MainLayout0
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
 
 
 <!-- subHeader -->
@@ -19,9 +25,7 @@
         <div id="productName">
             <div class="grid wide">
                 <div class="row">
-                    <h4>iPhone 13 Pro Max 128GB</h4>
-                    <p>|</p>
-                    <h4>Chinh hang VN/A</h4>
+                    <h4>@smartphone.device_name</h4>
                 </div>
             </div>
         </div>
@@ -36,43 +40,23 @@
                             <div
                                 class="section1__img---image"
                                 style="
-                                    background-image: url('./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg');
+                                    background-image: url('@smartphone.pictures.ElementAt(0)');
                                 "
                             ></div>
                         </div>
-
+                        
                         <div class="row section1__list">
-                            <div
+                            @foreach(var picture in @smartphone.pictures.Take(5)){
+                                <div
                                 class="col c-2 section1__list--item"
                                 style="
-                                    background-image: url('./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg');
+                                    background-image: url('@picture');
                                 "
                             ></div>
-                            <div
-                                class="col c-2 section1__list--item"
-                                style="
-                                    background-image: url('./assets/imgs/iphone13promax/ip13-pro-black.jpg');
-                                "
-                            ></div>
-                            <div
-                                class="col c-2 section1__list--item"
-                                style="
-                                    background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-max-gold-1-600x600.jpg');
-                                "
-                            ></div>
-                            <div
-                                class="col c-2 section1__list--item"
-                                style="
-                                    background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-max-green.jpg');
-                                "
-                            ></div>
-                            <div
-                                class="col c-2 section1__list--item"
-                                style="
-                                    background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');
-                                "
-                            ></div>
+                            }
                         </div>
+                        
+                        
                         <div class="section1__infoProduct">
                             <h4>Thông tin sản phẩm</h4>
                             <p>
@@ -154,12 +138,14 @@
                                 <span>Xanh lá</span>
                             </div>
                         </div>
-                        <div class="buyBtn">
-                            <a href="">
-                                <h3>MUA NGAY</h3>
-                                <p>(Giao tận nơi hoặc lấy tại cửa hàng</p>
-                            </a>
-                        </div>
+                        <div class=buyBtn>
+                <BSButton Color="BSColor.Danger" style="border-radius:20px" >
+                    <a href="/Cart" style="color:#FFFFFF">
+                        <h3>MUA NGAY</h3>
+                        <small>(Giao tận nơi hoặc lấy tại cửa hàng</small>
+                    </a>
+                </BSButton>
+                </div>
                     </div>
                     <!-- section3 -->
                     <div class="col c-4 section3">
@@ -169,15 +155,15 @@
                                 <p>Kích thước màn hình</p>
                             </div>
                             <div class="col c-7">
-                                <p>6.7 inches</p>
+                                <p>@smartphone.display_size inch</p>
                             </div>
                         </div>
                         <div class="row section3__List">
                             <div class="col c-3">
-                                <p>Camera trước</p>
+                                <p>Camera sau</p>
                             </div>
                             <div class="col c-7">
-                                <p>12MP</p>
+                                <p>@smartphone.camera</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -185,7 +171,7 @@
                                 <p>Chất lượng video</p>
                             </div>
                             <div class="col c-7">
-                                <p>2160p</p>
+                                <p>@smartphone.video</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -193,7 +179,7 @@
                                 <p>Dung lượng RAM</p>
                             </div>
                             <div class="col c-7">
-                                <p>6GB RAM</p>
+                                <p>@smartphone.ram</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -201,7 +187,7 @@
                                 <p>Chipset</p>
                             </div>
                             <div class="col c-7">
-                                <p>Apple A15 Bionic</p>
+                                <p>@smartphone.chipset</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -209,7 +195,7 @@
                                 <p>Dung lượng pin</p>
                             </div>
                             <div class="col c-7">
-                                <p>4352mAh</p>
+                                <p>@smartphone.battery</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -217,7 +203,7 @@
                                 <p>Loại pin</p>
                             </div>
                             <div class="col c-7">
-                                <p>Li-on</p>
+                                <p>@smartphone.batteryType</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -225,7 +211,7 @@
                                 <p>Trọng lượng</p>
                             </div>
                             <div class="col c-7">
-                                <p>240g, 7.7mm thickness</p>
+                                <p>@smartphone.body</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -233,7 +219,7 @@
                                 <p>Hệ điều hành</p>
                             </div>
                             <div class="col c-7">
-                                <p>iOS 15, up to iOS 15.5</p>
+                                <p>@smartphone.os_type</p>
                             </div>
                         </div>
                         <div class="row section3__List">
@@ -241,7 +227,7 @@
                                 <p>Bộ nhớ trong</p>
                             </div>
                             <div class="col c-7">
-                                <p>128GB/256GB/1TB storage, no card slot</p>
+                                <p>@smartphone.storage</p>
                             </div>
                         </div>
                     </div>
@@ -249,7 +235,32 @@
             </div>
         </div>
         <!--  -->
+        
 
 @code {
+    [Parameter]
+    public string device_key { get; set; }
+
+
+
+
+
+    Smartphone smartphone = new Smartphone();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
+
+    }
+
+    private void GetSmartphone()
+    {
+        smartphone = ProductIService.GetSpecifySmartphone(device_key);
+
+    }
+
+    
 
 }

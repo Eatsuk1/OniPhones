@@ -10,13 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Pages\products.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\assets\imgs\svg\award.svg" />
     <None Include="wwwroot\assets\imgs\svg\award_48px.svg" />
     <None Include="wwwroot\assets\imgs\svg\calendar.svg" />
