@@ -2,7 +2,9 @@
 using MongoDB.Driver;
 using System.Collections.Generic;
 using MongoDB.Bson;
+using DoAn1.Models;
 using MongoDB.Bson.Serialization;
+using System.Threading.Tasks;
 
 namespace DoAn1.Service
 {
@@ -33,5 +35,6 @@ namespace DoAn1.Service
             var filter = Builders<Smartphone>.Filter.Eq("key",_key);
             return _collection.Find(filter).FirstOrDefault();
         }
+        
     }
 }
