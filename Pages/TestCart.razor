@@ -1,84 +1,102 @@
 ﻿@page "/testCart"
 @using DoAn1.Data
-@using DoAn1.Models
 @using DoAn1.Service
 @using System.Security.Claims
+@using System.Security.Principal
 @inject CartService CartIService
+@inject ProductService ProductIService
 @inject IJSRuntime JSRuntime
 @inject AuthenticationStateProvider AuthenticationStateProvider
-
+@inject NavigationManager navigationManager
 @layout MainLayout0
 
-<div class="cart-page">
-    <!-- Cart header -->
-    <div class="cart-header">
-        <div class="cart-header__subline"></div>
-        <div class="cart-header__goback">
-            <a href="">Quay lại</a>
+<AuthorizeView>
+    <NotAuthorized>
+        <div>
+            <p>You need log in to proceed</p>
         </div>
-        <div class="cart-header__title">
-            <h1>Giỏ hàng</h1>
-        </div>
-    </div>
+    </NotAuthorized>
+    <Authorized>
+        <div class="cart-page">
+            <!-- Cart header -->
+            <div class="cart-header">
+                <div class="cart-header__subline"></div>
+                <div class="cart-header__goback">
+                    <a href="">Quay lại</a>
+                </div>
+                <div class="cart-header__title">
+                    <h1>Giỏ hàng</h1>
+                </div>
+            </div>
 
-    <!-- Cart items  -->
-    <table>
-        <tr>
-            <th>Product</th>
-            <th class="cart-page-quantity">Quantity</th>
-            <th class="text-center">Subtotal</th>
-        </tr>
-        @foreach(var item in CartItems){
-        <tr>
-            <td class="col c-8 section">
-                <div class="cart-info">
-                    <div class="cart-info_img">
-                        <div
-                            class="cart-info_img---image"
-                            style="background-image: url();">
-                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
-                        </div>
-                    </div>
-                    <div>
-                        <h3>@item.device_key</h3>
-                        <small>1đ</small>
-                        <a href="Remove"></a>
+            <!-- Cart items  -->
+
+
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th class="cart-page-quantity">Quantity</th>
+                    <th class="text-center">Subtotal</th>
+                </tr>
+                @foreach (var item in CartItems)
+                {
+                    <tr>
+                        <td class="col c-8 section">
+                            <div class="cart-info">
+                                <div class="cart-info_img">
+                                    <div
+                                        class="cart-info_img---image"
+                                        style="background-image: url('');">
+                                        <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>@item.device_key</h3>
+                                    <small>1đ</small>
+                                    <a href="Remove"></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key)" on/>
+
+                        </td>
+                        <td class="text-center">@(item.quantity)đ</td>
+                    </tr>
+                }
+
+            </table>
+
+
+            <div class="payment-details">
+                <div class="total-price">
+                    <h4>Tổng tiền tạm tính:</h4>
+                    <div class="total">
+                        <span>@GetTotalPrice()&nbsp;đ </span>
                     </div>
                 </div>
-            </td>
-            <td>
-                <input type="number" value="1" />
-            </td>
-            <td class="text-center">1đ</td>
-        </tr>
-        }
-    </table>
-    
-    <div class="payment-details">
-        <div class="total-price">
-            <h4>Tổng tiền tạm tính:</h4>
-            <div class="total">
-                <span>@totalprice &nbsp;đ </span>
-            </div>
-        </div>
-        <!--Buy Button-->
-        <div class="buy-button">
-            <BSButton Color="BSColor.Danger">
-                @*<a href="">*@
-                    <h3>TIẾN HÀNH ĐẶT HÀNG</h3>
-                @*</a>*@
-            </BSButton>
-        </div>
+                <!--Buy Button-->
+                <div class="buy-button">
+                    <BSButton Color="BSColor.Danger">
+                        @*<a href="">*@
+                        <h3>TIẾN HÀNH ĐẶT HÀNG</h3>
+                        @*</a>*@
+                    </BSButton>
+                </div>
 
-        @*<div class="buy-button">
+
+                @*<div class="buy-button">
             @<BSButton Color="BSColor.Danger" IsOutlined="true">*@
                 <a href="">
                     <h3>CHỌN THÊM SẢN PHẨM KHÁC</h3>
                 </a>
-            @*</BSButton>*@
-        @*</div>*@
-    </div>
-</div>
+                @*</BSButton>*@
+                @*</div>*@
+            </div>
+
+        </div>
+    </Authorized>
+</AuthorizeView>
 
 
 
@@ -90,6 +108,13 @@
 
     [Parameter]
     public int totalprice { get; set; }
+
+    [Parameter]
+    public int subtotal { get; set; }
+    public int finalsubtotal { get; set; }
+
+    Smartphone smartphone = new Smartphone();
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -105,23 +130,48 @@
 
     public int GetTotalPrice()
     {
-        foreach(var item in CartItems)
+        subtotal = 0;
+        foreach (var item in CartItems)
         {
-            totalprice++;
+            subtotal += item.quantity;
         }
-        return totalprice;
+        return subtotal;
     }
 
-    public async Task GetClaims()
+    public void OnQuantityChange(string key)
     {
-		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-	    var userClaims = authState.User.Claims;
-	    foreach (var claim in userClaims)
-	    {
-	        if (claim.Type == ClaimTypes.NameIdentifier)
-	        {
-		        Customerid= claim.Value;
-	        }
-	    }
-	}
+        int q_temp = 0;
+        subtotal = 0;
+        finalsubtotal = 0;
+        foreach (var item in CartItems)
+        {
+            q_temp = item.quantity;
+            subtotal += item.quantity;
+        }
+        finalsubtotal = subtotal;
+        CartIService.UpdateCart(key, Customerid, q_temp);
+        
+
+    }
+
+    
+
+           public async Task GetClaims()
+           {
+               var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+               var userClaims = authState.User.Claims;
+               try
+               {
+                   foreach (var claim in userClaims)
+                   {
+                       if (claim.Type == ClaimTypes.NameIdentifier)
+                       {
+                           Customerid = claim.Value;
+                       }
+                   }
+               }catch(Exception ex){}
+           }
+
+    
+    
 }

@@ -1,7 +1,8 @@
+using BlazorStrap;
 using DoAn1.Areas.Identity;
 using DoAn1.Data;
-using DoAn1.Service;
 using DoAn1.Models;
+using DoAn1.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -14,12 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
-using BlazorStrap;
+using System.Threading.Tasks;
 
 namespace DoAn1
 {
@@ -109,7 +108,7 @@ namespace DoAn1
          }
      };
  });
-            
+
             services.AddBlazorStrap();
         }
 

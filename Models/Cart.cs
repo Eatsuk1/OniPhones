@@ -1,5 +1,4 @@
-﻿using DoAn1.Data;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace DoAn1.Models

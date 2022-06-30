@@ -6,11 +6,11 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Components.Authorization
-@inject Cart Cart
+
 @inject ProductService ProductIService
 @inject CartService CartIService
 @layout MainLayout0
-@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@inject NavigationManager navigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 
@@ -263,7 +263,7 @@
 
     }
 
-    private void GetSmartphone()
+    public void GetSmartphone()
     {
         _ = GetClaims();
         smartphone = ProductIService.GetSpecifySmartphone(device_key);
@@ -297,10 +297,9 @@
                     }
                 }
             }
-            else break;
         }
-        catch(Exception ex)
-        
+        catch(Exception ex){}
+
     }
     
 
