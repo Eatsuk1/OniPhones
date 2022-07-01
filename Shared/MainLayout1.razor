@@ -8,7 +8,9 @@
         <div class="grid wide">
             <div class="row">
                 <div class="col header__logo c-2">
-                    <img src="./assets/imgs/Logo-oniphone.png" alt="logo">
+                    <a href="/">
+                        <img src="./assets/imgs/Logo-oniphone.png" alt="logo">
+                        </a>
                 </div>
                 <div class="col c-6">
                     <div class="header__searchbar">
@@ -44,7 +46,7 @@
                         <img src="./assets/imgs/svg/user.svg" alt="">
                     </div>
                     <div class="header__section--sub">
-                        <a href="">Cmember</a>
+                        <a href="/Account/Main">Cmember</a>
                     </div>
                 </div>
                 
@@ -68,7 +70,7 @@
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/clock.svg" alt="">
                             <a class="nav-link" href="/@customerid/lichsumuahang">
-                <span aria-hidden="true"></span>Lịch sử mua hàng</a>
+                            <span aria-hidden="true"></span>Lịch sử mua hàng</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/location-pin.png" alt="">
@@ -106,7 +108,10 @@
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/log-out.svg" alt="">
-                            <a href="">Thoát tài khoản</a>
+                            <form method="post" action="Account/LogOut">
+				                <button type="submit" class="nav-link btn btn-link">Thoát tài khoản</button>
+			                </form>
+                           @* <a href="Account/Logout">Thoát tài khoản</a>*@
                         </div>
                     </div>
                 </div>
