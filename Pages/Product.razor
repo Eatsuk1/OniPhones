@@ -234,12 +234,12 @@
     {
         if (CartIService.CheckDup(device_key, Customerid))
         {
-            navigationManager.NavigateTo($"/testCart");
+            navigationManager.NavigateTo($"/Cart");
         }
         else
         {
             await CartIService.AddtoCart(device_key, Customerid, 1);
-            navigationManager.NavigateTo($"/testCart");
+            navigationManager.NavigateTo($"/Cart");
         } 
     }
 

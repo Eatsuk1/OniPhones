@@ -25,7 +25,7 @@
     <div class="cart-header">
         <div class="cart-header__subline"></div>
         <div class="cart-header__goback">
-            <a href="">Quay lại</a>
+            <a href="" role="button" onclick="history.back()">Quay lại</a>
         </div>
         <div class="cart-header__title">
             <h1>Giỏ hàng</h1>
@@ -57,7 +57,7 @@
                 </div>
             </td>
             <td>
-                <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key)" on/>
+                <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key, item.quantity)"/>
             </td>
             <td class="text-center">@(item.quantity)đ</td>
         </tr>
@@ -131,14 +131,14 @@
         return subtotal;
     }
 
-    public void OnQuantityChange(string _device_key)
+    public void OnQuantityChange(string _device_key, int q_temp)
     {
-        int q_temp = 0;
+        
         subtotal = 0;
         finalsubtotal = 0;
         foreach (var item in CartItems)
         {
-            q_temp = item.quantity;
+            
             subtotal += item.quantity;
         }
         finalsubtotal = subtotal;

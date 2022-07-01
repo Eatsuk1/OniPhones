@@ -55,20 +55,18 @@
                             </div>
 
                             <div class="block-product">
-
-
                                 @foreach (var device in smartphone)
                                 {
                                     <div class="product_info-container c-2-4">
                                         <div class="product_info">
-                                            <a href="#" class="product_link">
+                                            <a href="/@device.key" class="product_link">
                                                 <div class="item-product_image">
-                                                    <a href="/phone/@device.device_name">
+                                                    <a href="/@device.key">
                                                         <img src="@device.device_image">
                                                     </a>
                                                 </div>
                                                 <div class="item-product_name"></div>
-                                                    <a href="/phone/@device.device_name">
+                                                    <a href="/@device.key">
                                                         <p>@device.device_name</p>
                                                     </a>
                                                 <div class="item-product_price">

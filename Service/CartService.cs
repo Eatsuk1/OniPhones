@@ -51,7 +51,7 @@ namespace DoAn1.Service
         {
             var builder = Builders<Cart>.Filter;
             var filter = builder.And(builder.Eq("device_key", _key), builder.Eq("user_id", _user_id));
-            var update = Builders<Cart>.Update.Set("quantity", _collection.Find(filter).FirstOrDefault().quantity += 1);
+            var update = Builders<Cart>.Update.Set("quantity", _collection.Find(filter).FirstOrDefault().quantity=_quantity);
             await _collection.UpdateOneAsync(filter, update);
         }
     }
