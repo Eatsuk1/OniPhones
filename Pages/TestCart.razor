@@ -10,10 +10,21 @@
 @inject NavigationManager navigationManager
 @layout MainLayout0
 
+
 <AuthorizeView>
     <NotAuthorized>
         <div>
-            <p>You need log in to proceed</p>
+            
+            @*CAPSLOCK ĐỂ AE DỄ THẤY, KHÔNG CÓ Ý GÌ*@
+
+            @*NOTE CHO ANH EM: VIẾT HỘ T CÁI MÀN HÌNH YÊU CẦU NGƯỜI DÙNG LOG IN MỚI THÊM HÀNG VÀO GIỎ ĐƯỢC
+            BÊN TRONG TRẠNG THÁI NOTAUTHORIZED*@
+            
+            @*ĐỌC ĐƯỢC XONG THÌ XÓA MẤY CÁI CMT NÀY ĐI NHÉ ;))*@
+            
+        </div>
+        <div>
+            <p>You need log in to use this feature</p>
         </div>
     </NotAuthorized>
     <Authorized>
@@ -46,25 +57,22 @@
                                 <div class="cart-info_img">
                                     <div
                                         class="cart-info_img---image"
-                                        style="background-image: url('');">
+                                        style="background-image: url('@GetSmartphone(item.device_key).device_image');">
                                         <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
                                     </div>
                                 </div>
                                 <div>
-                                    <h3>@item.device_key</h3>
-                                    <small>1đ</small>
-                                    <a href="Remove"></a>
+                                    <h3>@GetSmartphone(item.device_key).device_name</h3>
+                                    
                                 </div>
                             </div>
                         </td>
                         <td>
                             <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key)" on/>
-
                         </td>
                         <td class="text-center">@(item.quantity)đ</td>
                     </tr>
                 }
-
             </table>
 
 
@@ -138,7 +146,7 @@
         return subtotal;
     }
 
-    public void OnQuantityChange(string key)
+    public void OnQuantityChange(string _device_key)
     {
         int q_temp = 0;
         subtotal = 0;
@@ -149,29 +157,30 @@
             subtotal += item.quantity;
         }
         finalsubtotal = subtotal;
-        CartIService.UpdateCart(key, Customerid, q_temp);
-        
+        CartIService.UpdateCart(_device_key, Customerid, q_temp);
+    }
 
+    public Smartphone GetSmartphone(string _device_key)
+    {
+       return smartphone = ProductIService.GetSpecifySmartphone(_device_key);
     }
 
     
 
-           public async Task GetClaims()
-           {
-               var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-               var userClaims = authState.User.Claims;
-               try
-               {
-                   foreach (var claim in userClaims)
-                   {
-                       if (claim.Type == ClaimTypes.NameIdentifier)
-                       {
-                           Customerid = claim.Value;
-                       }
-                   }
-               }catch(Exception ex){}
-           }
+    public async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userClaims = authState.User.Claims;
+        try
+        {
+            foreach (var claim in userClaims)
+            {
+                if (claim.Type == ClaimTypes.NameIdentifier)
+                {
+                    Customerid = claim.Value;
 
-    
-    
+                }
+            }
+        }catch(Exception ex){}
+    }
 }
