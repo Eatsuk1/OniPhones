@@ -1,5 +1,8 @@
-﻿@page "/catalogsearch/result/"
+﻿@page "/search/result/{key}"
 
+@using DoAn1.Data
+@using DoAn1.Service
+@inject ProductService ProductIService
 @layout MainLayout0
 
  <div id="search-content">
@@ -52,25 +55,29 @@
                             </div>
 
                             <div class="block-product">
-                                <div class="product_info-container c-2">
-                                    <div class="product_info">
-                                        <a href="#" class="product_link">
-                                            <div class="item-product_image">
-                                                <a href="#">
-                                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
-                                                </a>
-                                            </div>
-                                            <div class="item-product_name"></div>
-                                                <a href="#">
-                                                    <p>iPhone 13 Promax</p>
-                                                </a>
-                                            <div class="item-product_price">
-                                                <p>20.290.000</p>
-                                            </div>                                    
-                                        </a>
-                                    </div>
-                                </div>
 
+
+                                @foreach (var device in smartphone)
+                                {
+                                    <div class="product_info-container c-2-4">
+                                        <div class="product_info">
+                                            <a href="#" class="product_link">
+                                                <div class="item-product_image">
+                                                    <a href="/phone/@device.device_name">
+                                                        <img src="@device.device_image">
+                                                    </a>
+                                                </div>
+                                                <div class="item-product_name"></div>
+                                                    <a href="/phone/@device.device_name">
+                                                        <p>@device.device_name</p>
+                                                    </a>
+                                                <div class="item-product_price">
+                                                    <p>@device.default_price</p>
+                                                </div>                                    
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
                             </div>
 
                             </div>
@@ -92,5 +99,21 @@
 
 
 @code {
+    [Parameter]
+    public string key { get; set; }
+
+    List<Smartphone> smartphone = new List<Smartphone>();
+
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
+    }
+
+    private void GetSmartphone()
+    {
+        smartphone = ProductIService.GetSmartphonesFilter(key);
+    }
 
 }

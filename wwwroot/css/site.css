@@ -156,6 +156,10 @@ html {
             color: var(--color-1);
         }
 
+        .sideNav__item:hover button {
+            color: var(--color-1);
+        }
+
     .sideNav__item a {
         font-size: 12px;
         text-decoration: none;
@@ -163,6 +167,15 @@ html {
         opacity: 0.8;
         margin-left: 4px;
     }
+
+    .sideNav__item button {
+        font-size: 12px;
+        text-decoration: none;
+        color: #333;
+        opacity: 0.8;
+        margin-left: 4px;
+    }
+
 
 
 
