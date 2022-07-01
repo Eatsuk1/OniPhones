@@ -39,6 +39,18 @@
             margin-left: 8px;
             font-weight: 700;
         }
+.subheader__list_add a {
+    line-height: 32px;
+    font-size: 12px;
+    padding: 0 8px;
+    text-decoration: none;
+    font-weight: 300;
+    color: #333;
+}
+    .subheader__list_add a::after {
+        content: "";
+        
+    }
 /* productName */
 #productName {
     margin-top: 96px;
@@ -152,7 +164,6 @@ contents {
     }
 
         .section2_Price h3::after {
-            content: "đ";
             font-size: 14px;
             position: absolute;
             margin-left: 4px;

@@ -17,7 +17,9 @@ html {
 .mt-16 {
     margin-top: 16px;
 }
-
+.text-center {
+    text-align: center;
+}
 /*Thanh do ben tren*/
 /* */
 #header {
@@ -27,6 +29,7 @@ html {
     background-color: var(--color-1);
     width: 100%;
     z-index: 1;
+    overflow:hidden;
 }
 
 .header__logo {

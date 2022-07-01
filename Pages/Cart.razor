@@ -1,10 +1,25 @@
 ﻿@page "/Cart"
+
 @using DoAn1.Data
 @using DoAn1.Models
-@inject IJSRuntime JSRuntime
+@using DoAn1.Service
+@using System.Security.Claims
+@using System.Security.Principal
 
+@inject CartService CartIService
+@inject ProductService ProductIService
+@inject IJSRuntime JSRuntime
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager navigationManager
 @layout MainLayout0
 
+<AuthorizeView>
+    <NotAuthorized>
+        <div>
+            <p>You need log in to use this feature</p>
+        </div>
+    </NotAuthorized>
+    <Authorized>
 <div class="cart-page">
     <!-- Cart header -->
     <div class="cart-header">
@@ -24,104 +39,133 @@
             <th class="cart-page-quantity">Quantity</th>
             <th class="text-center">Subtotal</th>
         </tr>
+         @foreach (var item in CartItems)
+        {
         <tr>
             <td class="col c-8 section">
                 <div class="cart-info">
                     <div class="cart-info_img">
                         <div
                             class="cart-info_img---image"
-                            style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
+                            style="background-image: url('@GetSmartphone(item.device_key).device_image');">
                             <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
                         </div>
                     </div>
                     <div>
-                        <h3>Iphone 13 Pro Max Chính hãng (VN/A)</h3>
-                        <small>34.990.000đ</small>
-                        <a href="Remove"></a>
+                        <h3>@GetSmartphone(item.device_key).device_name</h3>
                     </div>
                 </div>
             </td>
             <td>
-                <input type="number" value="1" />
+                <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key)" on/>
             </td>
-            <td class="text-center">34.990.000đ</td>
+            <td class="text-center">@(item.quantity)đ</td>
         </tr>
-
-        <tr>
-            <td class="col c-8 section">
-                <div class="cart-info">
-                    <div class="cart-info_img">
-                        <div
-                            class="cart-info_img---image"
-                            style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
-                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Iphone 13 Pro Max Chính hãng (VN/A)</h3>
-                        <small>34.990.000đ</small>
-                        <a href="Remove"></a>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <input type="number" value="1" />
-            </td>
-            <td class="text-center">34.990.000đ</td>
-        </tr>
-    
-        <tr>
-            <td class="col c-8 section">
-                <div class="cart-info">
-                    <div class="cart-info_img">
-                        <div
-                            class="cart-info_img---image"
-                            style="background-image: url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg);">
-                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Iphone 13 Pro Max Chính hãng (VN/A)</h3>
-                        <small>34.990.000đ</small>
-                        <a href="Remove"></a>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <input type="number" value="1" />
-            </td>
-            <td class="text-center">34.990.000đ</td>
-        </tr>
+        }
     </table>
     
     <div class="payment-details">
         <div class="total-price">
             <h4>Tổng tiền tạm tính:</h4>
             <div class="total">
-                <span>104.990.000 &nbsp;đ </span>
+                <span>@GetTotalPrice()&nbsp;đ</span>
             </div>
         </div>
         <!--Buy Button-->
         <div class="buy-button">
             <BSButton Color="BSColor.Danger">
-                @*<a href="">*@
-                    <h3>TIẾN HÀNH ĐẶT HÀNG</h3>
-                @*</a>*@
+                <a href="">
+                    <p>TIẾN HÀNH ĐẶT HÀNG</p>
+                </a>
             </BSButton>
         </div>
 
-        @*<div class="buy-button">
-            @<BSButton Color="BSColor.Danger" IsOutlined="true">*@
+        <div class="buy-button">
+            <BSButton Color="BSColor.Danger" IsOutlined="true">
                 <a href="">
-                    <h3>CHỌN THÊM SẢN PHẨM KHÁC</h3>
+                    <p>CHỌN THÊM SẢN PHẨM KHÁC</p>
                 </a>
-            @*</BSButton>*@
-        @*</div>*@
+            </BSButton>
+        </div>
     </div>
 </div>
-
+    </Authorized>
+</AuthorizeView>
 
 
 @code {
-   
+   [Parameter]
+    public string Customerid { get; set; }
+
+    public List<Models.Cart> CartItems { get; set; }
+
+    [Parameter]
+    public int totalprice { get; set; }
+
+    [Parameter]
+    public int subtotal { get; set; }
+    public int finalsubtotal { get; set; }
+
+    Smartphone smartphone = new Smartphone();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetCart();
+        await GetClaims();
+    }
+
+    public void GetCart()
+    {
+        _ = GetClaims();
+        CartItems = CartIService.GetCart(Customerid);
+    }
+
+    public int GetTotalPrice()
+    {
+        subtotal = 0;
+        foreach (var item in CartItems)
+        {
+            subtotal += item.quantity;
+        }
+        return subtotal;
+    }
+
+    public void OnQuantityChange(string _device_key)
+    {
+        int q_temp = 0;
+        subtotal = 0;
+        finalsubtotal = 0;
+        foreach (var item in CartItems)
+        {
+            q_temp = item.quantity;
+            subtotal += item.quantity;
+        }
+        finalsubtotal = subtotal;
+        CartIService.UpdateCart(_device_key, Customerid, q_temp);
+    }
+
+    public Smartphone GetSmartphone(string _device_key)
+    {
+       return smartphone = ProductIService.GetSpecifySmartphone(_device_key);
+    }
+
+    
+
+    public async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userClaims = authState.User.Claims;
+        try
+        {
+            foreach (var claim in userClaims)
+            {
+                if (claim.Type == ClaimTypes.NameIdentifier)
+                {
+                    Customerid = claim.Value;
+
+                }
+            }
+        }catch(Exception ex){}
+    }
 }
