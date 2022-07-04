@@ -77,7 +77,7 @@ namespace DoAn1
      options.Scope.Add("email");   // <- Optional extra
 
      //options.CallbackPath = new PathString("/callback");
-     options.CallbackPath = new PathString("http:/cphones.heroukuapp.com/callback");
+     options.CallbackPath = new PathString("cphones.heroukuapp.com/callback");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
      options.TokenValidationParameters = new TokenValidationParameters
