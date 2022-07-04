@@ -19,6 +19,8 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.HttpOverrides;
+
 
 namespace DoAn1
 {
@@ -111,6 +113,15 @@ namespace DoAn1
  });
 
             services.AddBlazorStrap();
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.RequireHeaderSymmetry = false;
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+                // TODO : it's a bit unsafe to allow all Networks and Proxies...
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -144,6 +155,8 @@ namespace DoAn1
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            app.UseForwardedHeaders();
+
         }
     }
 }
