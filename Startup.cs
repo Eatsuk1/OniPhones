@@ -79,12 +79,27 @@ namespace DoAn1
      options.Scope.Add("profile"); // <- Optional extra
      options.Scope.Add("email");   // <- Optional extra
 
-     options.CallbackPath = new PathString("/signin-oidc");
+     
+     options.CallbackPath = new PathString("/verify");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
      options.TokenValidationParameters = new TokenValidationParameters
      {
          NameClaimType = "name"
+     };
+
+     options.Events = new OpenIdConnectEvents()
+     {
+         OnRedirectToIdentityProvider = context =>
+         {
+             var builder = new UriBuilder(context.ProtocolMessage.RedirectUri)
+             {
+                 Scheme = "https",
+                 Port = -1
+             };
+             context.ProtocolMessage.RedirectUri = builder.ToString();
+             return Task.FromResult(0);
+         }
      };
 
      // Add handling of lo
