@@ -164,6 +164,15 @@ namespace DoAn1
             });
             app.UseForwardedHeaders();
 
+            app.Use(next => context => {
+                if (string.Equals(context.Request.Headers["X-Forwarded-Proto"], "https", StringComparison.OrdinalIgnoreCase))
+                {
+                    context.Request.Scheme = "https";
+                }
+
+                return next(context);
+            });
+
         }
     }
 }
