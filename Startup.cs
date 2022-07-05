@@ -79,6 +79,7 @@ namespace DoAn1
      options.Scope.Add("profile"); // <- Optional extra
      options.Scope.Add("email");   // <- Optional extra
 
+
      
      options.CallbackPath = new PathString("/callback");
      options.ClaimsIssuer = "Auth0";
@@ -92,11 +93,8 @@ namespace DoAn1
      {
          OnRedirectToIdentityProvider = context =>
          {
-             var builder = new UriBuilder(context.ProtocolMessage.RedirectUri)
-             {
-                 Scheme = "https"
-             };
-             context.ProtocolMessage.RedirectUri = builder.ToString();
+            
+             context.ProtocolMessage.RedirectUri = "/verify";
              return Task.FromResult(0);
          }
      };
