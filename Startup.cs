@@ -80,7 +80,7 @@ namespace DoAn1
      options.Scope.Add("email");   // <- Optional extra
 
      
-     options.CallbackPath = new PathString($"https://"+"/verify");
+     options.CallbackPath = new PathString(@"https://oniphones.herokuapp.com/verify");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
      options.TokenValidationParameters = new TokenValidationParameters
