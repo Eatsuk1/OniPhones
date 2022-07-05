@@ -79,8 +79,7 @@ namespace DoAn1
      options.Scope.Add("profile"); // <- Optional extra
      options.Scope.Add("email");   // <- Optional extra
 
-     options.CallbackPath = new PathString("/verify");
-     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+     
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
      options.TokenValidationParameters = new TokenValidationParameters
