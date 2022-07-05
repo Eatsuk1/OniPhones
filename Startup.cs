@@ -80,7 +80,7 @@ namespace DoAn1
      options.Scope.Add("email");   // <- Optional extra
 
      
-     options.CallbackPath = new PathString(@"https://oniphones.herokuapp.com/verify");
+     options.CallbackPath = new PathString(@"/verify");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
      options.TokenValidationParameters = new TokenValidationParameters
@@ -128,15 +128,7 @@ namespace DoAn1
  });
 
             services.AddBlazorStrap();
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.RequireHeaderSymmetry = false;
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-
-                // TODO : it's a bit unsafe to allow all Networks and Proxies...
-                options.KnownNetworks.Clear();
-                options.KnownProxies.Clear();
-            });
+            
 
             //services.AddAuth0WebAppAuthentication(options => {
             //    options.Domain = Configuration["Auth0:Domain"];
@@ -175,7 +167,7 @@ namespace DoAn1
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-            app.UseForwardedHeaders();
+            
 
             app.Use(next => context => {
                 if (string.Equals(context.Request.Headers["X-Forwarded-Proto"], "https", StringComparison.OrdinalIgnoreCase))
