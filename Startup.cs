@@ -80,7 +80,7 @@ namespace DoAn1
      options.Scope.Add("email");   // <- Optional extra
 
      
-     options.CallbackPath = new PathString("/verify");
+     options.CallbackPath = new PathString("/callback");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
      options.TokenValidationParameters = new TokenValidationParameters
