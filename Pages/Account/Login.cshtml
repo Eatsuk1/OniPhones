@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Mvc;
 @using Auth0.AspNetCore.Authentication;
 @functions {
-	public ChallengeResult OnGet(string returnUrl = "Account/Verify")
+	public ChallengeResult OnGet(string returnUrl = "/verify")
 	{
 		return Challenge(new AuthenticationProperties() { RedirectUri = returnUrl }, "Auth0");
 	}
