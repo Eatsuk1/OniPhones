@@ -89,15 +89,7 @@ namespace DoAn1
          NameClaimType = "name"
      };
 
-     options.Events = new OpenIdConnectEvents
-     {
-         OnRedirectToIdentityProvider = context =>
-         {
-            
-             context.ProtocolMessage.RedirectUri = "https://oniphones.herokuapp.com/verify";
-             return Task.FromResult(0);
-         }
-     };
+   
 
      // Add handling of lo
      options.Events = new OpenIdConnectEvents
