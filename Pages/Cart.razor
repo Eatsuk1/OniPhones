@@ -60,6 +60,7 @@
                 <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key, item.quantity)"/>
             </td>
             <td class="text-center">@(item.quantity)đ</td>
+            <td><BSCloseButton/> </td>                   
         </tr>
         }
     </table>
