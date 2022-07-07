@@ -177,3 +177,33 @@ th {
         .buy-button a:hover {
             opacity: 0.8;
         }
+/*Not log*/
+.notlog-screen {
+    z-index: 999;
+    position: fixed;
+    top: 64px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notlog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 3px solid green;
+}
+.notlog p{
+    display: inline-block;
+}
+.login-button a {
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+    .login-button a:hover {
+        opacity: 0.8;
+    }
