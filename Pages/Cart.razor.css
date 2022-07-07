@@ -79,12 +79,6 @@ table {
     border-collapse: collapse;
 }
 
-.cart-info {
-    display: flex;
-    
-    align-items: center;
-}
-
 th {
     text-align: left;
     padding: 5px;
@@ -93,6 +87,11 @@ th {
     font-weight: normal;
 }
 
+.cart-info {
+    
+    display: flex;
+    align-items: center;
+}
 .cart-info_img {
     display: flex;
     justify-content: center;
@@ -111,10 +110,21 @@ th {
 }
 
 .cart-page-quantity {
-    width: 100px;
+    width: 15%;
     text-align: center;
 }
-
+.cart-page-subtotal {
+    width: 20%;
+    text-align:center;
+}
+.close-button {
+    width:5%;
+    text-align:center;
+}
+.close-button a img{
+    max-width:200px;
+    height: auto;
+}
 .cart-page td input {
     outline: none;
     text-align: center;

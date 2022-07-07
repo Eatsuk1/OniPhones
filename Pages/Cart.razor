@@ -20,8 +20,8 @@
                 <p>Bạn cần đăng nhập để tiếp tục</p>
                 <div class="login-button">
                     <BSButton Color="BSColor.Danger" style="margin-top: 15px">
-                        <a href="">
-                            <p>QUAY LẠI TRANG CHỦ</p>
+                        <a href="Account/Login">
+                            <p>QUAY LẠI TRANG ĐĂNG NHẬP</p>
                         </a>
                     </BSButton>
                 </div>
@@ -46,7 +46,8 @@
         <tr>
             <th>Product</th>
             <th class="cart-page-quantity">Quantity</th>
-            <th class="text-center">Subtotal</th>
+            <th class="cart-page-subtotal">Subtotal</th>
+            <th class="close-button"></th>
         </tr>
          @foreach (var item in CartItems)
         {
@@ -68,8 +69,14 @@
             <td>
                 <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key, item.quantity)"/>
             </td>
-            <td class="text-center">@(item.quantity)đ</td>
-            <td><BSCloseButton/> </td>                   
+            <td class="text-center">
+                @(item.quantity)đ
+            </td>
+            <td class="close-button">
+                <a href="">
+                    <img src="./assets/imgs/svg/trash-can-solid.svg" alt="" @onclick="_ => DeleteCart(item.device_key, Customerid)" />
+                </a>   
+            </td>                   
         </tr>
         }
     </table>
@@ -104,7 +111,7 @@
 
 
 @code {
-   [Parameter]
+    [Parameter]
     public string Customerid { get; set; }
 
     public List<Models.Cart> CartItems { get; set; }
@@ -143,16 +150,22 @@
 
     public void OnQuantityChange(string _device_key, int q_temp)
     {
-        
+
         subtotal = 0;
         finalsubtotal = 0;
         foreach (var item in CartItems)
         {
-            
+
             subtotal += item.quantity;
         }
         finalsubtotal = subtotal;
         CartIService.UpdateCart(_device_key, Customerid, q_temp);
+    }
+
+    public async Task DeleteCart(string _device_key, string _user_id)
+    {
+        await
+        CartIService.DeleteCart(_device_key,_user_id);    
     }
 
     public Smartphone GetSmartphone(string _device_key)
