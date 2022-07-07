@@ -107,25 +107,26 @@
                                 
                         @foreach(var phone in smartphone)
                         {
-                            <div id="01" class="product_info-container c-2">
+                            <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="/@phone.key" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="/@phone.key">
-                                            <img src="@phone.device_image">
+                                        <a href="/@phone.key" class="product_link">
+                                            <div class="item-product_image">
+                                                <a href="/@phone.key">
+                                                    <img src="@phone.device_image">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="/@phone.key">
+                                                    <p>@phone.device_name</p>
+                                                </a>
+                                            </div>
+                                            <div class="item-product_price">
+                                                <p>@phone.default_price</p>
+                                            </div>
+                                            <div class="item-product_rating">
+                                                <!-- <p>Đánh giá</p> -->
+                                            </div>
                                         </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="/@phone.key">
-                                            <p>@phone.device_name</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>@phone.default_price</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
                                     </div>
                                 </div>
                         }

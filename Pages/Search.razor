@@ -24,9 +24,9 @@
                         <div class="block-result__header">
                             <h1>
                                 "Tìm thấy "
-                                <strong>12</strong>
+                                <strong>@getcount()</strong>
                                 " sản phẩm cho từ khóa"
-                                <strong>'iphone'</strong>
+                                <strong>'@key'</strong>
                             </h1>
                         </div>
                 
@@ -37,6 +37,7 @@
                                     <BSButton Color="BSColor.Light">Điện thoại</BSButton>
                                     <BSButton Color="BSColor.Light">Máy tính bảng</BSButton>
                                 </div>
+                            </div>
 
                             <div class="block-filter">
                                 <div class="filter__block-list-sort">
@@ -46,7 +47,6 @@
                             
                                     <div class="box-list-filter">
                                         <div class="list-filter">
-                                            <BSButton Color="BSColor.Light">Liên quan</BSButton>
                                             <BSButton Color="BSColor.Light">Giá cao</BSButton>
                                             <BSButton Color="BSColor.Light">Giá thấp</BSButton>                              
                                         </div>
@@ -89,8 +89,7 @@
             </div>
             
               
-
-  </div>
+    
 
 
 
@@ -102,7 +101,7 @@
 
     List<Smartphone> smartphone = new List<Smartphone>();
 
-    
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -113,5 +112,18 @@
     {
         smartphone = ProductIService.GetSmartphonesFilter(key);
     }
+
+    public int count { get; set;  }
+
+    private int getcount (){
+        foreach(var device in smartphone) {
+            count++;
+
+        }
+        return count;
+    }                       
+                                        
+                                   
+
 
 }
