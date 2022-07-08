@@ -8,7 +8,7 @@
 
 @inject CartService CartIService
 @inject ProductService ProductIService
-@inject IJSRuntime JSRuntime
+
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager navigationManager
 @layout MainLayout0
@@ -73,9 +73,9 @@
                 @(item.quantity)đ
             </td>
             <td class="close-button">
-                <a href="">
+                
                     <img src="./assets/imgs/svg/trash-can-solid.svg" alt="" @onclick="_ => DeleteCart(item.device_key, Customerid)" />
-                </a>   
+                   
             </td>                   
         </tr>
         }
@@ -148,7 +148,7 @@
         return subtotal;
     }
 
-    public void OnQuantityChange(string _device_key, int q_temp)
+    public async Task OnQuantityChange(string _device_key, int q_temp)
     {
 
         subtotal = 0;
@@ -159,13 +159,13 @@
             subtotal += item.quantity;
         }
         finalsubtotal = subtotal;
-        CartIService.UpdateCart(_device_key, Customerid, q_temp);
+        await CartIService.UpdateCart(_device_key, Customerid, q_temp);
     }
 
     public async Task DeleteCart(string _device_key, string _user_id)
     {
-        await
-        CartIService.DeleteCart(_device_key,_user_id);    
+        await CartIService.DeleteCart(_device_key,_user_id);
+        await InvokeAsync(OnInitializedAsync);
     }
 
     public Smartphone GetSmartphone(string _device_key)
@@ -189,6 +189,7 @@
 
                 }
             }
-        }catch(Exception ex){}
+        }
+        catch (Exception ex){}
     }
 }
