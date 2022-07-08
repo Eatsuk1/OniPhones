@@ -72,8 +72,8 @@
             <td class="text-center">
                 @(item.quantity)đ
             </td>
-            <td class="close-button">
-                <a href="">
+            <td class="delete-button">
+                <a href="/Cart">
                     <img src="./assets/imgs/svg/trash-can-solid.svg" alt="" @onclick="_ => DeleteCart(item.device_key, Customerid)" />
                 </a>   
             </td>                   
@@ -90,7 +90,7 @@
         </div>
         <!--Buy Button-->
         <div class="buy-button">
-            <BSButton Color="BSColor.Danger">
+            <BSButton Color="BSColor.Danger" IsOutlined="true">
                 <a href="">
                     <p>TIẾN HÀNH ĐẶT HÀNG</p>
                 </a>
