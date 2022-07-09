@@ -84,7 +84,7 @@
         <!--Buy Button-->
         <div class="buy-button">
             <BSButton Color="BSColor.Danger">
-                <a href="">
+                <a href="/Payment">
                     <p>TIẾN HÀNH ĐẶT HÀNG</p>
                 </a>
             </BSButton>
@@ -93,10 +93,11 @@
         <div class="buy-button">
             <BSButton Color="BSColor.Danger" IsOutlined="true">
                 <a href="">
-                    <p>CHỌN THÊM SẢN PHẨM KHÁC</p>
+                    <p>CHỌN THÊM SẢN PHẨM KHÁC </p>
                 </a>
             </BSButton>
         </div>
+
     </div>
 </div>
     </Authorized>
@@ -104,9 +105,10 @@
 
 
 @code {
-   [Parameter]
+    [Parameter]
     public string Customerid { get; set; }
 
+    [Parameter]
     public List<Models.Cart> CartItems { get; set; }
 
     [Parameter]
@@ -143,12 +145,12 @@
 
     public void OnQuantityChange(string _device_key, int q_temp)
     {
-        
+
         subtotal = 0;
         finalsubtotal = 0;
+       
         foreach (var item in CartItems)
         {
-            
             subtotal += item.quantity;
         }
         finalsubtotal = subtotal;

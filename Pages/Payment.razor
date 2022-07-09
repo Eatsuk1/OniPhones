@@ -66,11 +66,9 @@
 					</div>
 				</div>
 				<div class="buy--button">
-					<BSButton Color="BSColor.Danger" style="border-radius: 15px; margin-top: 1em;">
-						<a href="">
-							<p>HOÀN TẤT ĐƠN HÀNG</p>
-						</a>
-					</BSButton>
+					<a class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
+							HOÀN TẤT ĐƠN HÀNG						
+					</a>
 				</div>
 			</div>
 		<!-- Payment--product -->
@@ -151,5 +149,8 @@
 	</div>
 </div>
 @code {
-
+	public async Task Checkout_click(){
+		Cart.FirstorDefault().ShippingAddress = shippingAdress;
+		Cart.
+	}
 }

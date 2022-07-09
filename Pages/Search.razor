@@ -5,19 +5,19 @@
 @inject ProductService ProductIService
 @layout MainLayout0
 
- <div id="search-content">
+ <div>
 
 <!-- subHeader -->
         <div id="sub-header">
             <div class="grid wide">
                 <div class="row subheader__list">
                     <a href=""><img src="./assets/imgs/svg/home-red.svg" alt="" />Trang chủ</a>
-                    <span>Kết quả tìm kiếm cho 'iphone'</span>
+                    <span>Kết quả tìm kiếm cho '@key'</span>
                 </div>
             </div>
         </div>
 <!--Block result-->
-            <div class="grid wide">
+            <div class="grid wide" style="margin-top: 96px">
                 <div class="row">
                     <div class="block-result c-12 mt-16">
               
@@ -57,7 +57,7 @@
                             <div class="block-product">
                                 @foreach (var device in smartphone)
                                 {
-                                    <div class="product_info-container c-2-4">
+                                    <div class="product_info-container c-2">
                                         <div class="product_info">
                                             <a href="/@device.key" class="product_link">
                                                 <div class="item-product_image">
@@ -84,9 +84,9 @@
             
             
                     </div>
-                </div>
-
             </div>
+ </div>
+            
             
               
     
@@ -112,6 +112,10 @@
     {
         smartphone = ProductIService.GetSmartphonesFilter(key);
     }
+
+    //public List<Smartphone> GetSmartphoneSort(){
+    // 
+    // }
 
     public int count { get; set;  }
 

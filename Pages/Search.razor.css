@@ -5,7 +5,7 @@
     color: #707070;
 }
 
-#subheader {
+#sub-header {
     background-color: #fff;
     z-index: 999;
     position: fixed;
@@ -70,7 +70,7 @@
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+
 }
 
 .item-product_image img {
@@ -86,9 +86,9 @@
 }
 
 .product_info-container {
-    width: auto;
     padding: 10px;
-    margin-right: 10px;
+    margin: 0 20px;
+    margin-bottom: 10px;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);

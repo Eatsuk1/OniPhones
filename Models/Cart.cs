@@ -12,6 +12,14 @@ namespace DoAn1.Models
 
         public int quantity { get; set; }
 
+        //public int subtotal { get; set; }
+
+        //public string ShippingAddress { get; set; }
+
+        //public int ShippingCharges { get; set; }
+
+        //public string PaymentMode  { get; set; }
+
         public string user_id { get; set; }
     }
 }
