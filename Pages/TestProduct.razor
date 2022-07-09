@@ -1,11 +1,17 @@
-﻿@page "/{device_key}"
+﻿@page "/testproduct"
 @using DoAn1.Data
 @using DoAn1.Service
 @using DoAn1.Models
-@inject Cart Cart
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Components.Authorization
+
 @inject ProductService ProductIService
+@inject CartService CartIService
 @layout MainLayout0
-@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 
 
@@ -139,8 +145,8 @@
                             </div>
                         </div>
                         <div class=buyBtn>
-                <BSButton Color="BSColor.Danger" style="border-radius:20px" >
-                    <a href="/Cart" style="color:#FFFFFF">
+                <BSButton Color="BSColor.Danger" style="border-radius:20px" OnClick="AddtoCart" >
+                    <a style="color:#FFFFFF">
                         <h3>MUA NGAY</h3>
                         <small>(Giao tận nơi hoặc lấy tại cửa hàng</small>
                     </a>
@@ -241,6 +247,8 @@
     [Parameter]
     public string device_key { get; set; }
 
+    [Parameter]
+    public string Customerid { get; set; }
 
 
 
@@ -255,12 +263,44 @@
 
     }
 
-    private void GetSmartphone()
+    public void GetSmartphone()
     {
+        _ = GetClaims();
         smartphone = ProductIService.GetSpecifySmartphone(device_key);
-
     }
 
+    public async Task AddtoCart()
+    {
+        if (CartIService.CheckDup(device_key, Customerid))
+        {
+            navigationManager.NavigateTo($"/testCart");
+        }
+        else
+        {
+            await CartIService.AddtoCart(device_key, Customerid, 1);
+            navigationManager.NavigateTo($"/testCart");
+        } 
+    }
+
+    public async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userClaims = authState.User.Claims;
+        try{
+            if (userClaims != null)
+            {
+                foreach (var claim in userClaims)
+                {
+                    if (claim.Type == ClaimTypes.NameIdentifier)
+                    {
+                        Customerid = claim.Value;
+                    }
+                }
+            }
+        }
+        catch(Exception ex){}
+
+    }
     
 
 }

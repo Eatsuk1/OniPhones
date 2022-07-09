@@ -8,10 +8,10 @@
 
 @code {
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        _ = GetClaims();
-        return Task.CompletedTask;
+        await GetClaims();
+        
     }
 
     public async Task GetClaims()

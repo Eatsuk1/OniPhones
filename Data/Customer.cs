@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization;   
+using System.Collections.Generic;
 
 namespace DoAn1.Data
 {
@@ -15,12 +11,12 @@ namespace DoAn1.Data
         public string Id { get; set; }
 
         [BsonElement("user_id")]
-        public string UserId { get; set; }      
+        public string UserId { get; set; }
 
         [BsonElement("name")]
         public string Name { get; set; }
 
-        
+
         public List<string> address { get; set; }
 
         [BsonElement("joined day")]
@@ -34,6 +30,6 @@ namespace DoAn1.Data
 
     }
 
-   
-   
+
+
 }

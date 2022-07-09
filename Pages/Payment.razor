@@ -1,0 +1,154 @@
+﻿@page "/Payment"
+
+@using DoAn1.Data
+
+@layout MainLayout0
+
+<div class="payment-page"> 
+<!-- Payment header -->
+	<div class="payment-header">
+		<div class="payment-header__subline"></div>
+        <div class="payment-header__goback">
+			<a href="">Quay lại</a>
+        </div>
+		<div class="payment-header__title">
+			<h1>Thông tin đơn hàng</h1>
+        </div>
+    </div>
+<!-- Payment -->
+	<div class="payment" >
+		<div class="row">
+		<!-- Payment--info -->
+			<div class="col c-7 paymentInfo">
+				<div class="paymentInfo-shipinfo">
+               		<h3>THÔNG TIN GIAO HÀNG</h3>
+               		<input type="text" placeholder="Họ và tên" />
+               		<div class="row" style="display: flex; justify-content: space-between; width: 90%; padding: 0px 5px;">
+                  		<input type="text" placeholder="Email" name="email" />
+                  		<input type="text" placeholder="Số điện thoại" name="sdt" />
+               		</div>
+               		<input type="text" placeholder="Địa chỉ" />
+			   		<div class="row" style="display: flex; justify-content: flex-start; width: 90%;" >
+              			<select name="address">
+                  			<option value="">Chọn tỉnh/thành</option>
+                  			<option value="">Hà Nội</option>
+                  			<option value="">Thành phố Hồ Chí Minh</option>
+                  			<option value="">Đà Nẵng</option>
+               			</select>
+			   			<select name="address">
+							<option value="">Chọn quận/huyện</option>
+							<option value="">Quận Hai Bà Trưng</option>
+							<option value="">Quận 1</option>
+							<option value="">Quận Hà Đông</option>
+				 		</select>
+					</div>
+            	</div>
+				<div class="paymentInfo-method">
+					<h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
+					<div class="paymentInfo-method-box">
+						<input type="radio" id="ship1" name="shipmethod" value="Giao hàng tận nơi">
+  						<label for="ship1">Giao hàng tận nơi</label><br>
+					</div>
+					<div class="paymentInfo-method-box">
+						<input type="radio" id="ship2" name="shipmethod" value="Lấy tại cửa hàng">
+  						<label for="ship2">Lấy tại cửa hàng</label><br>	
+					</div>
+				</div>
+				<div class="paymentInfo-method">
+					<h3>PHƯƠNG THỨC THANH TOÁN</h3>
+					<div class="paymentInfo-method-box">
+						<input type="radio" id="cod" name="shipmethod" value="Thanh toán khi nhận hàng">
+  						<label for="cod">Thanh toán khi nhận hàng</label><br>
+					</div>
+					<div class="paymentInfo-method-box">
+						<input type="radio" id="online" name="shipmethod" value="Thanh toán online">
+  						<label for="online">Thanh toán online</label><br>								
+					</div>
+				</div>
+				<div class="buy--button">
+					<a class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
+							HOÀN TẤT ĐƠN HÀNG						
+					</a>
+				</div>
+			</div>
+		<!-- Payment--product -->
+            <div class="col c-5 paymentProduct">					
+               	<h3>THÔNG TIN SẢN PHẨM</h3>
+				<div class="paymentProduct-info">
+					<div class="paymentProduct-info-img"
+						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+					>	
+						<span>1</span>											
+					</div>
+					<div class="paymentProduct-info-content">
+						<p>Iphone 13 Promax</p>
+					</div>			
+					<div class="paymentProduct-info-price">						
+						<p>99.999.999đ</p>
+					</div>
+				</div>
+
+				<div class="paymentProduct-info">
+					<div class="paymentProduct-info-img"
+						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+					>	
+						<span>1</span>											
+					</div>
+					<div class="paymentProduct-info-content">
+						<p>Iphone 13 Promax</p>
+					</div>			
+					<div class="paymentProduct-info-price">						
+						<p>99.999.999đ</p>
+					</div>
+				</div>
+
+				<div class="paymentProduct-info">
+					<div class="paymentProduct-info-img"
+						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+					>	
+						<span>1</span>											
+					</div>
+					<div class="paymentProduct-info-content">
+						<p>Iphone 13 Promax</p>
+					</div>			
+					<div class="paymentProduct-info-price">						
+						<p>99.999.999đ</p>
+					</div>
+				</div>
+
+				<div class="paymentProduct-price">
+					<div class="paymentProduct-price-box">
+						<div class="paymentProduct-price-content">
+							<p>Tạm tính</p>
+						</div>
+						<div class="paymentProduct-price-pay">
+							<span>99.999.000đ </span>
+						</div>
+					</div>
+
+					<div class="paymentProduct-price-box">
+						<div class="paymentProduct-price-content">
+							<p>Phí vận chuyển</p>
+						</div>
+						<div class="paymentProduct-price-pay">
+							<span>Miễn phí</span>
+						</div>
+					</div>
+
+					<div class="paymentProduct-totalprice-box">
+						<div class="paymentProduct-totalprice-content">
+							<p>Tổng cộng</p>
+						</div>
+						<div class="paymentProduct-totalprice-price">
+							<span>99.999.000đ</span>
+						</div>
+					</div>
+				</div>
+            </div>	
+			<BSCloseButton/>
+		</div>
+	</div>
+</div>
+@code {
+	
+}

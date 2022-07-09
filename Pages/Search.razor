@@ -1,29 +1,32 @@
-﻿@page "/catalogsearch/result/"
+﻿@page "/search/result/{key}"
 
+@using DoAn1.Data
+@using DoAn1.Service
+@inject ProductService ProductIService
 @layout MainLayout0
 
- <div id="search-content">
+ <div>
 
 <!-- subHeader -->
         <div id="sub-header">
             <div class="grid wide">
                 <div class="row subheader__list">
                     <a href=""><img src="./assets/imgs/svg/home-red.svg" alt="" />Trang chủ</a>
-                    <span>Kết quả tìm kiếm cho 'iphone'</span>
+                    <span>Kết quả tìm kiếm cho '@key'</span>
                 </div>
             </div>
         </div>
 <!--Block result-->
-            <div class="grid wide">
+            <div class="grid wide" style="margin-top: 96px">
                 <div class="row">
                     <div class="block-result c-12 mt-16">
               
                         <div class="block-result__header">
                             <h1>
                                 "Tìm thấy "
-                                <strong>12</strong>
+                                <strong>@getcount()</strong>
                                 " sản phẩm cho từ khóa"
-                                <strong>'iphone'</strong>
+                                <strong>'@key'</strong>
                             </h1>
                         </div>
                 
@@ -34,6 +37,7 @@
                                     <BSButton Color="BSColor.Light">Điện thoại</BSButton>
                                     <BSButton Color="BSColor.Light">Máy tính bảng</BSButton>
                                 </div>
+                            </div>
 
                             <div class="block-filter">
                                 <div class="filter__block-list-sort">
@@ -43,7 +47,6 @@
                             
                                     <div class="box-list-filter">
                                         <div class="list-filter">
-                                            <BSButton Color="BSColor.Light">Liên quan</BSButton>
                                             <BSButton Color="BSColor.Light">Giá cao</BSButton>
                                             <BSButton Color="BSColor.Light">Giá thấp</BSButton>                              
                                         </div>
@@ -52,25 +55,27 @@
                             </div>
 
                             <div class="block-product">
-                                <div class="product_info-container c-2">
-                                    <div class="product_info">
-                                        <a href="#" class="product_link">
-                                            <div class="item-product_image">
-                                                <a href="#">
-                                                    <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
-                                                </a>
-                                            </div>
-                                            <div class="item-product_name"></div>
-                                                <a href="#">
-                                                    <p>iPhone 13 Promax</p>
-                                                </a>
-                                            <div class="item-product_price">
-                                                <p>20.290.000</p>
-                                            </div>                                    
-                                        </a>
+                                @foreach (var device in smartphone)
+                                {
+                                    <div class="product_info-container c-2">
+                                        <div class="product_info">
+                                            <a href="/@device.key" class="product_link">
+                                                <div class="item-product_image">
+                                                    <a href="/@device.key">
+                                                        <img src="@device.device_image">
+                                                    </a>
+                                                </div>
+                                                <div class="item-product_name"></div>
+                                                    <a href="/@device.key">
+                                                        <p>@device.device_name</p>
+                                                    </a>
+                                                <div class="item-product_price">
+                                                    <p>@device.default_price</p>
+                                                </div>                                    
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-
+                                }
                             </div>
 
                             </div>
@@ -79,18 +84,50 @@
             
             
                     </div>
-                </div>
-
             </div>
+ </div>
+            
             
               
-
-  </div>
+    
 
 
 
 
 
 @code {
+    [Parameter]
+    public string key { get; set; }
+
+    List<Smartphone> smartphone = new List<Smartphone>();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
+    }
+
+    private void GetSmartphone()
+    {
+        smartphone = ProductIService.GetSmartphonesFilter(key);
+    }
+
+    //public List<Smartphone> GetSmartphoneSort(){
+    // 
+    // }
+
+    public int count { get; set;  }
+
+    private int getcount (){
+        foreach(var device in smartphone) {
+            count++;
+
+        }
+        return count;
+    }                       
+                                        
+                                   
+
 
 }

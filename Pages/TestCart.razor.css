@@ -79,6 +79,12 @@ table {
     border-collapse: collapse;
 }
 
+.cart-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 th {
     text-align: left;
     padding: 5px;
@@ -87,10 +93,6 @@ th {
     font-weight: normal;
 }
 
-.cart-info {
-    display: flex;
-    align-items: center;
-}
 .cart-info_img {
     display: flex;
     justify-content: center;
@@ -109,25 +111,10 @@ th {
 }
 
 .cart-page-quantity {
-    width: 15%;
+    width: 100px;
     text-align: center;
 }
-.cart-page-subtotal {
-    width: 25%;
-    text-align:center;
-}
-.close-button {
-    width:3%;
-    text-align:center;
-}
-.delete-button{
-    width: 20%;
-    text-align: center;
-}
-.delete-button a img{
-    max-width:10%;
-    height: auto;
-}
+
 .cart-page td input {
     outline: none;
     text-align: center;
@@ -190,39 +177,3 @@ th {
         .buy-button a:hover {
             opacity: 0.8;
         }
-
-/*Not log*/
-.notlog-screen {
-    z-index: 999;
-    position: fixed;
-    top: 64px;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.notlog {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #F01223;
-    padding: 15px;
-    border-radius: 20px;
-    margin-top: -200px;
-}
-.notlog p{
-    display: inline-block;
-    
-}
-.login-button a {
-    text-align: center;
-    color: #fff;
-    text-decoration: none;
-}
-    .login-button a:hover {
-        opacity: 0.8;
-    }
-
-

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using DoAn1.Data;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using DoAn1.Data;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System.Security.Claims;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using MongoDB.Bson;
 
 
 namespace DoAn1.Service
@@ -51,7 +48,7 @@ namespace DoAn1.Service
 
         public Customer GetCustomer(string Customerid)
         {
-            
+
             var filter = Builders<Customer>.Filter.Eq(x => x.UserId, Customerid);
             var projection = Builders<Customer>.Projection.Include("name").Include("joined day");
             return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault());
@@ -59,11 +56,11 @@ namespace DoAn1.Service
 
         public Customer GetCustomerAddress(string customerid)
         {
-            var filter = Builders<Customer>.Filter.Eq(x=> x.UserId, customerid);
+            var filter = Builders<Customer>.Filter.Eq(x => x.UserId, customerid);
             var projection = Builders<Customer>.Projection.Include("address");
 
             return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault());
-            
+
         }
     }
 }
