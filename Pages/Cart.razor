@@ -124,7 +124,6 @@
     public int subtotal { get; set; }
     public int finalsubtotal { get; set; }
 
-    Smartphone smartphone = new Smartphone();
 
 
     protected override async Task OnInitializedAsync()
@@ -135,7 +134,7 @@
 
     public void GetCart()
     {
-        _ = GetClaims();
+        
         CartItems = CartIService.GetCart(Customerid);
     }
 
@@ -171,7 +170,7 @@
 
     public Smartphone GetSmartphone(string _device_key)
     {
-       return smartphone = ProductIService.GetSpecifySmartphone(_device_key);
+       return ProductIService.GetSpecifySmartphone(_device_key);
     }
 
     

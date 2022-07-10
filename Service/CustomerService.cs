@@ -10,7 +10,7 @@ namespace DoAn1.Service
 {
     public class CustomerService
     {
-        private ClassDB db = new ClassDB();
+        private readonly ClassDB db = new ClassDB();
         private IMongoCollection<Customer> _collection;
 
 
@@ -61,6 +61,12 @@ namespace DoAn1.Service
 
             return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault());
 
+        }
+
+        public Customer GetCustomerInfoPayment(string customerid)
+        {
+            var filter = Builders<Customer>.Filter.Eq(x => x.UserId, customerid);
+            return _collection.Find(filter).FirstOrDefault();
         }
     }
 }

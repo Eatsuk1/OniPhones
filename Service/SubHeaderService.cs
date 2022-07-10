@@ -11,7 +11,7 @@ namespace DoAn1.Service
 {
     public class SubHeaderService
     {
-        ClassDB db = new ClassDB();
+        private readonly ClassDB db = new ClassDB();
         private IMongoCollection<SubHeader> _collection;
 
         public SubHeaderService()

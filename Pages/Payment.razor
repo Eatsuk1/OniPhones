@@ -1,20 +1,26 @@
 ﻿@page "/Payment"
-
+@using System.Security.Claims
 @using DoAn1.Data
+@using DoAn1.Service
+
+@inject CartService CartIService
+@inject CustomerService CustomerIService
+@inject PaymentService PaymentIService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @layout MainLayout0
 
 @inject IJSRuntime JsRuntime
 
 <div class="payment-page"> 
-<!-- Payment header -->
-	<div class="payment-header">
-		<div class="payment-header__subline"></div>
+    <!-- Payment header -->
+    <div class="payment-header">
+        <div class="payment-header__subline"></div>
         <div class="payment-header__goback">
-			<a href="">Quay lại</a>
+            <a href="">Quay lại</a>
         </div>
-		<div class="payment-header__title">
-			<h1>Thông tin đơn hàng</h1>
+        <div class="payment-header__title">
+            <h1>Thông tin đơn hàng</h1>
         </div>
     </div>
 <!-- Payment -->
@@ -24,10 +30,10 @@
 			<div class="col c-7 paymentInfo">
 				<div class="paymentInfo-shipinfo">
                		<h3>THÔNG TIN GIAO HÀNG</h3>
-               		<input type="text" placeholder="Họ và tên" />
+               		<input type="text" placeholder="Họ và tên" value="@customer.Name"/>
                		<div class="row" style="display: flex; justify-content: space-between; width: 90%; padding: 0px 5px;">
-                  		<input type="text" placeholder="Email" name="email" />
-                  		<input type="text" placeholder="Số điện thoại" name="sdt" />
+                  		<input type="text" placeholder="Email" name="email" value="@customer.Email"/>
+                  		<input type="text" placeholder="Số điện thoại" name="sdt" value="@customer.PhoneNumber"/>
                		</div>
                		
 					@*Chọn địa chỉ giao hàng*@
@@ -103,67 +109,67 @@
 			</div>
 		<!-- Payment--product -->
             <div class="col c-5 paymentProduct">					
-               	<h3>THÔNG TIN SẢN PHẨM</h3>
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                <h3>THÔNG TIN SẢN PHẨM</h3>
+                <div class="paymentProduct-info">
+                    <div class="paymentProduct-info-img"
+                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+                    >	
+                        <span>1</span>											
+                    </div>
+                    <div class="paymentProduct-info-content">
+                        <p>Iphone 13 Promax</p>
+                    </div>			
+                    <div class="paymentProduct-info-price">						
+                        <p>99.999.999đ</p>
+                    </div>
+                </div>
 
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                <div class="paymentProduct-info">
+                    <div class="paymentProduct-info-img"
+                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+                    >	
+                        <span>1</span>											
+                    </div>
+                    <div class="paymentProduct-info-content">
+                        <p>Iphone 13 Promax</p>
+                    </div>			
+                    <div class="paymentProduct-info-price">						
+                        <p>99.999.999đ</p>
+                    </div>
+                </div>
 
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                <div class="paymentProduct-info">
+                    <div class="paymentProduct-info-img"
+                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+                    >	
+                        <span>1</span>											
+                    </div>
+                    <div class="paymentProduct-info-content">
+                        <p>Iphone 13 Promax</p>
+                    </div>			
+                    <div class="paymentProduct-info-price">						
+                        <p>99.999.999đ</p>
+                    </div>
+                </div>
 
-				<div class="paymentProduct-price">
-					<div class="paymentProduct-price-box">
-						<div class="paymentProduct-price-content">
-							<p>Tạm tính</p>
-						</div>
-						<div class="paymentProduct-price-pay">
-							<span>99.999.000đ </span>
-						</div>
-					</div>
+                <div class="paymentProduct-price">
+                    <div class="paymentProduct-price-box">
+                        <div class="paymentProduct-price-content">
+                            <p>Tạm tính</p>
+                        </div>
+                        <div class="paymentProduct-price-pay">
+                            <span>99.999.000đ </span>
+                        </div>
+                    </div>
 
-					<div class="paymentProduct-price-box">
-						<div class="paymentProduct-price-content">
-							<p>Phí vận chuyển</p>
-						</div>
-						<div class="paymentProduct-price-pay">
-							<span>Miễn phí</span>
-						</div>
-					</div>
+                    <div class="paymentProduct-price-box">
+                        <div class="paymentProduct-price-content">
+                            <p>Phí vận chuyển</p>
+                        </div>
+                        <div class="paymentProduct-price-pay">
+                            <span>Miễn phí</span>
+                        </div>
+                    </div>
 
 					<div class="paymentProduct-totalprice-box">
 						<div class="paymentProduct-totalprice-content">
@@ -223,16 +229,36 @@
 		</div>
 	</div>
 @code {
-	string AddPopUp;
 
-	async Task MyMethod()
-	{
-		AddPopUp = "display: flex";
-	}
+    public List<Models.Cart> CartItems { get; set; }
 
-	async Task PopUp()
-	{
-		await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Payment.js");
-	}
+	[Parameter]
+    public string Customerid { get; set; }
+
+	public List<Models.Address> listaddress { get; set; }
+
+    public Customer customer = new Customer();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetClaims();
+        CartItems = CartIService.GetCart(Customerid);
+        listaddress = PaymentIService.GetAll();
+        customer = CustomerIService.GetCustomerInfoPayment(Customerid);
+    }
+
+
+    public async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userClaims = authState.User.Claims;
+        foreach (var claim in userClaims)
+        {
+            if (claim.Type == ClaimTypes.NameIdentifier)
+            {
+                Customerid= claim.Value;
+            }
+        }
+    }
 
 }
