@@ -53,6 +53,7 @@ namespace DoAn1
             services.AddScoped<List<Cart>>();
             services.AddScoped<CartService>();
             services.AddScoped<SubHeaderService>();
+            services.AddScoped<PaymentService>();
             //services.AddAuthentication().AddGoogle(googleOptions =>
             //{
             //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];

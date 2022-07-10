@@ -8,7 +8,7 @@ namespace DoAn1.Service
 {
     public class CartService
     {
-        ClassDB db = new ClassDB();
+        private readonly ClassDB db = new ClassDB();
         private IMongoCollection<Cart> _collection;
 
         public CartService()
