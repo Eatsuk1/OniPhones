@@ -44,29 +44,39 @@
                         <img src="./assets/imgs/svg/shopping-cart.svg" alt="">
                     </div>
                     <div class="header__section--sub">
-                        <a href="">Giỏ hàng</a>
+                        <a href="/Cart">Giỏ hàng</a>
                     </div>
                     </a>
                 </div>
+                <AuthorizeView>
+                    <Authorized>
                 <div class="header__section col c-1">
+                    <a href="Account/Main">
 	                <div class="header__section--item">
 		                <img src="./assets/imgs/svg/user.svg" alt="">
 	                </div>
-	                <AuthorizeView>
-		                <Authorized>
+	                
 			                <div class="header__section--sub">
 				                <a href="Account/Main">Cmember</a>
 			                </div>
-			               
-		                </Authorized>
+                            </a>
+                            </div>
+			              </Authorized> 
 		                <NotAuthorized>
+                            <div class="header__section col c-1">
+                    <a href="Account/Main">
+	                <div class="header__section--item">
+		                <img src="./assets/imgs/svg/user.svg" alt="">
+	                </div>
+	                
 			                <div class="header__section--sub">
 				                <a href="Account/Login">Cmember</a>
 			                </div>
+                            </a>
+                            </div>
 		                </NotAuthorized>
-	                </AuthorizeView>
-	                
-                </div>
+</AuthorizeView>
+
 
             </div>
         </div>

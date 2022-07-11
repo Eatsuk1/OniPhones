@@ -1,7 +1,6 @@
 ﻿using DoAn1.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DoAn1.Service
 {
@@ -19,6 +18,6 @@ namespace DoAn1.Service
         {
             return _collection.Find(_ => true).ToList();
         }
-        
+
     }
 }

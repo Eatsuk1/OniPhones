@@ -231,15 +231,26 @@
 
     public async Task AddtoCart()
     {
-        if (CartIService.CheckDup(device_key, Customerid))
+        try
         {
-            navigationManager.NavigateTo($"/Cart");
+            if (Customerid != null)
+            {
+                if (CartIService.CheckDup(device_key, Customerid))
+                {
+                    navigationManager.NavigateTo($"/Cart");
+                }
+                else
+                {
+                    await CartIService.AddtoCart(device_key, Customerid, 1);
+                    navigationManager.NavigateTo($"/Cart");
+                }
+            }
+            else
+            {
+                navigationManager.NavigateTo($"/Cart");
+            }
         }
-        else
-        {
-            await CartIService.AddtoCart(device_key, Customerid, 1);
-            navigationManager.NavigateTo($"/Cart");
-        } 
+        catch (Exception ex) { }
     }
 
 

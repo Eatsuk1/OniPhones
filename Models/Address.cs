@@ -13,7 +13,7 @@ namespace DoAn1.Models
 
         [BsonElement("Mã TP")]
         public string cp_code { get; set; }
-        [BsonElement("Quận Huyện")] 
+        [BsonElement("Quận Huyện")]
         public string district { get; set; }
 
         [BsonElement("Mã QH")]
