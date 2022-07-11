@@ -101,7 +101,7 @@
     private void GetCustomer()
     {
         _ = GetClaims();
-	    _customer = CustomerIService.GetCustomer(Customerid);
+	    _customer = CustomerIService.GetCustomerInfo(Customerid);
     }
 
 	public async Task GetClaims()

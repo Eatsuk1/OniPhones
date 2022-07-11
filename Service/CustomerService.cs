@@ -46,13 +46,6 @@ namespace DoAn1.Service
             await _collection.InsertOneAsync(document);
         }
 
-        public Customer GetCustomer(string Customerid)
-        {
-
-            var filter = Builders<Customer>.Filter.Eq(x => x.UserId, Customerid);
-            var projection = Builders<Customer>.Projection.Include("name").Include("joined day");
-            return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault());
-        }
 
         public Customer GetCustomerAddress(string customerid)
         {
@@ -63,7 +56,7 @@ namespace DoAn1.Service
 
         }
 
-        public Customer GetCustomerInfoPayment(string customerid)
+        public Customer GetCustomerInfo(string customerid)
         {
             var filter = Builders<Customer>.Filter.Eq(x => x.UserId, customerid);
             return _collection.Find(filter).FirstOrDefault();

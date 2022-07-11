@@ -127,16 +127,11 @@
 
 
     protected override async Task OnInitializedAsync()
-    {
-        GetCart();
+    { 
         await GetClaims();
-    }
-
-    public void GetCart()
-    {
-        
         CartItems = CartIService.GetCart(Customerid);
     }
+
 
     public int GetTotalPrice()
     {

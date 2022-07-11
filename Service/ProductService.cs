@@ -27,7 +27,7 @@ namespace DoAn1.Service
             return _collection.Find(filter).ToList();
         }
 
-        
+
 
         public Smartphone GetSpecifySmartphone(string _key)
         {

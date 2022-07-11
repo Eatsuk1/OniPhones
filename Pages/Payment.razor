@@ -256,13 +256,13 @@
 
 	public Customer customer = new Customer();
 
-	protected override async Task OnInitializedAsync()
-	{
-		await GetClaims();
-		CartItems = CartIService.GetCart(Customerid);
-		listaddress = PaymentIService.GetAll();
-		customer = CustomerIService.GetCustomerInfoPayment(Customerid);
-	}
+    protected override async Task OnInitializedAsync()
+    {
+        await GetClaims();
+        CartItems = CartIService.GetCart(Customerid);
+        listaddress = PaymentIService.GetAll();
+        customer = CustomerIService.GetCustomerInfo(Customerid);
+    }
 
 
 	public async Task GetClaims()
