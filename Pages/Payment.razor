@@ -1,18 +1,26 @@
 ﻿@page "/Payment"
-
+@using System.Security.Claims
 @using DoAn1.Data
+@using DoAn1.Service
+
+@inject CartService CartIService
+@inject CustomerService CustomerIService
+@inject PaymentService PaymentIService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @layout MainLayout0
 
+@inject IJSRuntime JsRuntime
+
 <div class="payment-page"> 
-<!-- Payment header -->
-	<div class="payment-header">
-		<div class="payment-header__subline"></div>
+    <!-- Payment header -->
+    <div class="payment-header">
+        <div class="payment-header__subline"></div>
         <div class="payment-header__goback">
-			<a href="">Quay lại</a>
+            <a href="">Quay lại</a>
         </div>
-		<div class="payment-header__title">
-			<h1>Thông tin đơn hàng</h1>
+        <div class="payment-header__title">
+            <h1>Thông tin đơn hàng</h1>
         </div>
     </div>
 <!-- Payment -->
@@ -22,19 +30,105 @@
 			<div class="col c-7 paymentInfo">
 				<div class="paymentInfo-shipinfo">
                		<h3>THÔNG TIN GIAO HÀNG</h3>
-               		<input type="text" placeholder="Họ và tên" />
+               		<input type="text" placeholder="Họ và tên" value="@customer.Name"/>
                		<div class="row" style="display: flex; justify-content: space-between; width: 90%; padding: 0px 5px;">
-                  		<input type="text" placeholder="Email" name="email" />
-                  		<input type="text" placeholder="Số điện thoại" name="sdt" />
+                  		<input type="text" placeholder="Email" name="email" value="@customer.Email"/>
+                  		<input type="text" placeholder="Số điện thoại" name="sdt" value="@customer.PhoneNumber"/>
                		</div>
-               		<input type="text" placeholder="Địa chỉ" />
-			   		<div class="row" style="display: flex; justify-content: flex-start; width: 90%;" >
-              			<select name="address">
-                  			<option value="">Chọn tỉnh/thành</option>
-                  			<option value="">Hà Nội</option>
-                  			<option value="">Thành phố Hồ Chí Minh</option>
-                  			<option value="">Đà Nẵng</option>
-               			</select>
+               		
+					@*Chọn địa chỉ giao hàng*@
+
+					<div class="shipping-address">
+						<div class="shipping-title">
+							<h3>Địa chỉ giao hàng</h3>
+						</div>
+						<form class="address-details">
+							@*chỗ này để foreach load địa chỉ*@
+							<div class="address-list paymentInfo-method-box">
+								<input type="radio" id="html" name="fav_language" value="Hà Đông, Hà Nội" style="width:auto">
+ 								<label for="html">Hà Đông, Hà Nội</label><br>
+							</div>
+
+							<!-- Button trigger modal -->
+							<button type="button" class="btn paymentInfo-method-box" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align:left; ">
+							  <span style="padding-left:20px;">Thêm địa chỉ</span>
+							</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+								<div class="modal-content">
+									  <div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Hãy điền địa chỉ</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									  </div>
+									  <div class="modal-body">
+											<div class="addform-section">
+												<label>Tính/Thành phố</label>
+												<div class="input-item">
+													<select name="calc_shipping_provinces" required="">
+													<option value="">Tỉnh / Thành phố</option>
+													</select>
+												</div>
+											</div>
+											<div class="addform-section">
+												<label>Quận/Huyện</label>
+												<div class="input-item">
+													<select name="calc_shipping_provinces" required="">
+													<option value="">Quận/Huyện</option>
+													</select>
+												</div>
+											</div>
+											<div class="addform-section">
+												<label>Phường/Xã</label>
+												<div class="input-item">
+													<select name="calc_shipping_provinces" required="">
+													<option value="">Phường/Xã</option>
+													</select>
+												</div>
+											</div>
+											<div class="addform-section">
+												<label>Địa chỉ nhận hàng</label>
+												<div class="input-item">
+													<input type="text" placeholder="Địa chỉ nhận hàng" value="" />
+												</div>
+											</div>
+											<input class="billing_address_1" name="" type="hidden" value="">
+											<input class="billing_address_2" name="" type="hidden" value="">
+											<input class="billing_address_3" name="" type="hidden" value="">
+											<input class="billing_address_4" name="" type="hidden" value="">
+											
+									  </div>
+								  <div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+									<button type="button" class="btn btn-primary">Lưu</button>
+								  </div>
+								</div>
+							  </div>
+							</div>
+
+							@*<div class="address-add paymentInfo-method-box">
+								@*<button type="button" data-bs-toggle="bg-addform" data-bs-target="#addModal" style="border: none; background-color: rgb(204,204,204);" >
+									<svg id="plusicon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+										<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+									</svg>
+								</button>
+								<label for="plusicon">Giao hàng đến địa chỉ khác</label>
+
+							</div>*@
+
+						</form>
+					</div>
+					   
+					<input type="text" placeholder="Địa chỉ" />			   		
+					<div class="row" style="display: flex; justify-content: flex-start; width: 90%;" >
+                        <select name="address">
+                            <option value="">Chọn tỉnh/thành</option>
+							@foreach(var item in listcity){
+                            <option value="">@item</option>
+							}
+                        </select>
 			   			<select name="address">
 							<option value="">Chọn quận/huyện</option>
 							<option value="">Quận Hai Bà Trưng</option>
@@ -42,6 +136,7 @@
 							<option value="">Quận Hà Đông</option>
 				 		</select>
 					</div>
+
             	</div>
 				<div class="paymentInfo-method">
 					<h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
@@ -73,67 +168,67 @@
 			</div>
 		<!-- Payment--product -->
             <div class="col c-5 paymentProduct">					
-               	<h3>THÔNG TIN SẢN PHẨM</h3>
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                <h3>THÔNG TIN SẢN PHẨM</h3>
+                <div class="paymentProduct-info">
+                    <div class="paymentProduct-info-img"
+                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+                    >	
+                        <span>1</span>											
+                    </div>
+                    <div class="paymentProduct-info-content">
+                        <p>Iphone 13 Promax</p>
+                    </div>			
+                    <div class="paymentProduct-info-price">						
+                        <p>99.999.999đ</p>
+                    </div>
+                </div>
 
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                <div class="paymentProduct-info">
+                    <div class="paymentProduct-info-img"
+                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+                    >	
+                        <span>1</span>											
+                    </div>
+                    <div class="paymentProduct-info-content">
+                        <p>Iphone 13 Promax</p>
+                    </div>			
+                    <div class="paymentProduct-info-price">						
+                        <p>99.999.999đ</p>
+                    </div>
+                </div>
 
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-						style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                <div class="paymentProduct-info">
+                    <div class="paymentProduct-info-img"
+                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
+                    >	
+                        <span>1</span>											
+                    </div>
+                    <div class="paymentProduct-info-content">
+                        <p>Iphone 13 Promax</p>
+                    </div>			
+                    <div class="paymentProduct-info-price">						
+                        <p>99.999.999đ</p>
+                    </div>
+                </div>
 
-				<div class="paymentProduct-price">
-					<div class="paymentProduct-price-box">
-						<div class="paymentProduct-price-content">
-							<p>Tạm tính</p>
-						</div>
-						<div class="paymentProduct-price-pay">
-							<span>99.999.000đ </span>
-						</div>
-					</div>
+                <div class="paymentProduct-price">
+                    <div class="paymentProduct-price-box">
+                        <div class="paymentProduct-price-content">
+                            <p>Tạm tính</p>
+                        </div>
+                        <div class="paymentProduct-price-pay">
+                            <span>99.999.000đ </span>
+                        </div>
+                    </div>
 
-					<div class="paymentProduct-price-box">
-						<div class="paymentProduct-price-content">
-							<p>Phí vận chuyển</p>
-						</div>
-						<div class="paymentProduct-price-pay">
-							<span>Miễn phí</span>
-						</div>
-					</div>
+                    <div class="paymentProduct-price-box">
+                        <div class="paymentProduct-price-content">
+                            <p>Phí vận chuyển</p>
+                        </div>
+                        <div class="paymentProduct-price-pay">
+                            <span>Miễn phí</span>
+                        </div>
+                    </div>
 
 					<div class="paymentProduct-totalprice-box">
 						<div class="paymentProduct-totalprice-content">
@@ -145,13 +240,43 @@
 					</div>
 				</div>
             </div>	
-			<BSCloseButton/>
+			
 		</div>
 	</div>
 </div>
+
 @code {
-	//public async Task Checkout_click(){
-	//	Cart.FirstorDefault().ShippingAddress = shippingAdress;
-	//	Cart.
+
+	public List<Models.Cart> CartItems { get; set; }
+
+	[Parameter]
+	public string Customerid { get; set; }
+
+	public List<string> listcity { get; set; }
+
+
+
+	public Customer customer = new Customer();
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetClaims();
+		CartItems = CartIService.GetCart(Customerid);
+		listcity = PaymentIService.GetCity();
+		customer = CustomerIService.GetCustomerInfo(Customerid);
+    }
+
+
+	public async Task GetClaims()
+	{
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var userClaims = authState.User.Claims;
+		foreach (var claim in userClaims)
+		{
+			if (claim.Type == ClaimTypes.NameIdentifier)
+			{
+				Customerid= claim.Value;
+			}
+		}
 	}
 }

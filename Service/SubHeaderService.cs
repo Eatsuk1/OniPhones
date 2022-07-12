@@ -1,17 +1,13 @@
-﻿using DoAn1.Data;
-using DoAn1.Models;
-using MongoDB.Driver;
+﻿using DoAn1.Models;
 using MongoDB.Bson.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using MongoDB.Driver;
 
 
 namespace DoAn1.Service
 {
     public class SubHeaderService
     {
-        ClassDB db = new ClassDB();
+        private readonly ClassDB db = new ClassDB();
         private IMongoCollection<SubHeader> _collection;
 
         public SubHeaderService()
