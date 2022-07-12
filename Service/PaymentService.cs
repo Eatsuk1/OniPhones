@@ -1,6 +1,8 @@
 ﻿using DoAn1.Models;
 using MongoDB.Driver;
+using MongoDB.Bson.Serialization;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DoAn1.Service
 {
@@ -14,10 +16,12 @@ namespace DoAn1.Service
             _collection = db.GetConnection().GetCollection<Address>("address");
         }
 
-        public List<Address> GetAll()
+        public List<string> GetCity()
         {
-            return _collection.Find(_ => true).ToList();
+            var filter = Builders<Address>.Filter.Empty;
+            return _collection.Distinct(x => x.city_province,filter).ToList();
         }
 
+        
     }
 }

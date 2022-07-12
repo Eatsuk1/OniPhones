@@ -121,13 +121,13 @@
 						</form>
 					</div>
 					   
-					@*<input type="text" placeholder="Địa chỉ" />			   		
+					<input type="text" placeholder="Địa chỉ" />			   		
 					<div class="row" style="display: flex; justify-content: flex-start; width: 90%;" >
                         <select name="address">
                             <option value="">Chọn tỉnh/thành</option>
-                            <option value="">Hà Nội</option>
-                            <option value="">Thành phố Hồ Chí Minh</option>
-                            <option value="">Đà Nẵng</option>
+							@foreach(var item in listcity){
+                            <option value="">@item</option>
+							}
                         </select>
 			   			<select name="address">
 							<option value="">Chọn quận/huyện</option>
@@ -135,7 +135,7 @@
 							<option value="">Quận 1</option>
 							<option value="">Quận Hà Đông</option>
 				 		</select>
-					</div>*@
+					</div>
 
             	</div>
 				<div class="paymentInfo-method">
@@ -252,16 +252,18 @@
 	[Parameter]
 	public string Customerid { get; set; }
 
-	public List<Models.Address> listaddress { get; set; }
+	public List<string> listcity { get; set; }
+
+
 
 	public Customer customer = new Customer();
 
-    protected override async Task OnInitializedAsync()
-    {
-        await GetClaims();
-        CartItems = CartIService.GetCart(Customerid);
-        listaddress = PaymentIService.GetAll();
-        customer = CustomerIService.GetCustomerInfo(Customerid);
+	protected override async Task OnInitializedAsync()
+	{
+		await GetClaims();
+		CartItems = CartIService.GetCart(Customerid);
+		listcity = PaymentIService.GetCity();
+		customer = CustomerIService.GetCustomerInfo(Customerid);
     }
 
 
