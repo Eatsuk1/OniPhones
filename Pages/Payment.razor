@@ -2,6 +2,7 @@
 @using System.Security.Claims
 @using DoAn1.Data
 @using DoAn1.Service
+@using BlazorStrap
 
 @inject CartService CartIService
 @inject CustomerService CustomerIService
@@ -50,17 +51,19 @@
 							</div>
 
 							<!-- Button trigger modal -->
-							<button type="button" class="btn paymentInfo-method-box" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align:left; ">
-							  <span style="padding-left:20px;">Thêm địa chỉ</span>
+
+							<button type="button" class="btn paymentInfo-method-box" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: left; ">
+								Thêm địa chỉ...
 							</button>
 
-							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							  <div class="modal-dialog">
 								<div class="modal-content">
 									  <div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Hãy điền địa chỉ</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+										<span>x</span>
+									</button>
 									  </div>
 									  <div class="modal-body">
 											<div class="addform-section">
@@ -107,35 +110,8 @@
 							  </div>
 							</div>
 
-							@*<div class="address-add paymentInfo-method-box">
-								@*<button type="button" data-bs-toggle="bg-addform" data-bs-target="#addModal" style="border: none; background-color: rgb(204,204,204);" >
-									<svg id="plusicon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-										<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-									</svg>
-								</button>
-								<label for="plusicon">Giao hàng đến địa chỉ khác</label>
-
-							</div>*@
-
 						</form>
 					</div>
-					   
-					@*<input type="text" placeholder="Địa chỉ" />			   		
-					<div class="row" style="display: flex; justify-content: flex-start; width: 90%;" >
-                        <select name="address">
-                            <option value="">Chọn tỉnh/thành</option>
-                            <option value="">Hà Nội</option>
-                            <option value="">Thành phố Hồ Chí Minh</option>
-                            <option value="">Đà Nẵng</option>
-                        </select>
-			   			<select name="address">
-							<option value="">Chọn quận/huyện</option>
-							<option value="">Quận Hai Bà Trưng</option>
-							<option value="">Quận 1</option>
-							<option value="">Quận Hà Đông</option>
-				 		</select>
-					</div>*@
 
             	</div>
 				<div class="paymentInfo-method">
@@ -152,11 +128,11 @@
 				<div class="paymentInfo-method">
 					<h3>PHƯƠNG THỨC THANH TOÁN</h3>
 					<div class="paymentInfo-method-box">
-						<input type="radio" id="cod" name="shipmethod" value="Thanh toán khi nhận hàng">
+						<input type="radio" id="cod" name="payment" value="Thanh toán khi nhận hàng">
   						<label for="cod">Thanh toán khi nhận hàng</label><br>
 					</div>
 					<div class="paymentInfo-method-box">
-						<input type="radio" id="online" name="shipmethod" value="Thanh toán online">
+						<input type="radio" id="online" name="payment" value="Thanh toán online">
   						<label for="online">Thanh toán online</label><br>								
 					</div>
 				</div>
