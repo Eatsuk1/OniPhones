@@ -6,6 +6,7 @@
 
 @inject CartService CartIService
 @inject CustomerService CustomerIService
+@inject ProductService ProductIService
 @inject PaymentService PaymentIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
@@ -45,10 +46,14 @@
 						</div>
 						<form class="address-details">
 							@*chỗ này để foreach load địa chỉ*@
-							<div class="address-list paymentInfo-method-box">
-								<input type="radio" id="html" name="fav_language" value="Hà Đông, Hà Nội" style="width:auto">
- 								<label for="html">Hà Đông, Hà Nội</label><br>
-							</div>
+                            <div class="address-list paymentInfo-method-box">
+								@foreach (var item in listaddress)
+								{
+								    <input type="radio" id="html" name="fav_language" value="@item" style="width: auto">
+								    <label for="html">@item</label>
+								    <br>
+								}
+                            </div>
 
 							<!-- Button trigger modal -->
 
@@ -123,7 +128,7 @@
 									  </div>
 								  <div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-									<button type="button" class="btn btn-primary" @onclick="AddNewAddress" >Lưu</button>
+									<button type="button" class="btn btn-primary" data-bs-dismiss = "modal" @onclick="AddNewAddress" >Lưu</button>
 								  </div>
 								</div>
 							  </div>
@@ -164,47 +169,23 @@
 		<!-- Payment--product -->
             <div class="col c-5 paymentProduct">					
                 <h3>THÔNG TIN SẢN PHẨM</h3>
-                <div class="paymentProduct-info">
-                    <div class="paymentProduct-info-img"
-                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-                    >	
-                        <span>1</span>											
+				@foreach (var item in CartItems)
+				{
+				    <div class="paymentProduct-info">
+                        <div class="paymentProduct-info-img"
+                             style="background-image: url('@GetSmartphone(item.device_key).device_image');">
+                            <span>@item.quantity</span>
+                        </div>
+                        <div class="paymentProduct-info-content">
+                            <p>@GetSmartphone(item.device_key).device_name</p>
+                        </div>
+                        <div class="paymentProduct-info-price">
+                            <p>@item.quantity đ</p>
+                        </div>
                     </div>
-                    <div class="paymentProduct-info-content">
-                        <p>Iphone 13 Promax</p>
-                    </div>			
-                    <div class="paymentProduct-info-price">						
-                        <p>99.999.999đ</p>
-                    </div>
-                </div>
+				}
 
-                <div class="paymentProduct-info">
-                    <div class="paymentProduct-info-img"
-                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-                    >	
-                        <span>1</span>											
-                    </div>
-                    <div class="paymentProduct-info-content">
-                        <p>Iphone 13 Promax</p>
-                    </div>			
-                    <div class="paymentProduct-info-price">						
-                        <p>99.999.999đ</p>
-                    </div>
-                </div>
-
-                <div class="paymentProduct-info">
-                    <div class="paymentProduct-info-img"
-                         style="background-image:url(./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg) ;"
-                    >	
-                        <span>1</span>											
-                    </div>
-                    <div class="paymentProduct-info-content">
-                        <p>Iphone 13 Promax</p>
-                    </div>			
-                    <div class="paymentProduct-info-price">						
-                        <p>99.999.999đ</p>
-                    </div>
-                </div>
+                
 
                 <div class="paymentProduct-price">
                     <div class="paymentProduct-price-box">
@@ -212,7 +193,7 @@
                             <p>Tạm tính</p>
                         </div>
                         <div class="paymentProduct-price-pay">
-                            <span>99.999.000đ </span>
+                            <span>@subtotal đ </span>
                         </div>
                     </div>
 
@@ -230,7 +211,7 @@
 							<p>Tổng cộng</p>
 						</div>
 						<div class="paymentProduct-totalprice-price">
-							<span>99.999.000đ</span>
+							<span>@subtotal đ</span>
 						</div>
 					</div>
 				</div>
@@ -261,7 +242,12 @@
 
 	public string detail_address { get; set; }
 
-	public Customer customer = new Customer();
+	public List<string> listaddress { get; set; }
+
+	public Customer customer = new();
+
+    public int subtotal { get; set; }
+	public int shipping_fee { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -269,6 +255,8 @@
 		CartItems = CartIService.GetCart(Customerid);
 		listcity = PaymentIService.GetCity();
 		customer = CustomerIService.GetCustomerInfo(Customerid);
+	    listaddress = CustomerIService.GetCustomerAddress(Customerid);
+	    GetSubTotalPrice();
 	}
 
 	public void GetDistrict()
@@ -293,8 +281,23 @@
 	public async Task AddNewAddress()
 	{
 		await CustomerIService.AddNewAddress(selectedcity, selected_district, selectedward, detail_address, Customerid);
+	    await InvokeAsync(OnInitializedAsync);
 	}
 
+    public Smartphone GetSmartphone(string _device_key)
+    {
+        return ProductIService.GetSpecifySmartphone(_device_key);
+    }
+
+    public int GetSubTotalPrice()
+    {
+        subtotal = 0;
+        foreach (var item in CartItems)
+        {
+            subtotal += item.quantity;
+        }
+        return subtotal;
+    }
 
 	public async Task GetClaims()
 	{

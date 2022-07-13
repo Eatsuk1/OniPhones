@@ -47,12 +47,12 @@ namespace DoAn1.Service
         }
 
 
-        public Customer GetCustomerAddress(string customerid)
+        public List<string> GetCustomerAddress(string customerid)
         {
             var filter = Builders<Customer>.Filter.Eq(x => x.UserId, customerid);
             var projection = Builders<Customer>.Projection.Include("address");
 
-            return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault());
+            return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault()).address;
 
         }
 
