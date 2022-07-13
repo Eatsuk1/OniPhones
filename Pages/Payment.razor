@@ -109,7 +109,7 @@
 											<div class="addform-section">
 												<label>Địa chỉ nhận hàng</label>
 												<div class="input-item">
-													<input type="text" placeholder="Địa chỉ nhận hàng" value="" />
+													<input type="text" placeholder="Địa chỉ nhận hàng" @bind-value = "detail_address">
 												</div>
 											</div>
 											<input class="billing_address_1" name="" type="hidden" value="">
@@ -120,7 +120,7 @@
 									  </div>
 								  <div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-									<button type="button" class="btn btn-primary">Lưu</button>
+									<button type="button" class="btn btn-primary" @onclick="AddNewAddress" >Lưu</button>
 								  </div>
 								</div>
 							  </div>
@@ -268,6 +268,8 @@
 
 	public string selectedward { get; set; }
 
+	public string detail_address { get; set; }
+
 	public Customer customer = new Customer();
 
 	protected override async Task OnInitializedAsync()
@@ -275,27 +277,32 @@
 		await GetClaims();
 		CartItems = CartIService.GetCart(Customerid);
 		listcity = PaymentIService.GetCity();
-	    customer = CustomerIService.GetCustomerInfo(Customerid);
-    }
+		customer = CustomerIService.GetCustomerInfo(Customerid);
+	}
 
-    public void GetDistrict()
-    {
-        listdistrict = PaymentIService.GetDistrict(selectedcity);
-        if (selectedcity == "")
-        {
+	public void GetDistrict()
+	{
+		listdistrict = PaymentIService.GetDistrict(selectedcity);
+		if (selectedcity == "")
+		{
 			listdistrict.Clear();
 			listward.Clear();
-        }
-    }
+		}
+	}
 
-    public void GetWard()
-    {
-        listward = PaymentIService.GetWard(selected_district);
-        if (selected_district == "")
-        {
-            listward.Clear();
-        }
-    }
+	public void GetWard()
+	{
+		listward = PaymentIService.GetWard(selected_district);
+		if (selected_district == "")
+		{
+			listward.Clear();
+		}
+	}
+
+	public async Task AddNewAddress()
+	{
+		await CustomerIService.AddNewAddress(selectedcity, selected_district, selectedward, detail_address, Customerid);
+	}
 
 
 	public async Task GetClaims()
