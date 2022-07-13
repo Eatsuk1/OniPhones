@@ -57,23 +57,23 @@
 							</button>
 
 							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-								<div class="modal-content">
-									  <div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Hãy điền địa chỉ</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-										<span>x</span>
-									</button>
-									  </div>
-									  <div class="modal-body">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Hãy điền địa chỉ</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+											<span>x</span>
+											</button>
+										</div>
+										<div class="modal-body">
 											<div class="addform-section">
 												<label>Tính/Thành phố</label>
 												<div class="input-item">
 													<select name="calc_shipping_provinces" required="" @bind="selectedcity" @onclick="GetDistrict" >
-                                                        <option value="">Tỉnh / Thành phố</option>
-                                                        @foreach(var item in listcity){
-                                                            <option value="@item">@item</option>
-                                                        }
+														<option value="">Tỉnh / Thành phố</option>
+														@foreach(var item in listcity){
+															<option value="@item">@item</option>
+														}
 													</select>
 												</div>
 											</div>
@@ -81,15 +81,15 @@
 												<label>Quận/Huyện</label>
 												<div class="input-item">
 													<select name="calc_shipping_provinces" required="" @bind="selected_district" @onclick="GetWard">
-                                                        <option value="">Quận/Huyện</option>
-                                                        @if (selectedcity != null)
-                                                        {
+														<option value="">Quận/Huyện</option>
+														@if (selectedcity != null)
+														{
 
-                                                            @foreach (var item in listdistrict)
-                                                            {
-                                                                <option value="@item">@item</option>
-                                                            }
-                                                        }
+															@foreach (var item in listdistrict)
+															{
+																<option value="@item">@item</option>
+															}
+														}
 													</select>
 												</div>
 											</div>
@@ -97,15 +97,14 @@
 												<label>Phường/Xã</label>
 												<div class="input-item">
 													<select name="calc_shipping_provinces" required="" @bind="selectedward">
-                                                        <option value="">Phường/Xã</option>
-                                                        @if (selected_district != null)
-                                                        {
-                                                            @foreach (var item in listward)
-                                                            {
-                                                                <option value="@item">@item</option>
-                                                            }
-
-                                                        }
+														<option value="">Phường/Xã</option>
+														@if (selected_district != null)
+														{
+															@foreach (var item in listward)
+															{
+																<option value="@item">@item</option>
+															}
+														}
 													</select>
 												</div>
 											</div>
@@ -118,21 +117,18 @@
 											<input class="billing_address_1" name="" type="hidden" value="">
 											<input class="billing_address_2" name="" type="hidden" value="">
 											<input class="billing_address_3" name="" type="hidden" value="">
-											<input class="billing_address_4" name="" type="hidden" value="">
-											
-									  </div>
-								  <div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-									<button type="button" class="btn btn-primary" @onclick="AddNewAddress" >Lưu</button>
-								  </div>
+											<input class="billing_address_4" name="" type="hidden" value="">											
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+											<button type="button" class="btn btn-primary" @onclick="AddNewAddress" >Lưu</button>
+										</div>
+									</div>
 								</div>
-							  </div>
 							</div>
-
 						</form>
 					</div>
-
-            	</div>
+				</div>
 				<div class="paymentInfo-method">
 					<h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
 					<div class="paymentInfo-method-box">
@@ -156,7 +152,7 @@
 					</div>
 				</div>
 				<div class="buy--button">
-					<a class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
+					<a href="/Success" class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
 							HOÀN TẤT ĐƠN HÀNG						
 					</a>
 				</div>
