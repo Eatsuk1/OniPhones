@@ -11,7 +11,7 @@
 <h3>CustomerAddress</h3>
 
 
-    @foreach(string address in Cus_Address.address)
+    @foreach(string address in Cus_Address)
 {
     <p>@address</p>
     
@@ -22,7 +22,7 @@
 
 
 @code {
-    Customer Cus_Address = new Customer();
+    public List<string> Cus_Address { get; set; }
 
 
 

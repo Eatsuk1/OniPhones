@@ -6,6 +6,7 @@
 
 @inject CartService CartIService
 @inject CustomerService CustomerIService
+@inject ProductService ProductIService
 @inject PaymentService PaymentIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
@@ -49,15 +50,15 @@
 						</div>
 						<form class="address-details">
 							@*chỗ này để foreach load địa chỉ*@
-							<div class="address-list paymentInfo-method-box">
-								<input type="radio" id="html" name="fav_language" value="Hà Đông, Hà Nội" style="width:auto">
- 								<label for="html">số 1 đại cồ việt, Phường Bách Khoa, Quận Hai Bà Trưng, Thành phố Hà Nội</label><br>
-							</div>
+                            <div class="address-list paymentInfo-method-box">
+								@foreach (var item in listaddress)
+								{
+								    <input type="radio" id="html" name="fav_language" value="@item" style="width: auto">
+								    <label for="html">@item</label>
+								    <br>
+								}
+                            </div>
 
-							<div class="address-list paymentInfo-method-box">
-								<input type="radio" id="html" name="fav_language" value="Hà Đông, Hà Nội" style="width:auto">
- 								<label for="html">số 1 đại cồ việt, Phường Bách Khoa, Quận Hai Bà Trưng, Thành phố Hà Nội</label><br>
-							</div>
 							<!-- Button trigger modal -->
 
 							<button type="button" class="btn paymentInfo-method-box" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: left; ">
@@ -112,7 +113,6 @@
 															{
 																<option value="@item">@item</option>
 															}
-
 														}
 													</select>
 												</div>
@@ -126,21 +126,18 @@
 											<input class="billing_address_1" name="" type="hidden" value="">
 											<input class="billing_address_2" name="" type="hidden" value="">
 											<input class="billing_address_3" name="" type="hidden" value="">
-											<input class="billing_address_4" name="" type="hidden" value="">
-											
+											<input class="billing_address_4" name="" type="hidden" value="">											
 										</div>
-									<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-									<button type="button" class="btn btn-primary" @onclick="AddNewAddress"  data-bs-dismiss="modal" >Lưu</button>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+											<button type="button" class="btn btn-primary" @onclick="AddNewAddress" >Lưu</button>
+										</div>
 									</div>
 								</div>
-								</div>
 							</div>
-
 						</form>
 					</div>
-
-            	</div>
+				</div>
 				<div class="paymentInfo-method">
 					<h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
 					<div class="paymentInfo-method-box">
@@ -164,65 +161,41 @@
 					</div>
 				</div>
 				<div class="buy--button">
-					<a class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
+					<a href="/Success" class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
 							HOÀN TẤT ĐƠN HÀNG						
 					</a>
 				</div>
 			</div>
 		<!-- Payment--product -->
-			<div class="col c-5 paymentProduct">					
-				<h3>THÔNG TIN SẢN PHẨM</h3>
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-							style="background-image:url(https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s22-ultra-5g.jpg); background-size: contain;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+            <div class="col c-5 paymentProduct">					
+                <h3>THÔNG TIN SẢN PHẨM</h3>
+				@foreach (var item in CartItems)
+				{
+				    <div class="paymentProduct-info">
+                        <div class="paymentProduct-info-img"
+                             style="background-image: url('@GetSmartphone(item.device_key).device_image'); background-size: contain;">
+                            <span>@item.quantity</span>
+                        </div>
+                        <div class="paymentProduct-info-content">
+                            <p>@GetSmartphone(item.device_key).device_name</p>
+                        </div>
+                        <div class="paymentProduct-info-price">
+                            <p>@item.quantity đ</p>
+                        </div>
+                    </div>
+				}
 
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-							style="background-image:url(https://fdn2.gsmarena.com/vv/bigpic/google-pixel-6-pro.jpg); background-size: contain;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
+                
 
-				<div class="paymentProduct-info">
-					<div class="paymentProduct-info-img"
-							style="background-image:url(https://fdn2.gsmarena.com/vv/bigpic/oneplus-10-pro.jpg); background-size: contain;"
-					>	
-						<span>1</span>											
-					</div>
-					<div class="paymentProduct-info-content">
-						<p>Iphone 13 Promax</p>
-					</div>			
-					<div class="paymentProduct-info-price">						
-						<p>99.999.999đ</p>
-					</div>
-				</div>
-
-				<div class="paymentProduct-price">
-					<div class="paymentProduct-price-box">
-						<div class="paymentProduct-price-content" >
-							<p style=" margin-left: 10px;">Tạm tính</p>
-						</div>
-						<div class="paymentProduct-price-pay">
-							<span>99.999.000đ </span>
-						</div>
-					</div>
+                <div class="paymentProduct-price">
+                    <div class="paymentProduct-price-box">
+                        <div class="paymentProduct-price-content">
+                            <p style="margin-left: 10px;">Tạm tính</p>
+                        </div>
+                        <div class="paymentProduct-price-pay">
+                            <span>@subtotal đ </span>
+                        </div>
+                    </div>
 
 					<div class="paymentProduct-price-box">
 						<div class="paymentProduct-price-content" >
@@ -238,7 +211,7 @@
 							<p style=" margin-left: 10px;">Tổng cộng</p>
 						</div>
 						<div class="paymentProduct-totalprice-price">
-							<span>99.999.000đ</span>
+							<span>@subtotal đ</span>
 						</div>
 					</div>
 				</div>
@@ -270,7 +243,12 @@
 
 	public string detail_address { get; set; }
 
-	public Customer customer = new Customer();
+	public List<string> listaddress { get; set; }
+
+	public Customer customer = new();
+
+    public int subtotal { get; set; }
+	public int shipping_fee { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -278,6 +256,8 @@
 		CartItems = CartIService.GetCart(Customerid);
 		listcity = PaymentIService.GetCity();
 		customer = CustomerIService.GetCustomerInfo(Customerid);
+	    listaddress = CustomerIService.GetCustomerAddress(Customerid);
+	    GetSubTotalPrice();
 	}
 
 	public void GetDistrict()
@@ -302,8 +282,23 @@
 	public async Task AddNewAddress()
 	{
 		await CustomerIService.AddNewAddress(selectedcity, selected_district, selectedward, detail_address, Customerid);
+	    await InvokeAsync(OnInitializedAsync);
 	}
 
+    public Smartphone GetSmartphone(string _device_key)
+    {
+        return ProductIService.GetSpecifySmartphone(_device_key);
+    }
+
+    public int GetSubTotalPrice()
+    {
+        subtotal = 0;
+        foreach (var item in CartItems)
+        {
+            subtotal += item.quantity;
+        }
+        return subtotal;
+    }
 
 	public async Task GetClaims()
 	{
