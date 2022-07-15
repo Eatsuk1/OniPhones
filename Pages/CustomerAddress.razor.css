@@ -20,6 +20,7 @@
 }
 .list-item-text {
     width:70%;
+    padding-left: 15px;
 }
 .list-item-button{
     width:30%;
