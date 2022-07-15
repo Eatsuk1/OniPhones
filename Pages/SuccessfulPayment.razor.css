@@ -8,12 +8,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
 .successful-image {
     width: 200px;
     height: 200px;
+    margin-top: -10em;
 }
 
     .successful-image img {
