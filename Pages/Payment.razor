@@ -3,12 +3,15 @@
 @using DoAn1.Data
 @using DoAn1.Service
 @using BlazorStrap
+@using DoAn1.Models
 
 @inject CartService CartIService
 @inject CustomerService CustomerIService
 @inject ProductService ProductIService
 @inject PaymentService PaymentIService
+@inject OrderService OrderIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JS
 
 @layout MainLayout0
 
@@ -32,30 +35,32 @@
 			<div class="col c-7 paymentInfo">
 				<div class="paymentInfo-shipinfo">
                		<h3>THÔNG TIN GIAO HÀNG</h3>
-               		<input type="text" placeholder="Họ và tên" value="@customer.Name"/>
-               		<div class="row" style="display: flex; justify-content: space-between; width: 90%; padding: 0px 5px;">
-                  		<input type="text" placeholder="Email" name="email" value="@customer.Email"/>
-                  		<input type="text" placeholder="Số điện thoại" name="sdt" value="@customer.PhoneNumber"/>
-               		</div>
-               		
-					@*Chọn địa chỉ giao hàng*@
+               		<input type="text" placeholder="Họ và tên" @bind-value="customer.Name"/>
+                       <div class="row" style="display: flex; justify-content: space-between; width: 90%; padding: 0px 5px;">
+                           <input type="text" placeholder="Email" name="email" @bind-value="customer.Email"/>
+                           <input type="text" placeholder="Số điện thoại" name="sdt" @bind-value="customer.PhoneNumber" />
+                          
+
+                       </div>
+
+                       @*Chọn địa chỉ giao hàng*@
 
 					<div class="shipping-address">
 						<div class="shipping-title">
 							<h3>Địa chỉ giao hàng</h3>
 						</div>
-						<form class="address-details">
+						<form class="address-details" >
 							@*chỗ này để foreach load địa chỉ*@
-                            <div class="address-list paymentInfo-method-box">
-								@foreach (var item in listaddress)
+                            @foreach (var item in listaddress)
 								{
-								    <input type="radio" id="html" name="fav_language" value="@item" style="width: auto">
-								    <label for="html">@item</label>
-								    <br>
+								    <div class="address-list paymentInfo-method-box">
+                                        <input type="radio" id="html" name="fav_language" value="@item" style="width: auto" @onclick="() => GetShippingAddress(item)">
+                                        <label for="html">@item</label>
+                                        <br>
+                                    </div>
 								}
-                            </div>
 
-							<!-- Button trigger modal -->
+                            <!-- Button trigger modal -->
 
 							<button type="button" class="btn paymentInfo-method-box" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: left; ">
 								Thêm địa chỉ...
@@ -126,7 +131,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-											<button type="button" class="btn btn-primary" @onclick="AddNewAddress" >Lưu</button>
+											<button type="button" class="btn btn-primary" data-bs-dismiss ="modal" @onclick="AddNewAddress" >Lưu</button>
 										</div>
 									</div>
 								</div>
@@ -134,30 +139,30 @@
 						</form>
 					</div>
 				</div>
-				<div class="paymentInfo-method">
-					<h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
-					<div class="paymentInfo-method-box">
-						<input type="radio" id="ship1" name="shipmethod" value="Giao hàng tận nơi">
-  						<label for="ship1">Giao hàng tận nơi</label><br>
-					</div>
-					<div class="paymentInfo-method-box">
-						<input type="radio" id="ship2" name="shipmethod" value="Lấy tại cửa hàng">
-  						<label for="ship2">Lấy tại cửa hàng</label><br>	
-					</div>
-				</div>
-				<div class="paymentInfo-method">
+                <div class="paymentInfo-method">
+                    <h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
+                    <div class="paymentInfo-method-box">
+                        <input type="radio" id="ship1" name="shipmethod" value="Giao hàng tận nơi" @onclick="GetShippingMethod1">
+                        <label for="ship1">Giao hàng tận nơi</label><br>
+                    </div>
+                    <div class="paymentInfo-method-box">
+                        <input type="radio" id="ship2" name="shipmethod" value="Lấy tại cửa hàng" @onclick="GetShippingMethod2">
+                        <label for="ship2">Lấy tại cửa hàng</label><br>	
+                    </div>
+                </div>
+                <div class="paymentInfo-method">
 					<h3>PHƯƠNG THỨC THANH TOÁN</h3>
 					<div class="paymentInfo-method-box">
-						<input type="radio" id="cod" name="payment" value="Thanh toán khi nhận hàng">
+						<input type="radio" id="cod" name="payment" value="Thanh toán khi nhận hàng" @onclick="GetPaymentMethod1">
   						<label for="cod">Thanh toán khi nhận hàng</label><br>
 					</div>
 					<div class="paymentInfo-method-box">
-						<input type="radio" id="online" name="payment" value="Thanh toán online">
+                        <input type="radio" id="online" name="payment" value="Thanh toán online" @onclick="GetPaymentMethod2">
   						<label for="online">Thanh toán online</label><br>								
 					</div>
 				</div>
 				<div class="buy--button">
-					<a href="/Success" class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;">
+					<a href="/Success" class="btn btn-danger" style="border-radius: 15px; margin-top: 1em;" @onclick="CheckOut">
 							HOÀN TẤT ĐƠN HÀNG						
 					</a>
 				</div>
@@ -176,7 +181,7 @@
                             <p>@GetSmartphone(item.device_key).device_name</p>
                         </div>
                         <div class="paymentProduct-info-price">
-                            <p>@item.quantity đ</p>
+                            <p>@(item.quantity)đ</p>
                         </div>
                     </div>
 				}
@@ -189,7 +194,7 @@
                             <p>Tạm tính</p>
                         </div>
                         <div class="paymentProduct-price-pay">
-                            <span>@subtotal đ </span>
+                            <span>@(subtotal)đ </span>
                         </div>
                     </div>
 
@@ -198,7 +203,17 @@
                             <p>Phí vận chuyển</p>
                         </div>
                         <div class="paymentProduct-price-pay">
-                            <span>Miễn phí</span>
+							@if (shipping_method == "Giao hàng tận nơi")
+							{
+							    <span>@(shipping_fee)đ</span>
+							}else if (shipping_method == "Lấy tại cửa hàng")
+							{
+							    <span>Miễn phí</span>
+							}
+							else
+							{
+							    <span></span>
+							}
                         </div>
                     </div>
 
@@ -207,7 +222,7 @@
 							<p>Tổng cộng</p>
 						</div>
 						<div class="paymentProduct-totalprice-price">
-							<span>@subtotal đ</span>
+							<span>@(subtotal + shipping_fee)đ</span>
 						</div>
 					</div>
 				</div>
@@ -221,8 +236,7 @@
 
 	public List<Models.Cart> CartItems { get; set; }
 
-	[Parameter]
-	public string Customerid { get; set; }
+    public string Customerid { get; set; }
 
 	public List<string> listcity { get; set; }
 
@@ -243,9 +257,15 @@
 	public Customer customer = new();
 
     public int subtotal { get; set; }
-	public int shipping_fee { get; set; }
 
-	protected override async Task OnInitializedAsync()
+	public int shipping_fee { get; set; }
+	public string shipping_method { get; set; }
+	public string shipping_address { get; set; }
+
+    public string payment_method { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
 	{
 		await GetClaims();
 		CartItems = CartIService.GetCart(Customerid);
@@ -285,6 +305,22 @@
         return ProductIService.GetSpecifySmartphone(_device_key);
     }
 
+    public async Task CheckOut()
+    {
+        List<product_order> OrderItems = new();
+        foreach (var item in CartItems)
+        {
+            var x = new product_order
+            {
+                device_key = item.device_key,
+                quantity = item.quantity.ToString(),
+                sub_price = item.quantity + "đ"
+            };
+            OrderItems.Add(x);
+        }
+        await OrderIService.AddNewOrder(Customerid, customer.Name, customer.Email,customer.PhoneNumber,payment_method,shipping_address,shipping_method,shipping_fee.ToString(), OrderItems);
+    }
+
     public int GetSubTotalPrice()
     {
         subtotal = 0;
@@ -293,6 +329,33 @@
             subtotal += item.quantity;
         }
         return subtotal;
+    }
+
+    public void GetShippingAddress(string _shipping_address)
+    {
+        shipping_address = _shipping_address;
+    }
+
+    public async Task GetShippingMethod1()
+    {
+        shipping_method = new(await JS.InvokeAsync<string>("getshippingmethod1", shipping_method));
+        shipping_fee = 15000;
+    }
+
+    public async Task GetShippingMethod2()
+    {
+        shipping_method = new(await JS.InvokeAsync<string>("getshippingmethod2", shipping_method));
+        shipping_fee = 0;
+    }
+
+    public async Task GetPaymentMethod1()
+    {
+        payment_method = new(await JS.InvokeAsync<string>("getpaymentmethod1", payment_method));
+    }
+
+    public async Task GetPaymentMethod2()
+    {
+        payment_method = new(await JS.InvokeAsync<string>("getpaymentmethod2", payment_method));
     }
 
 	public async Task GetClaims()
