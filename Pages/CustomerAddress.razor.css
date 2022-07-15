@@ -1,0 +1,36 @@
+﻿.customer-address {
+    border-radius: 20px;
+    background-color: #f6fbfc;
+    box-shadow: 1px 1px 2px #ccc;
+    text-align:center;
+}
+.address-display-showtime {
+    
+}
+.address-display {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    border: 0px solid #7e7e7e;
+}
+.address-display-list {
+    display: flex;
+    border-radius: 25px;
+    border: 1px solid #7e7e7e;
+    margin-bottom: 10px;    
+}
+.list-item-text {
+    width:70%;
+}
+.list-item-button{
+    width:30%;
+}
+/* button */
+.btn add-adress {
+    width: 90%;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    outline: none;
+    padding: 4px 12px;
+    border-radius: 1em;
+    background-color: #f6fbfc;
+}

@@ -1,4 +1,9 @@
 ﻿@page "/Success"
+@using DoAn1.Data
+@using System.Security.Claims
+@inject DoAn1.Service.CustomerService CustomerIService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using DoAn1.Pages
 @layout MainLayout0
 
 <div class="success">

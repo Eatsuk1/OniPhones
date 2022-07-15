@@ -1,19 +1,197 @@
 ﻿@page "/Account/Address"
 @using DoAn1.Data
 @using System.Security.Claims
+@using BlazorStrap
+
 @inject DoAn1.Service.CustomerService CustomerIService
 @layout MainLayout1
 @inject AuthenticationStateProvider AuthenticationStateProvider
+
 @using DoAn1.Pages
 
 
+<div class="col c-10 mt-16">
+    <div class="customer-address">
+        <div class="address">
+	        <h3>Địa chỉ khách hàng</h3>
+        </div>
+        <form class="address-details">
+	        @*chỗ này để foreach load địa chỉ*@
+	        <div class="address-display-showtime">
+                <div class="address-display">
+                    <div class="address-display-list">
+                        <div class="list-item-text"> 
+							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
+						</div>
+						<div class="list-item-button">
+							<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: left; ">
+								Sửa địa chỉ
+							</button>
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel"> Hãy điền địa chỉ </h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+											<span>x</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="addform-section">
+												<label>Tính/Thành phố</label>
+												<div class="input-item">
+													<select name="calc_shipping_provinces" required="" @*@bind="selectedcity" @onclick="GetDistrict"*@ >
+														<option value="">Tỉnh / Thành phố</option>
+														@*@foreach(var item in listcity){
+															<option value="@item">@item</option>
+														}*@
+													</select>
+												</div>
+											</div>
+											<div class="addform-section">
+												<label>Quận/Huyện</label>
+												<div class="input-item">
+													<select name="calc_shipping_provinces" required="" @*@bind="selected_district" @onclick="GetWard"*@>
+														<option value="">Quận/Huyện</option>
+														@*@if (selectedcity != null)
+														{
 
-<h3>CustomerAddress</h3>
+															@foreach (var item in listdistrict)
+															{
+																<option value="@item">@item</option>
+															}
+														}*@
+													</select>
+												</div>
+											</div>
+											<div class="addform-section">
+												<label>Phường/Xã</label>
+												<div class="input-item">
+													<select name="calc_shipping_provinces" required="" @*@bind="selectedward"*@>
+														<option value="">Phường/Xã</option>
+														@*@if (selected_district != null)
+														{
+															@foreach (var item in listward)
+															{
+																<option value="@item">@item</option>
+															}
+														}*@
+													</select>
+												</div>
+											</div>
+											<div class="addform-section">
+												<label>Địa chỉ nhận hàng</label>
+												<div class="input-item">
+													<input type="text" placeholder="Địa chỉ nhận hàng" @*@bind-value = "detail_address"*@>
+												</div>
+											</div>
+											<input class="billing_address_1" name="" type="hidden" value="">
+											<input class="billing_address_2" name="" type="hidden" value="">
+											<input class="billing_address_3" name="" type="hidden" value="">
+											<input class="billing_address_4" name="" type="hidden" value="">											
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+											<button type="button" class="btn btn-primary"@* @onclick="AddNewAddress"*@ >Lưu</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="address-display-list">
+                        <div class="list-item text-center"> 
+							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
+						</div>
+					</div>
+					<div class="address-display-list">
+                        <div class="list-item text-center"> 
+							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
+						</div>
+					</div> 
+                </div>
+			</div>
+            <!-- Button trigger modal -->
+			<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: left; ">
+				Thêm địa chỉ
+			</button>
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"> Hãy điền địa chỉ </h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							<span>x</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="addform-section">
+								<label>Tính/Thành phố</label>
+								<div class="input-item">
+									<select name="calc_shipping_provinces" required="" @*@bind="selectedcity" @onclick="GetDistrict"*@ >
+										<option value="">Tỉnh / Thành phố</option>
+										@*@foreach(var item in listcity){
+											<option value="@item">@item</option>
+										}*@
+									</select>
+								</div>
+							</div>
+							<div class="addform-section">
+								<label>Quận/Huyện</label>
+								<div class="input-item">
+									<select name="calc_shipping_provinces" required="" @*@bind="selected_district" @onclick="GetWard"*@>
+										<option value="">Quận/Huyện</option>
+										@*@if (selectedcity != null)
+										{
 
+											@foreach (var item in listdistrict)
+											{
+												<option value="@item">@item</option>
+											}
+										}*@
+									</select>
+								</div>
+							</div>
+							<div class="addform-section">
+								<label>Phường/Xã</label>
+								<div class="input-item">
+									<select name="calc_shipping_provinces" required="" @*@bind="selectedward"*@>
+										<option value="">Phường/Xã</option>
+										@*@if (selected_district != null)
+										{
+											@foreach (var item in listward)
+											{
+												<option value="@item">@item</option>
+											}
+										}*@
+									</select>
+								</div>
+							</div>
+							<div class="addform-section">
+								<label>Địa chỉ nhận hàng</label>
+								<div class="input-item">
+									<input type="text" placeholder="Địa chỉ nhận hàng" @*@bind-value = "detail_address"*@>
+								</div>
+							</div>
+							<input class="billing_address_1" name="" type="hidden" value="">
+							<input class="billing_address_2" name="" type="hidden" value="">
+							<input class="billing_address_3" name="" type="hidden" value="">
+							<input class="billing_address_4" name="" type="hidden" value="">											
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+							<button type="button" class="btn btn-primary"@* @onclick="AddNewAddress"*@ >Lưu</button>
+						</div>
+					</div>
+				</div>
+			</div>
+        </form>
+    </div>
+</div>
 
-    @foreach(string address in Cus_Address.address)
+    @*@foreach(string address in Cus_Address.address)
 {
-    <p>@address</p>
+    <p>@address</p>*@
     
 }
 
