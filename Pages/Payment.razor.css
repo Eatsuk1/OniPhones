@@ -1,7 +1,7 @@
 ﻿/* payment header */
-.payment-page {
-    margin: 80px auto;
-    width: 60%;
+
+.payment-page{
+    width: 100%;
 }
 
 .payment-header {
@@ -53,7 +53,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-right: 1px solid #ccc;
 }
 
 .paymentInfo-shipinfo {
@@ -102,6 +101,8 @@
     background-color: rgb(231, 226, 226);
     padding: 20px 0px 20px 50px;
     justify-content: center;
+    display:flex;
+    flex-direction: column;
 }
 
     .paymentInfo-method input {
@@ -140,11 +141,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 20px;
 }
 
     .paymentProduct h3 {
         padding-top: 20px;
         padding-bottom: 10px;
+        margin-left: 20px;
     }
 
 .paymentProduct-info {
@@ -181,6 +185,7 @@
     justify-content: center;
     align-items: center;
     opacity: 0.8;
+    font-weight: 700;
 }
 
 .paymentProduct-info-price {
@@ -225,18 +230,14 @@
     opacity: 0.8;
 }
 
-.paymentProduct-totalprice-price {
-    width: 50%;
-    text-align: right;
-    padding-right: 30px;
-    font-size: x-large;
-    opacity: 0.8;
-}
+    .paymentProduct-totalprice-price {
+        width: 50%;
+        text-align: right;
+        padding-right: 30px;
+        font-size: x-large;
+        opacity: 0.8;
+    }
 
-
-.modal-header button{
-
-}
 
 .modal-header button {
     position: absolute;
@@ -261,5 +262,5 @@
     display: block;
     word-wrap: break-word;
     white-space: normal;
-    padding-left: 5px;
+    padding-left:5px;
 }

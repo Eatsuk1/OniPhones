@@ -17,18 +17,22 @@
 
 @inject IJSRuntime JsRuntime
 
+<div id="content">
+    <div class="grid wide">
+        <div class="row">
+
 <div class="payment-page"> 
-    <!-- Payment header -->
-    <div class="payment-header">
-        <div class="payment-header__subline"></div>
-        <div class="payment-header__goback">
-            <a href="">Quay lại</a>
-        </div>
-        <div class="payment-header__title">
-            <h1>Thông tin đơn hàng</h1>
-        </div>
-    </div>
-<!-- Payment -->
+	<!-- Payment header -->
+	<div class="payment-header">
+		<div class="payment-header__subline"></div>
+		<div class="payment-header__goback">
+			<a href="">Quay lại</a>
+		</div>
+		<div class="payment-header__title">
+			<h1>Thông tin đơn hàng</h1>
+		</div>
+	</div>
+	<!-- Payment -->
 	<div class="payment" >
 		<div class="row">
 		<!-- Payment--info -->
@@ -63,17 +67,17 @@
                             <!-- Button trigger modal -->
 
 							<button type="button" class="btn paymentInfo-method-box" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: left; ">
-								Thêm địa chỉ...
+								<span style="margin-left: 20px;">Thêm địa chỉ...</span>
 							</button>
 
 							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
-									<div class="modal-content">
+								<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Hãy điền địa chỉ</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-											<span>x</span>
-											</button>
+										<h5 class="modal-title" id="exampleModalLabel">Hãy điền địa chỉ</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+										<span>x</span>
+									</button>
 										</div>
 										<div class="modal-body">
 											<div class="addform-section">
@@ -174,7 +178,7 @@
 				{
 				    <div class="paymentProduct-info">
                         <div class="paymentProduct-info-img"
-                             style="background-image: url('@GetSmartphone(item.device_key).device_image');">
+                             style="background-image: url('@GetSmartphone(item.device_key).device_image'); background-size: contain;">
                             <span>@item.quantity</span>
                         </div>
                         <div class="paymentProduct-info-content">
@@ -191,7 +195,7 @@
                 <div class="paymentProduct-price">
                     <div class="paymentProduct-price-box">
                         <div class="paymentProduct-price-content">
-                            <p>Tạm tính</p>
+                            <p style="margin-left: 10px;">Tạm tính</p>
                         </div>
                         <div class="paymentProduct-price-pay">
                             <span>@(subtotal)đ </span>
@@ -218,20 +222,21 @@
                     </div>
 
 					<div class="paymentProduct-totalprice-box">
-						<div class="paymentProduct-totalprice-content">
-							<p>Tổng cộng</p>
+						<div class="paymentProduct-totalprice-content" >
+							<p style=" margin-left: 10px;">Tổng cộng</p>
 						</div>
 						<div class="paymentProduct-totalprice-price">
 							<span>@(subtotal + shipping_fee)đ</span>
 						</div>
 					</div>
 				</div>
-            </div>	
-			
+			</div>	
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-
 @code {
 
 	public List<Models.Cart> CartItems { get; set; }
