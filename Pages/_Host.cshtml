@@ -46,9 +46,28 @@
     <script src="_content/BlazorStrap/popper.min.js"></script>
     <script src="_content/BlazorStrap/blazorstrap.js"></script>
     <script src="./js/page2.js"></script>
-    <script src="./js/Payment.js"></script>
+    <script src="js/Payment.js"></script>
+    <script>
+        function getshippingmethod1() {
+            var x = document.getElementById("ship1").value;
+            return x;
+        }
 
+        function getshippingmethod2() {
+            var x = document.getElementById("ship2").value;
+            return x;
+        }
 
+        function getpaymentmethod1() {
+            var x = document.getElementById("cod").value;
+            return x;
+        }
+
+        function getpaymentmethod2() {
+            var x = document.getElementById("online").value;
+            return x;
+        }
+    </script>
 </body>
 </html>
 

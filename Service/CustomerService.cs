@@ -35,24 +35,26 @@ namespace DoAn1.Service
 
         public async Task AddCustomer(string _customerid, string _name, string _email)
         {
-            var document = new Customer();
-            document.UserId = _customerid;
-            document.Name = _name;
-            document.Email = _email;
-            document.Birthday = "";
-            document.JoinedDay = DateTime.Today.ToShortDateString();
-            document.PhoneNumber = "";
-            document.address = new List<string>() { "" };
+            var document = new Customer
+            {
+                UserId = _customerid,
+                Name = _name,
+                Email = _email,
+                Birthday = "",
+                JoinedDay = DateTime.Today.ToShortDateString(),
+                PhoneNumber = "",
+                address = new List<string>() { "" }
+            };
             await _collection.InsertOneAsync(document);
         }
 
 
-        public Customer GetCustomerAddress(string customerid)
+        public List<string> GetCustomerAddress(string customerid)
         {
             var filter = Builders<Customer>.Filter.Eq(x => x.UserId, customerid);
             var projection = Builders<Customer>.Projection.Include("address");
 
-            return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault());
+            return BsonSerializer.Deserialize<Customer>(_collection.Find(filter).Project(projection).FirstOrDefault()).address;
 
         }
 
