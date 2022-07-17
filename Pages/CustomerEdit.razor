@@ -48,7 +48,44 @@
                 </div>
             </div>
             <div class="member__update">
-                <button type="button">Cập nhật thông tin</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;">
+                    Cập nhật thông tin
+                </button>
+                <div class="modal fade" id="fixModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			                <span>x</span>
+		                </button>
+                        </div>
+                        <div class="modal-body">
+		                    <div class="addform-section">
+			                    <label for="input-item"> Họ và tên </label>
+				                    <input type="text" placeholder="Họ và tên" @*@bind-value = "detail_address"*@>
+		                    </div>
+		                    <div class="addform-section">
+			                    <label for="birthday"> Ngày sinh </label>
+				                    <input type="date" id="birthday" name="birthday">
+		                    </div>
+		                    <div class="addform-section">
+			                    <label for="input-item"> Số điện thoại </label>
+				                    <input type="text" placeholder="Số điện thoại" @*@bind-value = "detail_address"*@>
+		                    </div>
+		                    
+		                    <input class="billing_address_1" name="" type="hidden" value="">
+		                    <input class="billing_address_2" name="" type="hidden" value="">
+		                    <input class="billing_address_3" name="" type="hidden" value="">
+		                    <input class="billing_address_4" name="" type="hidden" value="">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>   
