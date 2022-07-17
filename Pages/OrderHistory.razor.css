@@ -26,37 +26,6 @@
     margin-bottom: 1.5rem;
 }
 
-    .history__search button {
-        padding: 4px;
-        margin-left: 8px;
-        border: none;
-        cursor: pointer;
-        color: #b11e1e;
-    }
-
-        .history__search button:hover {
-            background-color: #db4052;
-        }
-
-.box__search {
-    border-radius: 25px;
-    background-color: #fff;
-}
-
-.search__img {
-    margin: 0 12px;
-    height: 16px;
-    width: 16px;
-    cursor: pointer;
-    opacity: 0.6;
-}
-
-.box__search input {
-    outline: none;
-    border: none;
-    padding-top: 6px;
-}
-
 .history__order_header {
     display: flex;
     padding: 0.5rem 1rem;
@@ -68,4 +37,99 @@
     color: #212529;
     line-height: 1.5;
     margin-bottom: 1.5rem;
+}
+
+.history__order_list-items button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.receiver_info{
+    display: flex;
+}
+
+.paymentProduct-info {
+    width: 100%;
+    display: flex;
+    padding-bottom: 1em;
+}
+
+.paymentProduct-info-img {
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+    .paymentProduct-info-img span {
+        width: 23px;
+        height: 23px;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        position: absolute;
+        background-color: rgb(95, 93, 93);
+        text-align: center;
+        line-height: 23px;
+        color: #fff;
+    }
+
+.paymentProduct-info-content {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    font-weight: 700;
+}
+
+.paymentProduct-info-price {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.paymentProduct-price {
+    width: 100%;
+}
+
+.paymentProduct-price-box {
+    width: 100%;
+    display: flex;
+}
+
+.paymentProduct-price-content {
+    width: 50%;
+    font-size: large;
+    opacity: 0.8;
+}
+
+.paymentProduct-price-pay {
+    width: 50%;
+    text-align: right;
+    padding-right: 30px;
+    font-size: large;
+    opacity: 0.8;
+}
+
+.paymentProduct-totalprice-box {
+    width: 100%;
+    display: flex;
+}
+
+.paymentProduct-totalprice-content {
+    width: 50%;
+    font-size: x-large;
+    opacity: 0.8;
+}
+
+.paymentProduct-totalprice-price {
+    width: 50%;
+    text-align: right;
+    padding-right: 30px;
+    font-size: x-large;
+    opacity: 0.8;
 }
