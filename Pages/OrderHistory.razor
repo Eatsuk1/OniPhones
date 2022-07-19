@@ -32,13 +32,14 @@
 
                     <div class="history__order_list">
                        @* For each để hiện các đơn hàng*@
-
-                        <div class="history__order_list-items">                      
+                       @foreach(var order in OrderHis)
+                       {
+      <div class="history__order_list-items">                      
                             <button class="btn history__order_header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                                 <div class="c-3">Mã online đơn 1</div>
                                 <div class="c-3">Đang xác nhận</div>
-                                <div class="c-3">16/07/2022</div>
-                                <div class="c-3">99.999.999đ</div>
+                                <div class="c-3">@order.created_on_date</div>
+                                <div class="c-3">@(subtotal + shipping_fee)</div>
                             </button>
                             <div class="collapse" id="collapseExample1">
                                     <div class="card card-body">
@@ -46,24 +47,24 @@
                                             <div class="receiver_info-basic c-4" style=" border: 1px solid #7e7e7e;">
                                                 <h5>Thông tin người nhận</h5>
                                                 <div class="receiver_info-basic-details">
-                                                    <div>Tên</div>
-                                                    <div>Số điện thoại</div>
-                                                    <div>Địa chỉ giao hàng</div>
+                                                    <div>@order.cus_name</div>
+                                                    <div>@order.cus_phone_number</div>
+                                                    <div>@order.shipping_address</div>
                                                 </div>
                                             </div>
                                             <div class="shipping-method c-4" style=" border: 1px solid #7e7e7e;">
                                                 <h5>Phương thức vận chuyển</h5>
-                                                <span>Giao hàng tận nơi</span>
+                                                <span>@order.shipping_method</span>
                                             </div>
                                             <div class="payment-method c-4" style=" border: 1px solid #7e7e7e;">
                                                 <h5>Phương thức thanh toán</h5>
-                                                <span>Thanh toán khi nhận hàng</span>
+                                                <span>@order.payment_method</span>
                                             </div>
                                         </div>
                                         <br />
                                         <div>
                                             <h5>Danh sách sản phẩm</h5>
-                                            @foreach (var item in CartItems)
+                                            @foreach (var item in order.product_order)
 				                            {
 				                                <div class="paymentProduct-info">
                                                     <img class="paymentProduct-info-img" src="@GetSmartphone(item.device_key).device_image">                                                    
@@ -71,11 +72,11 @@
                                                         <p>@GetSmartphone(item.device_key).device_name</p>
                                                     </div>
                                                     <div class="paymentProduct-info-price">
-                                                        <p>@(item.quantity)đ</p>
+                                                        <p>@item.sub_price</p>
                                                     </div>
                                                 </div>
 				                            }
-                                            <div class="paymentProduct-price">
+                                            @*<div class="paymentProduct-price">
                                                 <div class="paymentProduct-price-box">
                                                     <div class="paymentProduct-price-content">
                                                         <p style="margin-left: 10px;">Tạm tính</p>
@@ -83,24 +84,17 @@
                                                     <div class="paymentProduct-price-pay">
                                                         <span>@(subtotal)đ </span>
                                                     </div>
-                                                </div>
+                                                </div>*@
 
                                                 <div class="paymentProduct-price-box">
                                                     <div class="paymentProduct-price-content">
                                                         <p>Phí vận chuyển</p>
                                                     </div>
                                                     <div class="paymentProduct-price-pay">
-							                            @if (shipping_method == "Giao hàng tận nơi")
-							                            {
-							                                <span>@(shipping_fee)đ</span>
-							                            }else if (shipping_method == "Lấy tại cửa hàng")
-							                            {
-							                                <span>Miễn phí</span>
-							                            }
-							                            else
-							                            {
-							                                <span></span>
-							                            }
+							                            
+							                            
+							                                <span>@order.shipping_fee</span>
+							                            
                                                     </div>
                                                 </div>
 
@@ -117,7 +111,9 @@
 
                                     </div>
                             </div>
-                        </div>
+                            
+                         
+                       
                         <div class="history__order_list-items">                      
                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         Button with data-bs-target
@@ -128,6 +124,7 @@
                                     </div>
                             </div>
                         </div>
+                        }
                     </div>
                 </div>
                 
@@ -135,7 +132,8 @@
         </div>
 
 @code {
-    public List<Models.Cart> CartItems { get; set; }
+
+    public List<Order> OrderHis { get; set; }
 
     public Customer customer = new();
 
@@ -148,15 +146,29 @@
     public int shipping_fee { get; set; }
 
     protected override async Task OnInitializedAsync()
-	{
-		await GetClaims();
-		CartItems = CartIService.GetCart(Customerid);
-		customer = CustomerIService.GetCustomerInfo(Customerid);
-	}
+    {
+        await GetClaims();
+        customer = CustomerIService.GetCustomerInfo(Customerid);
+        OrderHis = OrderIService.GetOrderHis(Customerid);
+        GetTotalPrice();
+    }
 
     public Smartphone GetSmartphone(string _device_key)
     {
         return ProductIService.GetSpecifySmartphone(_device_key);
+    }
+
+    public int GetTotalPrice()
+    {
+        subtotal = 0;
+        foreach (var order in OrderHis)
+        {
+            foreach(var item in order.product_order)
+            {
+                subtotal += Int32.Parse(item.quantity);
+            }
+        }
+        return subtotal;
     }
 
     public async Task GetClaims()

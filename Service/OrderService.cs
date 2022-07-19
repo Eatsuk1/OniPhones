@@ -34,5 +34,11 @@ namespace DoAn1.Service
             };
             await _collection.InsertOneAsync(document);
         }
+
+        public List<Order> GetOrderHis(string _user_id)
+        {
+            var filter = Builders<Order>.Filter.Eq(x => x.user_id, _user_id);
+            return _collection.Find(filter).ToList();
+        }
     }
 }
