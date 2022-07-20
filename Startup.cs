@@ -47,8 +47,6 @@ namespace DoAn1
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<CustomerService>();
             services.AddScoped<ProductService>();
-            services.AddScoped<Cart>();
-            services.AddScoped<List<Cart>>();
             services.AddScoped<CartService>();
             services.AddScoped<SubHeaderService>();
             services.AddScoped<PaymentService>();

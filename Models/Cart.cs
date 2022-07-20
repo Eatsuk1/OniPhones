@@ -11,14 +11,10 @@ namespace DoAn1.Models
         public string device_key { get; set; }
 
         public int quantity { get; set; }
+        
+        public string storage_version { get; set; }
 
-        //public int subtotal { get; set; }
-
-        //public string ShippingAddress { get; set; }
-
-        //public int ShippingCharges { get; set; }
-
-        //public string PaymentMode  { get; set; }
+        public string color_selected { get; set; }
 
         public string user_id { get; set; }
     }

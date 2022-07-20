@@ -320,8 +320,8 @@
             var x = new product_order
             {
                 device_key = item.device_key,
-                quantity = item.quantity.ToString(),
-                sub_price = item.quantity + "đ"
+                quantity = item.quantity,
+                sub_price = item.quantity
             };
             OrderItems.Add(x);
         }

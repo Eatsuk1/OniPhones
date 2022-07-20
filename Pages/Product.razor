@@ -12,6 +12,7 @@
 @inject NavigationManager navigationManager
 @inject SubHeaderService SubHeaderIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JS
 
 <!-- subHeader -->
 <div id="subheader">
@@ -93,15 +94,16 @@
             <!-- Chon mau -->
             <h5>Chọn màu</h5>
             <div class="row section2_Select">
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"></div>
-                    <span>Bạc</span>
+                <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="GetColor">
+                    <div id="color1" class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"></div>
+                    <p value="Bạc"></p><span>Bạc</span>
                 </BSButton>
                 <BSButton Color="BSColor.Danger" IsOutlined="true">
                     <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/ip13-pro-black.jpg');"></div>
                     <span>Đen</span>
                 </BSButton>
             </div>
+            <p>@color_selected</p>
             <!--Nut mua --!>
             <div class=buyBtn>
                 <BSButton Color="BSColor.Danger" style="border-radius:20px" OnClick="AddtoCart" >
@@ -211,6 +213,10 @@
     [Parameter]
     public string Customerid { get; set; }
 
+    public string storage_version { get; set; }
+
+    public string color_selected { get; set; }
+
     Smartphone smartphone = new Smartphone();
 
     SubHeader subheader = new SubHeader();
@@ -235,13 +241,13 @@
         {
             if (Customerid != null)
             {
-                if (CartIService.CheckDup(device_key, Customerid))
+                if (CartIService.CheckDup(device_key, Customerid, storage_version, color_selected))
                 {
                     navigationManager.NavigateTo($"/Cart");
                 }
                 else
                 {
-                    await CartIService.AddtoCart(device_key, Customerid, 1);
+                    await CartIService.AddtoCart(device_key, Customerid, 1, storage_version, color_selected);
                     navigationManager.NavigateTo($"/Cart");
                 }
             }
@@ -253,6 +259,10 @@
         catch (Exception ex) { }
     }
 
+    public async Task GetColor()
+    {
+        color_selected = new(await JS.InvokeAsync<string>("getcolor", color_selected));
+    }
 
     public async Task GetClaims()
     {

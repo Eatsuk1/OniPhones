@@ -36,8 +36,8 @@ namespace DoAn1.Models
     {
         public string device_key { get; set; }
         
-        public string quantity { get; set; }
+        public int quantity { get; set; }
 
-        public string sub_price { get; set; }
+        public int sub_price { get; set; }
     }
 }

@@ -372,20 +372,17 @@
 
 
 
-   @code {
-       List<Smartphone> smartphone = new List<Smartphone>();
-       
-       protected override async Task OnInitializedAsync()
-       {
-           
-         GetSmartphone();
+@code {
+    List<Smartphone> smartphone = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
     }
 
     private void GetSmartphone()
     {
-        smartphone = ProductIService.GetSmartphones();
+       smartphone = ProductIService.GetSmartphones();
     }
 
-       
-
-   }
+}

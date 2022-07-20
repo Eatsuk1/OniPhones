@@ -150,7 +150,7 @@
         await GetClaims();
         customer = CustomerIService.GetCustomerInfo(Customerid);
         OrderHis = OrderIService.GetOrderHis(Customerid);
-        GetTotalPrice();
+        
     }
 
     public Smartphone GetSmartphone(string _device_key)
@@ -158,18 +158,7 @@
         return ProductIService.GetSpecifySmartphone(_device_key);
     }
 
-    public int GetTotalPrice()
-    {
-        subtotal = 0;
-        foreach (var order in OrderHis)
-        {
-            foreach(var item in order.product_order)
-            {
-                subtotal += Int32.Parse(item.quantity);
-            }
-        }
-        return subtotal;
-    }
+   
 
     public async Task GetClaims()
 	{
