@@ -39,5 +39,9 @@ namespace DoAn1.Models
         public int quantity { get; set; }
 
         public int sub_price { get; set; }
+
+        public string storage_version { get; set; }
+
+        public string color_selected { get; set; }
     }
 }

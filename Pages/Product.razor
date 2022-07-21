@@ -79,31 +79,24 @@
             <!-- Chon bo nho -->
             <h5>Chọn dung lượng</h5>
             <div class="row section2_Select">
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <p value="512">512<span>GB</span></p>
-                </BSButton>
-              
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <p value="256">256<span>GB</span></p>
-                </BSButton>
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <p value="128">128<span>GB</span></p>
-                </BSButton>
+                @foreach (var item in smartphone.storage_version)
+                {
+                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_=>GetStorage(item))">
+                        <span>@item</span>
+                    </BSButton>
+                }
             </div>
-               
             <!-- Chon mau -->
             <h5>Chọn màu</h5>
             <div class="row section2_Select">
-                <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="GetColor">
-                    <div id="color1" class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"></div>
-                    <p value="Bạc"></p><span>Bạc</span>
-                </BSButton>
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/ip13-pro-black.jpg');"></div>
-                    <span>Đen</span>
-                </BSButton>
+                @foreach (var color in smartphone.colors)
+                {
+                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_ => GetColor(color))">
+                        <div class="selectColor" @*style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"*@></div>
+                        <span>@color</span>
+                    </BSButton>
+                }
             </div>
-            <p>@color_selected</p>
             <!--Nut mua --!>
             <div class=buyBtn>
                 <BSButton Color="BSColor.Danger" style="border-radius:20px" OnClick="AddtoCart" >
@@ -210,16 +203,15 @@
     [Parameter]
     public string device_key { get; set; }
 
-    [Parameter]
     public string Customerid { get; set; }
 
     public string storage_version { get; set; }
 
     public string color_selected { get; set; }
 
-    Smartphone smartphone = new Smartphone();
+    Smartphone smartphone = new();
 
-    SubHeader subheader = new SubHeader();
+    SubHeader subheader = new();
 
 
     protected override async Task OnInitializedAsync()
@@ -259,9 +251,14 @@
         catch (Exception ex) { }
     }
 
-    public async Task GetColor()
+    public void GetColor(string color)
     {
-        color_selected = new(await JS.InvokeAsync<string>("getcolor", color_selected));
+        color_selected = color;
+    }
+
+    public void GetStorage(string storage_ver)
+    {
+        storage_version = storage_ver;
     }
 
     public async Task GetClaims()
