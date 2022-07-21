@@ -23,11 +23,13 @@ namespace DoAn1.Models
 
         public string user_id { get; set; }
 
-        public string shipping_fee { get; set; }
+        public int shipping_fee { get; set; }
 
         public string created_on_date { get; set; }
 
         public string created_on_time { get; set; }
+
+        public int total_price { get; set; }
 
         public List<product_order> product_order { get; set; }
     }

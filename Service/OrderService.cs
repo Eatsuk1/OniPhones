@@ -16,7 +16,7 @@ namespace DoAn1.Service
             _collection = db.GetConnection().GetCollection<Order>("order");
         }
 
-        public async Task AddNewOrder(string _user_id, string _cus_name, string _cus_email, string _cus_phone_number, string _payment_method, string _shipping_address, string _shipping_method, string _shipping_fee, List<product_order> _product_order)
+        public async Task AddNewOrder(string _user_id, string _cus_name, string _cus_email, string _cus_phone_number, string _payment_method, string _shipping_address, string _shipping_method, int _shipping_fee, List<product_order> _product_order, int _total_price)
         {
             var document = new Order
             {
@@ -29,8 +29,9 @@ namespace DoAn1.Service
                 shipping_method = _shipping_method,
                 shipping_fee = _shipping_fee,
                 product_order = _product_order,
-                created_on_date = DateTime.Today.ToShortDateString(),
-                created_on_time = DateTime.Today.ToShortTimeString()
+                created_on_date = DateTime.Now.ToShortDateString(),
+                created_on_time = DateTime.Now.ToShortTimeString(),
+                total_price = _total_price
             };
             await _collection.InsertOneAsync(document);
         }

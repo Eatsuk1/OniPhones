@@ -328,7 +328,7 @@
             OrderItems.Add(x);
             await CartIService.DeleteCart(item.device_key, Customerid);
         }
-        await OrderIService.AddNewOrder(Customerid, customer.Name, customer.Email,customer.PhoneNumber,payment_method,shipping_address,shipping_method,shipping_fee.ToString(), OrderItems);
+        await OrderIService.AddNewOrder(Customerid, customer.Name, customer.Email,customer.PhoneNumber,payment_method,shipping_address,shipping_method,shipping_fee, OrderItems, subtotal+shipping_fee);
     }
 
     public int GetSubTotalPrice()

@@ -34,12 +34,12 @@
                        @* For each để hiện các đơn hàng*@
                        @foreach(var order in OrderHis)
                        {
-      <div class="history__order_list-items">                      
+                        <div class="history__order_list-items">                      
                             <button class="btn history__order_header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                                 <div class="c-3">Mã online đơn 1</div>
                                 <div class="c-3">Đang xác nhận</div>
                                 <div class="c-3">@order.created_on_date</div>
-                                <div class="c-3">@(subtotal + shipping_fee)</div>
+                                <div class="c-3">@(order.total_price)đ</div>
                             </button>
                             <div class="collapse" id="collapseExample1">
                                     <div class="card card-body">
@@ -72,19 +72,20 @@
                                                         <p>@GetSmartphone(item.device_key).device_name</p>
                                                     </div>
                                                     <div class="paymentProduct-info-price">
-                                                        <p>@item.sub_price</p>
+                                                        <p>@(item.sub_price)đ</p>
                                                     </div>
                                                 </div>
 				                            }
-                                            @*<div class="paymentProduct-price">
+                                            <div class="paymentProduct-price">
                                                 <div class="paymentProduct-price-box">
                                                     <div class="paymentProduct-price-content">
                                                         <p style="margin-left: 10px;">Tạm tính</p>
                                                     </div>
                                                     <div class="paymentProduct-price-pay">
-                                                        <span>@(subtotal)đ </span>
+                                                 
+                                                        <span>@(order.total_price-order.shipping_fee)đ </span>
                                                     </div>
-                                                </div>*@
+                                                </div>
 
                                                 <div class="paymentProduct-price-box">
                                                     <div class="paymentProduct-price-content">
@@ -93,7 +94,7 @@
                                                     <div class="paymentProduct-price-pay">
 							                            
 							                            
-							                                <span>@order.shipping_fee</span>
+							                                <span>@(order.shipping_fee)đ</span>
 							                            
                                                     </div>
                                                 </div>
@@ -103,7 +104,7 @@
 							                            <p style=" margin-left: 10px;">Tổng cộng</p>
 						                            </div>
 						                            <div class="paymentProduct-totalprice-price">
-							                            <span>@(subtotal + shipping_fee)đ</span>
+							                            <span>@(order.total_price)đ</span>
 						                            </div>
 					                            </div>
 				                            </div>
@@ -111,19 +112,10 @@
 
                                     </div>
                             </div>
-                            
+                         </div>
                          
                        
-                        <div class="history__order_list-items">                      
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        Button with data-bs-target
-                            </button>
-                            <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant TRIGGER.
-                                    </div>
-                            </div>
-                        </div>
+                        
                         }
                     </div>
                 </div>
@@ -139,11 +131,8 @@
 
     public string Customerid { get; set; }
 
-    public int subtotal { get; set; }
-
     public string shipping_method { get; set; }
 
-    public int shipping_fee { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
