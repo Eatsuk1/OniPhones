@@ -174,12 +174,13 @@ contents {
     padding: 12px 0 4px 0;
 }
 
-.section2_Select {
-    padding-bottom: 20px;
+.section2_SelectVersion {
+    padding-bottom: 10px;
     justify-content: space-evenly;
 }
-
 .section2_SelectColor {
+    padding-bottom: 20px;
+    justify-content: space-evenly;
 }
 
 .section2_selectBox1,
