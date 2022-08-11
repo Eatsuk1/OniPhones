@@ -24,7 +24,7 @@
                         <div class="block-result__header">
                             <h1>
                                 "Tìm thấy "
-                                <strong>@getcount()</strong>
+                                <strong>@smartphone.Count()</strong>
                                 " sản phẩm cho từ khóa"
                                 <strong>'@key'</strong>
                             </h1>
@@ -47,8 +47,8 @@
                             
                                     <div class="box-list-filter">
                                         <div class="list-filter">
-                                            <BSButton Color="BSColor.Light">Giá cao</BSButton>
-                                            <BSButton Color="BSColor.Light">Giá thấp</BSButton>                              
+                                            <BSButton Color="BSColor.Light" OnClick="@DecSmartphone">Giá cao</BSButton>
+                                            <BSButton Color="BSColor.Light" OnClick="@IncSmartphone">Giá thấp</BSButton>                              
                                         </div>
                                     </div>                            
                                 </div>
@@ -113,21 +113,17 @@
         smartphone = ProductIService.GetSmartphonesFilter(key);
     }
 
-    //public List<Smartphone> GetSmartphoneSort(){
-    // 
-    // }
 
-    public int count { get; set;  }
+    private void IncSmartphone()
+    {
+        smartphone = smartphone.OrderBy(device => device.default_price).ToList();
 
-    private int getcount (){
-        foreach(var device in smartphone) {
-            count++;
+    }
 
-        }
-        return count;
-    }                       
-                                        
-                                   
+    private void DecSmartphone()
+    {
+        smartphone = smartphone.OrderByDescending(device => device.default_price).ToList();
+    }
 
 
 }
