@@ -12,6 +12,7 @@
 @inject NavigationManager navigationManager
 @inject SubHeaderService SubHeaderIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JS
 
 <!-- subHeader -->
 <div id="subheader">
@@ -77,30 +78,24 @@
                 
             <!-- Chon bo nho -->
             <h5>Chọn dung lượng</h5>
-            <div class="row section2_SelectVersion">
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <p value="512">512<span>GB</span></p>
-                </BSButton>
-              
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <p value="256">256<span>GB</span></p>
-                </BSButton>
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <p value="128">128<span>GB</span></p>
-                </BSButton>
+            <div class="row section2_Select">
+                @foreach (var item in smartphone.storage_version)
+                {
+                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_=>GetStorage(item))">
+                        <span>@item</span>
+                    </BSButton>
+                }
             </div>
-               
             <!-- Chon mau -->
             <h5>Chọn màu</h5>
-            <div class="row section2_SelectColor">
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"></div>
-                    <span>Bạc</span>
-                </BSButton>
-                <BSButton Color="BSColor.Danger" IsOutlined="true">
-                    <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/ip13-pro-black.jpg');"></div>
-                    <span>Đen</span>
-                </BSButton>
+            <div class="row section2_Select">
+                @foreach (var color in smartphone.colors)
+                {
+                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_ => GetColor(color))">
+                        <div class="selectColor" @*style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"*@></div>
+                        <span>@color</span>
+                    </BSButton>
+                }
             </div>
             <!--Nut mua --!>
             <div class=buyBtn>
@@ -208,12 +203,15 @@
     [Parameter]
     public string device_key { get; set; }
 
-    [Parameter]
     public string Customerid { get; set; }
 
-    Smartphone smartphone = new Smartphone();
+    public string storage_version { get; set; }
 
-    SubHeader subheader = new SubHeader();
+    public string color_selected { get; set; }
+
+    Smartphone smartphone = new();
+
+    SubHeader subheader = new();
 
 
     protected override async Task OnInitializedAsync()
@@ -235,13 +233,13 @@
         {
             if (Customerid != null)
             {
-                if (CartIService.CheckDup(device_key, Customerid))
+                if (CartIService.CheckDup(device_key, Customerid, storage_version, color_selected))
                 {
                     navigationManager.NavigateTo($"/Cart");
                 }
                 else
                 {
-                    await CartIService.AddtoCart(device_key, Customerid, 1);
+                    await CartIService.AddtoCart(device_key, Customerid, 1, storage_version, color_selected);
                     navigationManager.NavigateTo($"/Cart");
                 }
             }
@@ -253,6 +251,15 @@
         catch (Exception ex) { }
     }
 
+    public void GetColor(string color)
+    {
+        color_selected = color;
+    }
+
+    public void GetStorage(string storage_ver)
+    {
+        storage_version = storage_ver;
+    }
 
     public async Task GetClaims()
     {

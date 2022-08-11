@@ -2,13 +2,10 @@
 @using DoAn1.Data
 @using System.Security.Claims
 @using BlazorStrap
-
-@inject DoAn1.Service.CustomerService CustomerIService
-@layout MainLayout1
-@inject AuthenticationStateProvider AuthenticationStateProvider
-
 @using DoAn1.Pages
-
+@inject DoAn1.Service.CustomerService CustomerIService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@layout MainLayout1
 
 <div class="col c-10 mt-16">
     <div class="customer-address">
@@ -19,17 +16,20 @@
 	        @*chỗ này để foreach load địa chỉ*@
 	        <div class="address-display-showtime">
                 <div class="address-display">
-                    <div class="address-display-list">
-                        <div class="list-item-text"> 
-							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
-						</div>
-						<div class="list-item-button">
-							<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic; ">
+					@foreach(var address in Cus_Address)
+					{
+						<div class="address-display-list">
+							<div class="list-item-text"> 
+								<p>@address</p> 
+							</div>
+							<div class="list-item-button">
+								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic; ">
 								Sửa địa chỉ
-							</button>
-						</div>
+								</button>
+							</div>
 					</div>
-					 <div class="address-display-list">
+					}
+					 @*<div class="address-display-list">
                         <div class="list-item-text"> 
 							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
 						</div>
@@ -48,7 +48,7 @@
 								Sửa địa chỉ
 							</button>
 						</div>
-					</div>
+					</div>*@
                 </div>
 			</div>
             <!-- Button trigger modal -->
@@ -159,17 +159,13 @@
   </div>
 </div>
 
- @*   @foreach(string address in Cus_Address.address)
-{
-    <p>@address</p>
-    
-}*@
 
 
 
 
 
-@*@code {
+
+@code {
 
 	public List<string> Cus_Address{ get; set; }
 
@@ -207,4 +203,3 @@
 	}
 
 }
-*@

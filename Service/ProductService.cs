@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DoAn1.Service
 {
@@ -17,7 +18,6 @@ namespace DoAn1.Service
 
         public List<Smartphone> GetSmartphones()
         {
-
             return _collection.Find(_ => true).Limit(5).ToList();
         }
 

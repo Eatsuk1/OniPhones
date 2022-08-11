@@ -23,11 +23,13 @@ namespace DoAn1.Models
 
         public string user_id { get; set; }
 
-        public string shipping_fee { get; set; }
+        public int shipping_fee { get; set; }
 
         public string created_on_date { get; set; }
 
         public string created_on_time { get; set; }
+
+        public int total_price { get; set; }
 
         public List<product_order> product_order { get; set; }
     }
@@ -36,8 +38,12 @@ namespace DoAn1.Models
     {
         public string device_key { get; set; }
         
-        public string quantity { get; set; }
+        public int quantity { get; set; }
 
-        public string sub_price { get; set; }
+        public int sub_price { get; set; }
+
+        public string storage_version { get; set; }
+
+        public string color_selected { get; set; }
     }
 }

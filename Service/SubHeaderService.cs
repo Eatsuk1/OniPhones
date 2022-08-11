@@ -1,7 +1,7 @@
 ﻿using DoAn1.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-
+using System.Collections.Generic;
 
 namespace DoAn1.Service
 {
@@ -13,6 +13,11 @@ namespace DoAn1.Service
         public SubHeaderService()
         {
             _collection = db.GetConnection().GetCollection<SubHeader>("category");
+        }
+
+        public List<SubHeader> GetBrandOnly()
+        {
+            return _collection.Find(_ => true).ToList();
         }
 
         public SubHeader GetSubHeader(string _device_key)
