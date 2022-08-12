@@ -85,6 +85,15 @@
     margin-top: 20px;
 }
 
+.product_info a{
+    color: black;
+}
+
+.product_info a:hover{
+    text-decoration: none;
+}
+
+
 .product_info-container {
     padding: 10px;
     margin: 0 20px;

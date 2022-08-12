@@ -194,7 +194,7 @@ html {
     /*overflow-x: hidden;*/
 }
 
-    .left_menu a, p {
+    .left_menu a, left_menu p {
         padding: 6px 8px 6px 16px;
         text-decoration: none;
         font-size: 16px;
@@ -212,7 +212,7 @@ html {
         font-weight: 600;
     }
 
-        .left_menu a:hover, p:hover {
+        .left_menu a:hover, .left_menu p:hover {
             color: #f1f1f1;
         }
 
@@ -351,7 +351,7 @@ a.box-title_title {
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);
 }
 
-.item-product_name a, p {
+.item-product_name a, .item-product_name p {
     text-decoration: none;
 }
 
