@@ -127,8 +127,13 @@
         margin: 0 !important;
     }
 
+    .contentSection__item--btn a {
+        text-decoration: none;
+        color: var(--color-1);
+    }
+
     .contentSection__item--btn:hover {
         box-shadow: 4px 8px 8px #ccc;
         cursor: pointer;
         opacity: 0.6;
-}
+    }

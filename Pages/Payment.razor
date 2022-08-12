@@ -173,14 +173,18 @@
 				@foreach (var item in CartItems)
 				{
 				    <div class="paymentProduct-info">
-                        <div class="paymentProduct-info-img"
-                             style="background-image: url('@GetSmartphone(item.device_key).device_image'); background-size: contain;">
-                            <span>@item.quantity</span>
-                        </div>
-                        <div class="paymentProduct-info-content">
-                            <p>@GetSmartphone(item.device_key).device_name</p>
-                        </div>
-                        <div class="paymentProduct-info-price">
+                        <div class="paymentProduct-info-version c-9-6">
+							<div class="paymentProduct-info-img c-3"
+								 style="background-image: url('@GetSmartphone(item.device_key).device_image'); background-size: contain;">
+								<span>@item.quantity</span>
+							</div>
+							<div class="paymentProduct-info-content c-9">
+								<p>@GetSmartphone(item.device_key).device_name</p>
+								<p>@item.color_selected</p>
+								<p>@item.storage_version</p>
+							</div>
+						</div>
+                        <div class="paymentProduct-info-price c-2-4">
                             <p>@(item.quantity)đ</p>
                         </div>
                     </div>
@@ -199,7 +203,7 @@
                     </div>
 
                     <div class="paymentProduct-price-box">
-                        <div class="paymentProduct-price-content">
+                        <div class="paymentProduct-price-content" style="padding-left: 12px;">
                             <p>Phí vận chuyển</p>
                         </div>
                         <div class="paymentProduct-price-pay">

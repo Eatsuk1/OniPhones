@@ -8,7 +8,7 @@
 <div class="col c-10 mt-16">
     <div class="customer-address">
         <div class="address">
-	        <h3>Địa chỉ khách hàng</h3>
+	        <p>Địa chỉ khách hàng</p>
         </div>
         <form class="address-details">
 	        @*chỗ này để foreach load địa chỉ*@
@@ -17,42 +17,26 @@
 					@foreach(var address in Cus_Address)
 					{
 						<div class="address-display-list">
-							<div class="list-item-text"> 
+							<div class="list-item-text c-8"> 
 								<p>@address</p> 
 							</div>
 							<div class="list-item-button">
 								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic;" @onclick="_=>GetDetailAddress(address)">
 								Sửa địa chỉ
 								</button>
-							</div>
-					</div>
+								<button style=" font-style: italic; color: #DC3545;">Xóa</button>
+								</div>
+							
+						</div>
 					}
-					 @*<div class="address-display-list">
-                        <div class="list-item-text"> 
-							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
-						</div>
-						<div class="list-item-button">
-							<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic; ">
-								Sửa địa chỉ
-							</button>
-						</div>
-					</div>
-					 <div class="address-display-list">
-                        <div class="list-item-text"> 
-							<p>01 Đại Cồ Việt - Bách Khoa - Hai Bà Trưng - Hà Nội </p> 
-						</div>
-						<div class="list-item-button">
-							<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic;" >
-								Sửa địa chỉ
-							</button>
-						</div>
-					</div>*@
                 </div>
 			</div>
             <!-- Button trigger modal -->
-			<BSButton Color="BSColor.Danger" class="btn add-address" data-bs-toggle="modal" data-bs-target="#AddModal">
-				Thêm địa chỉ
-			</BSButton>
+			<div class="address-add">
+				<BSButton Color="BSColor.Danger" class="btn add-address" data-bs-toggle="modal" data-bs-target="#AddModal">
+					Thêm địa chỉ
+				</BSButton>
+			</div>
         </form>
     </div>
 </div>

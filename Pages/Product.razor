@@ -42,48 +42,47 @@
 </div>
 
 <!-- Content -->
-<div id="contents"
-<div class="grid wide">
-    <div class="row">
-        <!-- section1 -->
-        <div class="col c-4 section1">
-            <div class="section1__img">
-                <div class="section1__img---image" style=" background-image: url('@smartphone.pictures.ElementAt(0)');"></div>
-            </div>
+<div id="contents">
+    <div class="grid wide">
+        <div class="row">
+            <!-- section1 -->
+            <div class="col c-4 section1">
+                <div class="section1__img">
+                    <div class="section1__img---image" style=" background-image: url('@smartphone.pictures.ElementAt(0)');"></div>
+                </div>
                 
-            <div class="row section1__list">
+                <div class="row section1__list">
 
-                @foreach (var picture in @smartphone.pictures.Take(5))
-                {
-                    <div class="col c-2 section1__list--item"
-                         style="background-image: url('@picture');"></div>
+                    @foreach (var picture in @smartphone.pictures.Take(5))
+                    {
+                        <div class="col c-2 section1__list--item"
+                             style="background-image: url('@picture');"></div>
                                                                        
-                }
-            </div >
-            <div class="section1__infoProduct">
-                <h4>Thông tin sản phẩm</h4>
-                <p><img src="./assets/imgs/svg/smartphone.svg" alt=""/>Máy mới 100%,chính hãng</p>
-                <br/>
-                <p>
-                    <img src="./assets/imgs/svg/shield.svg" alt=""/>1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng
-                </p>
+                    }
+                </div >
+                <div class="section1__infoProduct">
+                    <h4>Thông tin sản phẩm</h4>
+                    <p><img src="./assets/imgs/svg/smartphone.svg" alt=""/>Máy mới 100%,chính hãng</p>
+                    <br/>
+                    <p>
+                        <img src="./assets/imgs/svg/shield.svg" alt=""/>1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng
+                    </p>
+                </div>
             </div>
-        </div>
-        <!-- section2 -->
-        <div class="col c-4 section2">
-            <div class="section2_Price">
-                <p style="width:30%">Trả góp 0%</p>
-                <h3>@smartphone.default_price</h3>
-            </div>
+            <!-- section2 -->
+            <div class="col c-4 section2">
+                <div class="section2_Price">
+                    <p style="width:30%">Trả góp 0%</p>
+                    <h3>@smartphone.default_price</h3>
+                </div>
                 
             <!-- Chon bo nho -->
             <h5>Chọn dung lượng</h5>
             <div class="row section2_Select">
                 @foreach (var item in smartphone.storage_version)
                 {
-                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_=>GetStorage(item))">
-                        <span>@item</span>
-                    </BSButton>
+                    <input type="radio" name="test1" id="@item" @onclick="@(_ => GetStorage(item))">
+                    <label for="@item">@item</label>
                 }
             </div>
             <!-- Chon mau -->
@@ -91,11 +90,9 @@
             <div class="row section2_Select">
                 @foreach (var color in smartphone.colors)
                 {
-                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_ => GetColor(color))">
-                        <div class="selectColor" @*style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"*@>
-                        </div>
-                        <span>@color</span>
-                    </BSButton>
+                    <input type="radio" name="test2" id="@color" @onclick="@(_ => GetColor(color))">
+                    <label for="@color">@color</label>
+                    
                 }
             </div>
             <!--Nut mua --!>
@@ -195,7 +192,6 @@
         </div>
     </div>
 </div>
-
 
 
 
