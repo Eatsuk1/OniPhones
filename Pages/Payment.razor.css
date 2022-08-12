@@ -1,7 +1,7 @@
 ﻿/* payment header */
-.payment-page {
-    margin: 80px auto;
-    width: 60%;
+
+.payment-page{
+    width: 100%;
 }
 
 .payment-header {
@@ -53,7 +53,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-right: 1px solid #ccc;
 }
 
 .paymentInfo-shipinfo {
@@ -102,6 +101,8 @@
     background-color: rgb(231, 226, 226);
     padding: 20px 0px 20px 50px;
     justify-content: center;
+    display:flex;
+    flex-direction: column;
 }
 
     .paymentInfo-method input {
@@ -120,7 +121,9 @@
     padding: 4px 12px;
     border-radius: 1em;
     background-color: #ccc;
+    display: flex;
 }
+
 
     .buy--button a {
         text-align: center;
@@ -138,11 +141,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 20px;
 }
 
     .paymentProduct h3 {
         padding-top: 20px;
         padding-bottom: 10px;
+        margin-left: 20px;
     }
 
 .paymentProduct-info {
@@ -173,12 +179,18 @@
         color: #fff;
     }
 
+.paymentProduct-info-version{
+    display: flex;
+    justify-content:space-evenly;
+}
+
 .paymentProduct-info-content {
-    width: 40%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
     opacity: 0.8;
+    font-weight: 700;
+    padding-left: 20px;
 }
 
 .paymentProduct-info-price {
@@ -223,10 +235,37 @@
     opacity: 0.8;
 }
 
-.paymentProduct-totalprice-price {
-    width: 50%;
-    text-align: right;
-    padding-right: 30px;
-    font-size: x-large;
-    opacity: 0.8;
+    .paymentProduct-totalprice-price {
+        width: 50%;
+        text-align: right;
+        padding-right: 30px;
+        font-size: x-large;
+        opacity: 0.8;
+    }
+
+
+.modal-header button {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+.modal-header button{
+    border: none;
+    top:16px;
+    opacity: 1;
+    background-color: white;
+}
+.btn-close span{
+    font-weight: 700;
+}
+
+.address-list label {
+    display: block;
+    word-wrap: break-word;
+    white-space: normal;
+    padding-left:5px;
 }

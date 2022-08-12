@@ -44,7 +44,7 @@
     <!-- Cart items  -->
     <table>
         <tr>
-            <th>Product</th>
+            <th style="padding-left: 20px;">Product</th>
             <th class="cart-page-quantity">Quantity</th>
             <th class="cart-page-subtotal">Subtotal</th>
             <th class="close-button"></th>
@@ -63,6 +63,8 @@
                     </div>
                     <div>
                         <h3>@GetSmartphone(item.device_key).device_name</h3>
+                        <p>@item.color_selected</p>
+                        <p>@item.storage_version</p>
                     </div>
                 </div>
             </td>
@@ -73,7 +75,7 @@
                 @(item.quantity)đ
             </td>
             <td class="close-button">                
-                    <img src="./assets/imgs/svg/trash-can-solid.svg" alt="" @onclick="_ => DeleteCart(item.device_key, Customerid)" />                   
+                <input type="image" src="./assets/imgs/svg/trash-can-solid.svg" alt="" @onclick="_ => DeleteCart(item.device_key, Customerid)" >
             </td>
              
         </tr>
@@ -124,20 +126,14 @@
     public int subtotal { get; set; }
     public int finalsubtotal { get; set; }
 
-    Smartphone smartphone = new Smartphone();
 
 
     protected override async Task OnInitializedAsync()
-    {
-        GetCart();
+    { 
         await GetClaims();
-    }
-
-    public void GetCart()
-    {
-        _ = GetClaims();
         CartItems = CartIService.GetCart(Customerid);
     }
+
 
     public int GetTotalPrice()
     {
@@ -171,7 +167,7 @@
 
     public Smartphone GetSmartphone(string _device_key)
     {
-       return smartphone = ProductIService.GetSpecifySmartphone(_device_key);
+       return ProductIService.GetSpecifySmartphone(_device_key);
     }
 
     

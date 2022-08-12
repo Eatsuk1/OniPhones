@@ -13,14 +13,14 @@
                     <div class="sideNav">
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/home.svg" alt="">
-                            <a class = "nav-link"  href="@customerid">
+                            <a class = "nav-link"  href="/Account/Main">
                             <span aria-hidden = "true"></span> Trang chủ
                             
                             </a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/clock.svg" alt="">
-                            <a class="nav-link" href="/@customerid/lichsumuahang">
+                            <a class="nav-link" href="/Account/Order">
                             <span aria-hidden="true"></span>Lịch sử mua hàng</a>
                         </div>
                         <div class="sideNav__item">
@@ -33,22 +33,14 @@
                             
                         </div>                        
                         <div class="sideNav__item">
-                            <img src="./assets/imgs/svg/gift.svg" alt="">
-                            <a href="">Ưu đãi của bạn</a>
-                        </div>
-                        <div class="sideNav__item">
-                            <img src="./assets/imgs/svg/wallet.png" alt="">
-                            <a href="">Tích lũy</a>
-                        </div>
-                        <div class="sideNav__item">
                             <img src="./assets/imgs/svg/user_solid.svg" alt="">
-                            <a class = "nav-link" href ="/@customerid/taikhoancuatoi" >
+                            <a class = "nav-link" href ="/Account/Edit" >
 
                              <span aria-hidden = "true"></span>Tài khoản của bạn</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/edit.svg" alt="">
-                            <a class = "nav-link" href ="/@customerid/phanhoi" >
+                            <a class = "nav-link" href ="/Account/Report" >
 
                              <span aria-hidden = "true"></span>
                             Góp ý - Phản hồi</a>
@@ -70,14 +62,12 @@
    
 
 @code {
-    Customer customer = new Customer();
+    
 
 
 
 
 
-    [Parameter]
-    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
 
    
 }

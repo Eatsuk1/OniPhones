@@ -19,7 +19,7 @@
                     <div class="header__searchbar">
                         <img src="./assets/imgs/svg/magnifying-glass-solid.svg" alt="">
                         <EditForm Model="_Search" OnValidSubmit="NavigateToComponent" >
-                        <input @onkeydown="a" type="text" placeholder="Bạn cần tìm gì?" @bind="_Search._search">
+                        <input @onkeydown="a" type="text" placeholder="Bạn cần tìm gì?" @bind="_Search._search" style="width: 550px;">
                         </EditForm>
 
                     </div>
@@ -44,29 +44,39 @@
                         <img src="./assets/imgs/svg/shopping-cart.svg" alt="">
                     </div>
                     <div class="header__section--sub">
-                        <a href="">Giỏ hàng</a>
+                        <a href="/Cart">Giỏ hàng</a>
                     </div>
                     </a>
                 </div>
+                <AuthorizeView>
+                    <Authorized>
                 <div class="header__section col c-1">
+                    <a href="Account/Main">
 	                <div class="header__section--item">
 		                <img src="./assets/imgs/svg/user.svg" alt="">
 	                </div>
-	                <AuthorizeView>
-		                <Authorized>
+	                
 			                <div class="header__section--sub">
 				                <a href="Account/Main">Cmember</a>
 			                </div>
-			               
-		                </Authorized>
+                            </a>
+                            </div>
+			              </Authorized> 
 		                <NotAuthorized>
-			                <div class="header__section--sub">
-				                <a href="Account/Login">Cmember</a>
-			                </div>
-		                </NotAuthorized>
-	                </AuthorizeView>
+                            <div class="header__section col c-1">
+                                <a href="Account/Login">
+	                            <div class="header__section--item">
+		                            <img src="./assets/imgs/svg/user.svg" alt="">
+	                            </div>
 	                
-                </div>
+			                    <div class="header__section--sub">
+				                    <a href="Account/Login">Cmember</a>
+			                    </div>
+                                </a>
+                            </div>
+		                </NotAuthorized>
+</AuthorizeView>
+
 
             </div>
         </div>

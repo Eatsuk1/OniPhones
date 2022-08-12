@@ -164,8 +164,6 @@ a.box-title_title {
         cursor: pointer;
         outline: none;
         width: 100%;
-        padding: 8px;
-        margin-bottom: 6px;
         font-weight: 600;
     }
 }
@@ -176,14 +174,10 @@ a.box-title_title {
 
 .product_info-container {
     width: auto;
-    padding: 10px;
     margin-right: 10px;
     height: 320px;
     border-radius: 15px;
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);
 }
 
-/*.item-product_name:hover {
-    text-decoration: none;
-    color: black
-}*/
+

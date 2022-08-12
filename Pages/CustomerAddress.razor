@@ -1,30 +1,163 @@
 ﻿@page "/Account/Address"
-@using DoAn1.Data
 @using System.Security.Claims
-@inject DoAn1.Service.CustomerService CustomerIService
-@layout MainLayout1
+@inject Service.CustomerService CustomerIService
+@inject Service.PaymentService PaymentIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@using DoAn1.Pages
+@layout MainLayout1
+
+<div class="col c-10 mt-16">
+    <div class="customer-address">
+        <div class="address">
+	        <p>Địa chỉ khách hàng</p>
+        </div>
+        <form class="address-details">
+	        @*chỗ này để foreach load địa chỉ*@
+	        <div class="address-display-showtime">
+                <div class="address-display">
+					@foreach(var address in Cus_Address)
+					{
+						<div class="address-display-list">
+							<div class="list-item-text c-8"> 
+								<p>@address</p> 
+							</div>
+							<div class="list-item-button">
+								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic;" @onclick="_=>GetDetailAddress(address)">
+								Sửa địa chỉ
+								</button>
+								<button style=" font-style: italic; color: #DC3545;" @onclick="DeleteAddress">Xóa</button>
+								</div>
+							
+						</div>
+					}
+                </div>
+			</div>
+            <!-- Button trigger modal -->
+			<div class="address-add">
+				<BSButton Color="BSColor.Danger" class="btn add-address" data-bs-toggle="modal" data-bs-target="#AddModal">
+					Thêm địa chỉ
+				</BSButton>
+			</div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="fixModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sửa địa chỉ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			<span>x</span>
+		</button>
+      </div>
+        <div class="modal-body">
+          <div class="addform-section">
+			<label>Địa chỉ nhận hàng</label>
+			<div class="input-item">
+				<input type="text" placeholder="Địa chỉ nhận hàng" @bind-value = "detail_address" style="width: -webkit-fill-available;">
+			</div>
+		  </div>
+		  <input class="billing_address_1" name="" type="hidden" value="">
+		  <input class="billing_address_2" name="" type="hidden" value="">
+		  <input class="billing_address_3" name="" type="hidden" value="">
+		  <input class="billing_address_4" name="" type="hidden" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="RestartInfo">Đóng</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="UpdateAddress">Lưu lại</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm địa chỉ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			<span>x</span>
+		</button>
+      </div>
+      <div class="modal-body">
+		  <div class="addform-section">
+			  <label for="input-item"> Tỉnh/Thành phố</label>
+				  <select name="input-item" id="input-item" required="" @bind="selectedcity" @onclick="GetDistrict" >
+					  <option value="">Tỉnh / Thành phố</option>
+                      @foreach(var item in listcity){
+                          <option value="@item">@item</option>
+                      }
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			  <label for="input-item"> Quận/Huyện</label>
+				  <select name="input-item" id="input-item" required="" @bind="selected_district" @onclick="GetWard">
+					  <option value="">Quận / Huyện</option>
+                      @if (selectedcity != null)
+                      {
+                          @foreach (var item in listdistrict)
+                          {
+                              <option value="@item">@item</option>
+                          }
+                      }
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			  <label for="input-item"> Phường/Xã</label>
+				  <select name="input-item" id="input-item" required="" @bind="selectedward">
+					  <option value="">Phường / Xã</option>
+                      @if (selected_district != null)
+                      {
+                          @foreach (var item in listward)
+                          {
+                              <option value="@item">@item</option>
+                          }
+                      }
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			<label>Địa chỉ nhận hàng</label>
+			<div class="input-item">
+				<input type="text" placeholder="Địa chỉ nhận hàng" @bind-value = "detail_address">
+			</div>
+		  </div>
+		  <input class="billing_address_1" name="" type="hidden" value="">
+		  <input class="billing_address_2" name="" type="hidden" value="">
+		  <input class="billing_address_3" name="" type="hidden" value="">
+		  <input class="billing_address_4" name="" type="hidden" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="RestartInfo">Đóng</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="AddNewAddress">Lưu lại</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-
-<h3>CustomerAddress</h3>
-
-
-    @foreach(string address in Cus_Address.address)
-{
-    <p>@address</p>
-    
-}
 
 
 
 
 
 @code {
-    Customer Cus_Address = new Customer();
 
+	public List<string> Cus_Address{ get; set; }
 
+    public List<string> listcity { get; set; }
+
+    public string selectedcity { get; set; }
+
+    public List<string> listdistrict { get; set; }
+
+    public string selected_district { get; set; }
+
+    public List<string> listward { get; set; }
+
+    public string selectedward { get; set; }
+
+    public string detail_address { get; set; }
+    public string old_address { get; set; }
 
     [Parameter]
     public string Customerid { get; set; }
@@ -32,16 +165,67 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await GetClaims();
         GetCustomerAddress();
+        listcity = PaymentIService.GetCity();
     }
-
-
 
     private void GetCustomerAddress()
     {
         
         _ = GetClaims();
         Cus_Address = CustomerIService.GetCustomerAddress(Customerid);
+    }
+
+    public void GetDetailAddress(string _address)
+    {
+        detail_address = _address;
+        old_address = _address;
+    }
+
+    public void GetDistrict()
+    {
+        listdistrict = PaymentIService.GetDistrict(selectedcity);
+        if (selectedcity == "")
+        {
+            listdistrict.Clear();
+            listward.Clear();
+        }
+    }
+
+    public void GetWard()
+    {
+        listward = PaymentIService.GetWard(selected_district);
+        if (selected_district == "")
+        {
+            listward.Clear();
+        }
+    }
+
+    public void RestartInfo()
+    {
+        selected_district = selectedcity = selectedward = detail_address = "";
+    }
+
+    public async Task AddNewAddress()
+    {
+        await CustomerIService.AddNewAddress(selectedcity, selected_district, selectedward, detail_address, Customerid);
+        RestartInfo();
+        await InvokeAsync(OnInitializedAsync);
+    }
+
+    public async Task UpdateAddress()
+    {
+        await CustomerIService.UpdateAddress(old_address, detail_address, Customerid);
+        detail_address = "";
+        await InvokeAsync(OnInitializedAsync);
+    }
+
+    public async Task DeleteAddress()
+    {
+        await CustomerIService.DeleteAddress(detail_address, Customerid);
+        detail_address = "";
+        await InvokeAsync(OnInitializedAsync);
     }
 
     public async Task GetClaims()

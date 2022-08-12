@@ -1,13 +1,9 @@
 ﻿@page "/{device_key}"
 
 @using DoAn1.Data
-@using DoAn1.Shared
 @using DoAn1.Service
 @using DoAn1.Models
-@using Microsoft.AspNetCore.Http
 @using System.Security.Claims
-@using Microsoft.AspNetCore.Identity
-@using Microsoft.AspNetCore.Components.Authorization
 
 
 @layout MainLayout0
@@ -16,10 +12,11 @@
 @inject NavigationManager navigationManager
 @inject SubHeaderService SubHeaderIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JS
 
 <!-- subHeader -->
 <div id="subheader">
-    <div class="grid wide"
+    <div class="grid wide">
         <div class="row subheader__list">
             <a href=""><img src="./assets/imgs/svg/home-red.svg" alt="" />Trang chủ</a>
             <a href="">@subheader.Device_Type</a>
@@ -29,7 +26,7 @@
                 <a href="">@subheader.Series</a>
             }
             <div class="subheader__list_add">
-            <a href="">@smartphone.device_name</a>
+                <a href="">@smartphone.device_name</a>
             </div>
         </div>
     </div>
@@ -37,7 +34,7 @@
 
 <!-- ProductName -->
 <div id="productName">
-    <div class="grid wide"
+    <div class="grid wide">
         <div class="row">
             <h4>@smartphone.device_name</h4>
         </div>
@@ -45,7 +42,7 @@
 </div>
 
 <!-- Content -->
-<div id="contents"
+<div id="contents">
     <div class="grid wide">
         <div class="row">
             <!-- section1 -->
@@ -62,159 +59,156 @@
                              style="background-image: url('@picture');"></div>
                                                                        
                     }
-                    </div >
-                    <div class="section1__infoProduct">
-                        <h4>Thông tin sản phẩm</h4>
-                        <p><img src="./assets/imgs/svg/smartphone.svg" alt=""/>Máy mới 100%,chính hãng</p>
-                        <br/>
-                        <p>
-                            <img src="./assets/imgs/svg/shield.svg" alt=""/>1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng
-                        </p>
-                    </div>
+                </div >
+                <div class="section1__infoProduct">
+                    <h4>Thông tin sản phẩm</h4>
+                    <p><img src="./assets/imgs/svg/smartphone.svg" alt=""/>Máy mới 100%,chính hãng</p>
+                    <br/>
+                    <p>
+                        <img src="./assets/imgs/svg/shield.svg" alt=""/>1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng
+                    </p>
                 </div>
+            </div>
             <!-- section2 -->
             <div class="col c-4 section2">
                 <div class="section2_Price">
-                     <p style="width:30%">Trả góp 0%</p>
-                     <h3>@smartphone.default_price</h3>
+                    <p style="width:30%">Trả góp 0%</p>
+                    <h3>@smartphone.default_price</h3>
                 </div>
                 
-                <!-- Chon bo nho -->
-                <h5>Chọn dung lượng</h5>
-                <div class="row section2_Select">
-                    <BSButton Color="BSColor.Danger" IsOutlined="true">
-                        <p value="512">512<span>GB</span></p>
-                    </BSButton>
-              
-                    <BSButton Color="BSColor.Danger" IsOutlined="true">
-                        <p value="256">256<span>GB</span></p>
-                    </BSButton>
-                    <BSButton Color="BSColor.Danger" IsOutlined="true">
-                        <p value="128">128<span>GB</span></p>
-                    </BSButton>
-                </div>
-               
-                <!-- Chon mau -->
-                <h5>Chọn màu</h5>
-                    <div class="row section2_Select">
-                        <BSButton Color="BSColor.Danger" IsOutlined="true">
-                            <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"></div>
-                        <span>Bạc</span>
-                        </BSButton>
-                        <BSButton Color="BSColor.Danger" IsOutlined="true">
-                            <div class="selectColor" style="background-image: url('./assets/imgs/iphone13promax/ip13-pro-black.jpg');"></div>
-                            <span>Đen</span>
-                        </BSButton>
-                    </div>
-                <!--Nut mua --!>
-                <div class=buyBtn>
+            <!-- Chon bo nho -->
+            <h5>Chọn dung lượng</h5>
+            <div class="row section2_Select">
+                @foreach (var item in smartphone.storage_version)
+                {
+                    <input type="radio" name="test1" id="@item" @onclick="@(_ => GetStorage(item))">
+                    <label for="@item">@item</label>
+                }
+            </div>
+            <!-- Chon mau -->
+            <h5>Chọn màu</h5>
+            <div class="row section2_Select">
+                @foreach (var color in smartphone.colors)
+                {
+                    <input type="radio" name="test2" id="@color" @onclick="@(_ => GetColor(color))">
+                    <label for="@color">@color</label>
+                    
+                }
+            </div>
+            <!--Nut mua --!>
+            <div class=buyBtn>
                 <BSButton Color="BSColor.Danger" style="border-radius:20px" OnClick="AddtoCart" >
                     <a style="color:#FFFFFF">
                         <h3>MUA NGAY</h3>
                         <p>(Giao tận nơi hoặc lấy tại cửa hàng</p>
                     </a>
                 </BSButton>
-                </div>
+            </div>
             </div>
             <!-- section3 -->
-                    <div class="col c-4 section3">
-                        <h4>Thông số kỹ thuật</h4>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Kích thước màn hình</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.display_size inch</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Camera sau</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.camera</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Chất lượng video</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.video</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Dung lượng RAM</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.ram</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Chipset</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.chipset</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Dung lượng pin</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.battery</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Loại pin</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.batteryType</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Trọng lượng</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.body</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Hệ điều hành</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.os_type</p>
-                            </div>
-                        </div>
-                        <div class="row section3__List">
-                            <div class="col c-3">
-                                <p>Bộ nhớ trong</p>
-                            </div>
-                            <div class="col c-7">
-                                <p>@smartphone.storage</p>
-                            </div>
-                        </div>
+            <div class="col c-4 section3">
+                <h4>Thông số kỹ thuật</h4>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Kích thước màn hình</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.display_size inch</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Camera sau</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.camera</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Chất lượng video</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.video</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Dung lượng RAM</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.ram</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Chipset</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.chipset</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Dung lượng pin</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.battery</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Loại pin</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.batteryType</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Trọng lượng</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.body</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Hệ điều hành</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.os_type</p>
+                    </div>
+                </div>
+                <div class="row section3__List">
+                    <div class="col c-3">
+                        <p>Bộ nhớ trong</p>
+                    </div>
+                    <div class="col c-7">
+                        <p>@smartphone.storage</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
 
 
 @code {
     [Parameter]
     public string device_key { get; set; }
 
-    [Parameter]
     public string Customerid { get; set; }
 
-    Smartphone smartphone = new Smartphone();
+    public string storage_version { get; set; }
 
-    SubHeader subheader = new SubHeader();
+    public string color_selected { get; set; }
+
+    Smartphone smartphone = new();
+
+    SubHeader subheader = new();
 
 
     protected override async Task OnInitializedAsync()
@@ -232,31 +226,49 @@
 
     public async Task AddtoCart()
     {
-        if (CartIService.CheckDup(device_key, Customerid))
+        try
         {
-            navigationManager.NavigateTo($"/Cart");
+            if (Customerid != null)
+            {
+                if (CartIService.CheckDup(device_key, Customerid, storage_version, color_selected))
+                {
+                    navigationManager.NavigateTo($"/Cart");
+                }
+                else
+                {
+                    await CartIService.AddtoCart(device_key, Customerid, 1, storage_version, color_selected);
+                    navigationManager.NavigateTo($"/Cart");
+                }
+            }
+            else
+            {
+                navigationManager.NavigateTo($"/Cart");
+            }
         }
-        else
-        {
-            await CartIService.AddtoCart(device_key, Customerid, 1);
-            navigationManager.NavigateTo($"/Cart");
-        } 
+        catch (Exception ex) { }
     }
 
+    public void GetColor(string color)
+    {
+        color_selected = color;
+    }
+
+    public void GetStorage(string storage_ver)
+    {
+        storage_version = storage_ver;
+    }
 
     public async Task GetClaims()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var userClaims = authState.User.Claims;
-        try{
-            if (userClaims != null)
+        try
+        {
+            foreach (var claim in userClaims)
             {
-                foreach (var claim in userClaims)
+                if (claim.Type == ClaimTypes.NameIdentifier)
                 {
-                    if (claim.Type == ClaimTypes.NameIdentifier)
-                    {
-                        Customerid = claim.Value;
-                    }
+                    Customerid = claim.Value;
                 }
             }
         }

@@ -31,16 +31,11 @@ namespace DoAn1.Data
         public List<string> pictures { get; set; }
 
 
-        public Price prices;
+        public List<string> colors { get; set; }
+
+        public List<string> storage_version { get; set; }
 
     }
 
-    public class Price
-    {
-        public string p128GB { get; set; }
-
-        public string p256GB { get; set; }
-
-        public string p512GB { get; set; }
-    }
+    
 }

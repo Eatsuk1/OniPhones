@@ -19,8 +19,6 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.HttpOverrides;
-using Auth0.AspNetCore.Authentication;
 
 
 namespace DoAn1
@@ -49,10 +47,10 @@ namespace DoAn1
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<CustomerService>();
             services.AddScoped<ProductService>();
-            services.AddScoped<Cart>();
-            services.AddScoped<List<Cart>>();
             services.AddScoped<CartService>();
             services.AddScoped<SubHeaderService>();
+            services.AddScoped<PaymentService>();
+            services.AddScoped<OrderService>();
             //services.AddAuthentication().AddGoogle(googleOptions =>
             //{
             //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
@@ -80,7 +78,7 @@ namespace DoAn1
      options.Scope.Add("email");   // <- Optional extra
 
 
-     
+
      options.CallbackPath = new PathString("/callback");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
@@ -89,7 +87,7 @@ namespace DoAn1
          NameClaimType = "name"
      };
 
-   
+
 
      // Add handling of lo
      options.Events = new OpenIdConnectEvents
@@ -118,7 +116,7 @@ namespace DoAn1
  });
 
             services.AddBlazorStrap();
-            
+
 
             //services.AddAuth0WebAppAuthentication(options => {
             //    options.Domain = Configuration["Auth0:Domain"];
@@ -157,9 +155,10 @@ namespace DoAn1
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-            
 
-            app.Use(next => context => {
+
+            app.Use(next => context =>
+            {
                 if (string.Equals(context.Request.Headers["X-Forwarded-Proto"], "https", StringComparison.OrdinalIgnoreCase))
                 {
                     context.Request.Scheme = "https";

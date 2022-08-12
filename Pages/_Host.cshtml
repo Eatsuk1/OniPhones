@@ -12,19 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OniPhones</title>
     <base href="~/" />
+    <link href="YourAssemblyName.styles.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/librarylayout.css"  />
     <link rel="stylesheet" href="./css/site.css"/>
     <link rel="stylesheet" href="./css/responsive.css" />
 @*    <link rel="stylesheet" href="./css/products.css" />
-*@    
+*@   
 
    
     <link href="DoAn1.styles.css" rel="stylesheet">
 </head>
 <body>
     <app>
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
+        <component type="typeof(App)" render-mode="Server"/>
     </app>
     
 
@@ -41,10 +42,32 @@
     </div>*@
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="_content/BlazorStrap/popper.min.js"></script>
     <script src="_content/BlazorStrap/blazorstrap.js"></script>
-<script src="./js/page2.js"></script>
+    <script src="./js/page2.js"></script>
+    <script src="js/Payment.js"></script>
+<script>
+    function getshippingmethod1() {
+        var x = document.getElementById("ship1").value;
+        return x;
+    }
 
+    function getshippingmethod2() {
+        var x = document.getElementById("ship2").value;
+        return x;
+    }
+
+    function getpaymentmethod1() {
+        var x = document.getElementById("cod").value;
+        return x;
+    }
+
+    function getpaymentmethod2() {
+        var x = document.getElementById("online").value;
+        return x;
+    }
+</script>
 
 </body>
 </html>

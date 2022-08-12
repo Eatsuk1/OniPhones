@@ -1,22 +1,23 @@
-﻿using DoAn1.Data;
-using DoAn1.Models;
-using MongoDB.Driver;
+﻿using DoAn1.Models;
 using MongoDB.Bson.Serialization;
-using System;
+using MongoDB.Driver;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-
 
 namespace DoAn1.Service
 {
     public class SubHeaderService
     {
-        ClassDB db = new ClassDB();
+        private readonly ClassDB db = new ClassDB();
         private IMongoCollection<SubHeader> _collection;
 
         public SubHeaderService()
         {
             _collection = db.GetConnection().GetCollection<SubHeader>("category");
+        }
+
+        public List<SubHeader> GetBrandOnly()
+        {
+            return _collection.Find(_ => true).ToList();
         }
 
         public SubHeader GetSubHeader(string _device_key)
