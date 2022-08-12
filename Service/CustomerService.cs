@@ -84,7 +84,7 @@ namespace DoAn1.Service
         public async Task DeleteAddress(string _address, string _customerid)
 		{
             var filter = Builders<Customer>.Filter.Eq(x => x.UserId, _customerid);
-            var update = Builders<Customer>.Update.PullFilter(x => x.address, _address);
+            var update = Builders<Customer>.Update.Pull(x => x.address, _address);
             await _collection.UpdateOneAsync(filter, update);
 		}
 
