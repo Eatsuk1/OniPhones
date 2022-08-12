@@ -174,6 +174,10 @@ contents {
     padding: 12px 0 4px 0;
 }
 
+.section2_Select{
+    justify-content: space-around;
+}
+
 .section2_SelectVersion {
     padding-bottom: 10px;
     justify-content: space-evenly;
@@ -227,10 +231,11 @@ contents {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 0 0 16px;
+    margin: 50px 0 0 16px;
     height: 55px;
     color: #fff;
     width: 90%;
+
 }
 
     .buyBtn a {
@@ -265,4 +270,31 @@ contents {
     color: #fff;
     background-color: #dc3545;
     border-color: black;
+}
+
+/*Choose btn*/
+
+input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+label {
+    display: inline-block;
+    background-color: #fff;
+    padding: 10px 20px;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+}
+
+input[type="radio"]:focus + label {
+    /*border: 2px solid #d70018;*/
+}
+
+input[type="radio"]:checked + label {
+    background-color: #DC3545;
+    color: #fff;
 }

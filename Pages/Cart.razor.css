@@ -77,6 +77,7 @@ html {
 table {
     width: 100%;
     border-collapse: collapse;
+
 }
 
 th {
@@ -102,7 +103,7 @@ th {
 
 .cart-info_img---image {
     width: 75%;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;

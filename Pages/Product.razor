@@ -81,9 +81,8 @@
             <div class="row section2_Select">
                 @foreach (var item in smartphone.storage_version)
                 {
-                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_=>GetStorage(item))">
-                        <span>@item</span>
-                    </BSButton>
+                    <input type="radio" name="test1" id="@item" @onclick="@(_ => GetStorage(item))">
+                    <label for="@item">@item</label>
                 }
             </div>
             <!-- Chon mau -->
@@ -91,10 +90,9 @@
             <div class="row section2_Select">
                 @foreach (var color in smartphone.colors)
                 {
-                    <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_ => GetColor(color))">
-                        <div class="selectColor" @*style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"*@></div>
-                        <span>@color</span>
-                    </BSButton>
+                    <input type="radio" name="test2" id="@color" @onclick="@(_ => GetColor(color))">
+                    <label for="@color">@color</label>
+                    
                 }
             </div>
             <!--Nut mua --!>

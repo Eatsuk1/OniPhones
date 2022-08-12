@@ -179,13 +179,18 @@
         color: #fff;
     }
 
+.paymentProduct-info-version{
+    display: flex;
+    justify-content:space-evenly;
+}
+
 .paymentProduct-info-content {
-    width: 40%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
     opacity: 0.8;
     font-weight: 700;
+    padding-left: 20px;
 }
 
 .paymentProduct-info-price {
