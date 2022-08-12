@@ -75,7 +75,7 @@ namespace DoAn1.Service
         public async Task UpdateAddress(string _oldaddress, string _newaddress, string _customerid)
 		{
             var builder = Builders<Customer>.Filter;
-            var filter = builder.And(builder.Eq(x => x.UserId, _customerid), builder.ElemMatch(x => x.address, _oldaddress));
+            var filter = builder.And(builder.Eq(x => x.UserId, _customerid), builder.AnyEq(x => x.address, _oldaddress));
             var update = Builders<Customer>.Update.Set(x => x.address[-1], _newaddress);
             await _collection.UpdateOneAsync(filter, update);
 
@@ -87,5 +87,14 @@ namespace DoAn1.Service
             var update = Builders<Customer>.Update.PullFilter(x => x.address, _address);
             await _collection.UpdateOneAsync(filter, update);
 		}
+
+        public async Task UpdateInfo(string _customerid, string _newname, string _newphonenum, string _newbday)
+        {
+            var builder = Builders<Customer>.Filter;
+            var filter = builder.Eq(x => x.UserId, _customerid);
+            var update = Builders<Customer>.Update.Set("name", _newname).Set("phone number", _newphonenum)
+                .Set("birthday", _newbday);
+            await _collection.UpdateOneAsync(filter, update);
+        }
     }
 }

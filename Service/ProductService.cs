@@ -23,7 +23,7 @@ namespace DoAn1.Service
 
         public List<Smartphone> GetSmartphonesFilter(string _key)
         {
-            var filter = Builders<Smartphone>.Filter.Regex("key", new BsonRegularExpression(_key, "i"));
+            var filter = Builders<Smartphone>.Filter.Regex("key", new BsonRegularExpression(_key, "imxs"));
             return _collection.Find(filter).ToList();
         }
 

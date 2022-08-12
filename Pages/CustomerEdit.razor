@@ -5,6 +5,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Components.Authorization
 @using DoAn1.Shared
+@using System.Runtime.CompilerServices
 @inject DoAn1.Service.CustomerService CustomerIService
 @layout MainLayout1
 @inject AuthenticationStateProvider AuthenticationStateProvider    
@@ -63,15 +64,15 @@
                         <div class="modal-body">
 		                    <div class="addform-section">
 			                    <label for="input-item"> Họ và tên </label>
-				                    <input type="text" placeholder="Họ và tên" @*@bind-value = "detail_address"*@>
+				                    <input type="text" placeholder="Họ và tên" @bind-value = "name">
 		                    </div>
 		                    <div class="addform-section">
 			                    <label for="birthday"> Ngày sinh </label>
-				                    <input type="date" id="birthday" name="birthday">
+				                    <input type="date" id="birthday" name="birthday" @bind-value = "birthday" >
 		                    </div>
 		                    <div class="addform-section">
 			                    <label for="input-item"> Số điện thoại </label>
-				                    <input type="text" placeholder="Số điện thoại" @*@bind-value = "detail_address"*@>
+				                    <input type="text" placeholder="Số điện thoại" @bind-value = "phone_num">
 		                    </div>
 		                    
 		                    <input class="billing_address_1" name="" type="hidden" value="">
@@ -81,7 +82,7 @@
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="UpdateInfo">Lưu lại</button>
                         </div>
                     </div>
                     </div>
@@ -95,13 +96,30 @@
     [Parameter]
     public string Customerid { get; set; }
 
+    public string name { get; set; }
+    public string phone_num { get; set; }
+    public DateTime birthday { get; set; }
+
     public Customer customer = new();
 
     protected override async Task OnInitializedAsync()
     {
         await GetClaims();
         customer = CustomerIService.GetCustomerInfo(Customerid);
-        
+        GetInfo();
+    }
+
+    public void GetInfo()
+    {
+        name = customer.Name;
+        phone_num = customer.PhoneNumber;
+        birthday = customer.Birthday == "" ? DateTime.Today : DateTime.Parse(customer.Birthday);
+    }
+
+    public async Task UpdateInfo()
+    {
+        await CustomerIService.UpdateInfo(Customerid, name, phone_num, birthday.ToShortDateString());
+        await InvokeAsync(OnInitializedAsync);
     }
 
     public async Task GetClaims()

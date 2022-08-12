@@ -92,7 +92,8 @@
                 @foreach (var color in smartphone.colors)
                 {
                     <BSButton Color="BSColor.Danger" IsOutlined="true" OnClick="@(_ => GetColor(color))">
-                        <div class="selectColor" @*style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"*@></div>
+                        <div class="selectColor" @*style="background-image: url('./assets/imgs/iphone13promax/iphone-13-pro-trang.jpg');"*@>
+                        </div>
                         <span>@color</span>
                     </BSButton>
                 }

@@ -1,9 +1,7 @@
 ﻿@page "/Account/Address"
-@using DoAn1.Data
 @using System.Security.Claims
-@using BlazorStrap
-@using DoAn1.Pages
-@inject DoAn1.Service.CustomerService CustomerIService
+@inject Service.CustomerService CustomerIService
+@inject Service.PaymentService PaymentIService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @layout MainLayout1
 
@@ -23,7 +21,7 @@
 								<p>@address</p> 
 							</div>
 							<div class="list-item-button">
-								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic; ">
+								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic;" @onclick="_=>GetDetailAddress(address)">
 								Sửa địa chỉ
 								</button>
 							</div>
@@ -68,32 +66,11 @@
 			<span>x</span>
 		</button>
       </div>
-      <div class="modal-body">
-		  <div class="addform-section">
-			  <label for="input-item"> Tỉnh/Thành phố</label>
-				  <select name="input-item" id="input-item" required="">
-					  <option value="">Tỉnh / Thành phố</option>
-					  <option value="">Hà Nội</option>
-				  </select>
-		  </div>
-		  <div class="addform-section">
-			  <label for="input-item"> Quận/Huyện</label>
-				  <select name="input-item" id="input-item" required="">
-					  <option value="">Quận / Huyện</option>
-					  <option value="">Hai Bà Trưng</option>
-				  </select>
-		  </div>
-		  <div class="addform-section">
-			  <label for="input-item"> Phường/Xã</label>
-				  <select name="input-item" id="input-item" required="">
-					  <option value="">Phường / Xã</option>
-					  <option value="">Bách Khoa</option>
-				  </select>
-		  </div>
-		  <div class="addform-section">
+        <div class="modal-body">
+          <div class="addform-section">
 			<label>Địa chỉ nhận hàng</label>
 			<div class="input-item">
-				<input type="text" placeholder="Địa chỉ nhận hàng" @*@bind-value = "detail_address"*@>
+				<input type="text" placeholder="Địa chỉ nhận hàng" @bind-value = "detail_address">
 			</div>
 		  </div>
 		  <input class="billing_address_1" name="" type="hidden" value="">
@@ -102,8 +79,8 @@
 		  <input class="billing_address_4" name="" type="hidden" value="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="RestartInfo">Đóng</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="UpdateAddress">Lưu lại</button>
       </div>
     </div>
   </div>
@@ -121,29 +98,43 @@
       <div class="modal-body">
 		  <div class="addform-section">
 			  <label for="input-item"> Tỉnh/Thành phố</label>
-				  <select name="input-item" id="input-item" required="">
+				  <select name="input-item" id="input-item" required="" @bind="selectedcity" @onclick="GetDistrict" >
 					  <option value="">Tỉnh / Thành phố</option>
-					  <option value="">Hà Nội</option>
+                      @foreach(var item in listcity){
+                          <option value="@item">@item</option>
+                      }
 				  </select>
 		  </div>
 		  <div class="addform-section">
 			  <label for="input-item"> Quận/Huyện</label>
-				  <select name="input-item" id="input-item" required="">
+				  <select name="input-item" id="input-item" required="" @bind="selected_district" @onclick="GetWard">
 					  <option value="">Quận / Huyện</option>
-					  <option value="">Hai Bà Trưng</option>
+                      @if (selectedcity != null)
+                      {
+                          @foreach (var item in listdistrict)
+                          {
+                              <option value="@item">@item</option>
+                          }
+                      }
 				  </select>
 		  </div>
 		  <div class="addform-section">
 			  <label for="input-item"> Phường/Xã</label>
-				  <select name="input-item" id="input-item" required="">
+				  <select name="input-item" id="input-item" required="" @bind="selectedward">
 					  <option value="">Phường / Xã</option>
-					  <option value="">Bách Khoa</option>
+                      @if (selected_district != null)
+                      {
+                          @foreach (var item in listward)
+                          {
+                              <option value="@item">@item</option>
+                          }
+                      }
 				  </select>
 		  </div>
 		  <div class="addform-section">
 			<label>Địa chỉ nhận hàng</label>
 			<div class="input-item">
-				<input type="text" placeholder="Địa chỉ nhận hàng" @*@bind-value = "detail_address"*@>
+				<input type="text" placeholder="Địa chỉ nhận hàng" @bind-value = "detail_address">
 			</div>
 		  </div>
 		  <input class="billing_address_1" name="" type="hidden" value="">
@@ -152,8 +143,8 @@
 		  <input class="billing_address_4" name="" type="hidden" value="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="RestartInfo">Đóng</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="AddNewAddress">Lưu lại</button>
       </div>
     </div>
   </div>
@@ -169,7 +160,20 @@
 
 	public List<string> Cus_Address{ get; set; }
 
+    public List<string> listcity { get; set; }
 
+    public string selectedcity { get; set; }
+
+    public List<string> listdistrict { get; set; }
+
+    public string selected_district { get; set; }
+
+    public List<string> listward { get; set; }
+
+    public string selectedward { get; set; }
+
+    public string detail_address { get; set; }
+    public string old_address { get; set; }
 
     [Parameter]
     public string Customerid { get; set; }
@@ -177,16 +181,60 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await GetClaims();
         GetCustomerAddress();
+        listcity = PaymentIService.GetCity();
     }
-
-
 
     private void GetCustomerAddress()
     {
         
         _ = GetClaims();
         Cus_Address = CustomerIService.GetCustomerAddress(Customerid);
+    }
+
+    public void GetDetailAddress(string _address)
+    {
+        detail_address = _address;
+        old_address = _address;
+    }
+
+    public void GetDistrict()
+    {
+        listdistrict = PaymentIService.GetDistrict(selectedcity);
+        if (selectedcity == "")
+        {
+            listdistrict.Clear();
+            listward.Clear();
+        }
+    }
+
+    public void GetWard()
+    {
+        listward = PaymentIService.GetWard(selected_district);
+        if (selected_district == "")
+        {
+            listward.Clear();
+        }
+    }
+
+    public void RestartInfo()
+    {
+        selected_district = selectedcity = selectedward = detail_address = "";
+    }
+
+    public async Task AddNewAddress()
+    {
+        await CustomerIService.AddNewAddress(selectedcity, selected_district, selectedward, detail_address, Customerid);
+        RestartInfo();
+        await InvokeAsync(OnInitializedAsync);
+    }
+
+    public async Task UpdateAddress()
+    {
+        await CustomerIService.UpdateAddress(old_address, detail_address, Customerid);
+        RestartInfo();
+        await InvokeAsync(OnInitializedAsync);
     }
 
     public async Task GetClaims()
