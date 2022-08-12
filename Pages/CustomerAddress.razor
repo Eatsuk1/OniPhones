@@ -24,7 +24,7 @@
 								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic;" @onclick="_=>GetDetailAddress(address)">
 								Sửa địa chỉ
 								</button>
-								<button style=" font-style: italic; color: #DC3545;">Xóa</button>
+								<button style=" font-style: italic; color: #DC3545;" @onclick="DeleteAddress">Xóa</button>
 								</div>
 							
 						</div>
@@ -217,7 +217,14 @@
     public async Task UpdateAddress()
     {
         await CustomerIService.UpdateAddress(old_address, detail_address, Customerid);
-        RestartInfo();
+        detail_address = "";
+        await InvokeAsync(OnInitializedAsync);
+    }
+
+    public async Task DeleteAddress()
+    {
+        await CustomerIService.DeleteAddress(detail_address, Customerid);
+        detail_address = "";
         await InvokeAsync(OnInitializedAsync);
     }
 
