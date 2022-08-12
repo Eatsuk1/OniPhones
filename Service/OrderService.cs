@@ -31,7 +31,8 @@ namespace DoAn1.Service
                 product_order = _product_order,
                 created_on_date = DateTime.Now.ToShortDateString(),
                 created_on_time = DateTime.Now.ToShortTimeString(),
-                total_price = _total_price
+                total_price = _total_price,
+                status = "Đang xác nhận",
             };
             await _collection.InsertOneAsync(document);
         }

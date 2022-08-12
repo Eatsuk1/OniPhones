@@ -32,6 +32,8 @@ namespace DoAn1.Models
         public int total_price { get; set; }
 
         public List<product_order> product_order { get; set; }
+
+        public string status { get; set; }
     }
 
     public class product_order

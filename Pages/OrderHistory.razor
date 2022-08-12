@@ -35,13 +35,13 @@
                        @foreach(var order in OrderHis)
                        {
                         <div class="history__order_list-items">                      
-                            <button class="btn history__order_header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
-                                <div class="c-3">Mã online đơn 1</div>
-                                <div class="c-3">Đang xác nhận</div>
+                            <button class="btn history__order_header" type="button" data-bs-toggle="collapse" data-bs-target="#example1" aria-expanded="false" aria-controls="collapseExample">
+                                <div class="c-3">@order.Id</div>
+                                <div class="c-3">@order.status</div>
                                 <div class="c-3">@order.created_on_date</div>
                                 <div class="c-3">@(order.total_price)đ</div>
                             </button>
-                            <div class="collapse" id="collapseExample1">
+                            <div class="collapse" id="example1">
                                     <div class="card card-body">
                                         <div class="receiver_info">
                                             <div class="receiver_info-basic c-4" style=" border: 1px solid #7e7e7e;">
