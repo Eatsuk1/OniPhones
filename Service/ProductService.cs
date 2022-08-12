@@ -1,14 +1,14 @@
 ﻿using DoAn1.Data;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
+using System.Threading.Tasks;
 
 namespace DoAn1.Service
 {
     public class ProductService
     {
-        ClassDB db = new ClassDB();
+        private readonly ClassDB db = new();
         private IMongoCollection<Smartphone> _collection;
 
         public ProductService()
@@ -18,7 +18,6 @@ namespace DoAn1.Service
 
         public List<Smartphone> GetSmartphones()
         {
-
             return _collection.Find(_ => true).Limit(5).ToList();
         }
 
@@ -26,6 +25,14 @@ namespace DoAn1.Service
         {
             var filter = Builders<Smartphone>.Filter.Regex("key", new BsonRegularExpression(_key, "i"));
             return _collection.Find(filter).ToList();
+        }
+
+
+
+        public Smartphone GetSpecifySmartphone(string _key)
+        {
+            var filter = Builders<Smartphone>.Filter.Eq("key", _key);
+            return _collection.Find(filter).FirstOrDefault();
         }
 
     }

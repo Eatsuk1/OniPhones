@@ -1,5 +1,7 @@
+using BlazorStrap;
 using DoAn1.Areas.Identity;
 using DoAn1.Data;
+using DoAn1.Models;
 using DoAn1.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -13,12 +15,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-using BlazorStrap;
 
 namespace DoAn1
 {
@@ -46,6 +47,10 @@ namespace DoAn1
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<CustomerService>();
             services.AddScoped<ProductService>();
+            services.AddScoped<CartService>();
+            services.AddScoped<SubHeaderService>();
+            services.AddScoped<PaymentService>();
+            services.AddScoped<OrderService>();
             //services.AddAuthentication().AddGoogle(googleOptions =>
             //{
             //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
@@ -72,6 +77,8 @@ namespace DoAn1
      options.Scope.Add("profile"); // <- Optional extra
      options.Scope.Add("email");   // <- Optional extra
 
+
+
      options.CallbackPath = new PathString("/callback");
      options.ClaimsIssuer = "Auth0";
      options.SaveTokens = true;
@@ -79,6 +86,8 @@ namespace DoAn1
      {
          NameClaimType = "name"
      };
+
+
 
      // Add handling of lo
      options.Events = new OpenIdConnectEvents
@@ -95,7 +104,7 @@ namespace DoAn1
                      var request = context.Request;
                      postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
                  }
-                 logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";
+                 logoutUri += $"&returnTo={Uri.EscapeDataString(postLogoutUri)}";
              }
 
              context.Response.Redirect(logoutUri);
@@ -105,8 +114,14 @@ namespace DoAn1
          }
      };
  });
-            
+
             services.AddBlazorStrap();
+
+
+            //services.AddAuth0WebAppAuthentication(options => {
+            //    options.Domain = Configuration["Auth0:Domain"];
+            //    options.ClientId = Configuration["Auth0:ClientId"];
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -140,6 +155,18 @@ namespace DoAn1
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+
+
+            app.Use(next => context =>
+            {
+                if (string.Equals(context.Request.Headers["X-Forwarded-Proto"], "https", StringComparison.OrdinalIgnoreCase))
+                {
+                    context.Request.Scheme = "https";
+                }
+
+                return next(context);
+            });
+
         }
     }
 }

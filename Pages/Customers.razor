@@ -4,6 +4,7 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Components.Authorization
+@using DoAn1.Shared
 @inject DoAn1.Service.CustomerService CustomerIService
 @layout MainLayout1
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -62,7 +63,7 @@
 						<p>0 đơn hàng</p>
 					</div>
 					<div class="contentSection__item--btn">
-						<p>Xem chi tiết</p>
+						<a href="/Account/Order">Xem chi tiết</a>
 					</div>
 				</div>
 				<div class="contentSection__item" style="background-color: #f1f8fe;">
@@ -100,7 +101,7 @@
     private void GetCustomer()
     {
         _ = GetClaims();
-	    _customer = CustomerIService.GetCustomer(Customerid);
+	    _customer = CustomerIService.GetCustomerInfo(Customerid);
     }
 
 	public async Task GetClaims()

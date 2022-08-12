@@ -1,0 +1,192 @@
+﻿@page "/Cart"
+
+@using DoAn1.Data
+@using DoAn1.Models
+@using DoAn1.Service
+@using System.Security.Claims
+@using System.Security.Principal
+
+@inject CartService CartIService
+@inject ProductService ProductIService
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager navigationManager
+@layout MainLayout0
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="notlog-screen">
+            <div class="notlog">
+                <p>Bạn cần đăng nhập để tiếp tục</p>
+                <div class="login-button">
+                    <BSButton Color="BSColor.Danger" style="margin-top: 15px">
+                        <a href="Account/Login">
+                            <p>QUAY LẠI TRANG ĐĂNG NHẬP</p>
+                        </a>
+                    </BSButton>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+    <Authorized>
+<div class="cart-page">
+    <!-- Cart header -->
+    <div class="cart-header">
+        <div class="cart-header__subline"></div>
+        <div class="cart-header__goback">
+            <a href="" role="button" onclick="history.back()">Quay lại</a>
+        </div>
+        <div class="cart-header__title">
+            <h1>Giỏ hàng</h1>
+        </div>
+    </div>
+
+    <!-- Cart items  -->
+    <table>
+        <tr>
+            <th>Product</th>
+            <th class="cart-page-quantity">Quantity</th>
+            <th class="cart-page-subtotal">Subtotal</th>
+            <th class="close-button"></th>
+        </tr>
+         @foreach (var item in CartItems)
+        {
+        <tr>
+            <td class="col c-8 section">
+                <div class="cart-info">
+                    <div class="cart-info_img">
+                        <div
+                            class="cart-info_img---image"
+                            style="background-image: url('@GetSmartphone(item.device_key).device_image');">
+                            <!-- <img src="./assets/imgs/iphone13promax/apple-iphone-13-pro-max-01.jpg" alt=""> -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3>@GetSmartphone(item.device_key).device_name</h3>
+                        <p>@item.color_selected</p>
+                        <p>@item.storage_version</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="number" @bind="item.quantity" @onclick="_ => OnQuantityChange(item.device_key, item.quantity)"/>
+            </td>
+            <td class="text-center">
+                @(item.quantity)đ
+            </td>
+            <td class="close-button">                
+                <input type="image" src="./assets/imgs/svg/trash-can-solid.svg" alt="" @onclick="_ => DeleteCart(item.device_key, Customerid)" >
+            </td>
+             
+        </tr>
+        }
+    </table>
+    
+    <div class="payment-details">
+        <div class="total-price">
+            <h4>Tổng tiền tạm tính:</h4>
+            <div class="total">
+                <span>@GetTotalPrice()&nbsp;đ</span>
+            </div>
+        </div>
+        <!--Buy Button-->
+        <div class="buy-button">
+            <BSButton Color="BSColor.Danger">
+                <a href="/Payment">
+                    <p>TIẾN HÀNH ĐẶT HÀNG</p>
+                </a>
+            </BSButton>
+        </div>
+
+        <div class="buy-button">
+            <BSButton Color="BSColor.Danger" IsOutlined="true">
+                <a href="">
+                    <p>CHỌN THÊM SẢN PHẨM KHÁC </p>
+                </a>
+            </BSButton>
+        </div>
+
+    </div>
+</div>
+    </Authorized>
+</AuthorizeView>
+
+
+@code {
+    [Parameter]
+    public string Customerid { get; set; }
+
+    [Parameter]
+    public List<Models.Cart> CartItems { get; set; }
+
+    [Parameter]
+    public int totalprice { get; set; }
+
+    [Parameter]
+    public int subtotal { get; set; }
+    public int finalsubtotal { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    { 
+        await GetClaims();
+        CartItems = CartIService.GetCart(Customerid);
+    }
+
+
+    public int GetTotalPrice()
+    {
+        subtotal = 0;
+        foreach (var item in CartItems)
+        {
+            subtotal += item.quantity;
+        }
+        return subtotal;
+    }
+
+    public async Task OnQuantityChange(string _device_key, int q_temp)
+    {
+
+        subtotal = 0;
+        finalsubtotal = 0;
+       
+        foreach (var item in CartItems)
+        {
+            subtotal += item.quantity;
+        }
+        finalsubtotal = subtotal;
+        await CartIService.UpdateCart(_device_key, Customerid, q_temp);
+    }
+
+    public async Task DeleteCart(string _device_key, string _user_id)
+    {
+        await CartIService.DeleteCart(_device_key,_user_id);
+        await InvokeAsync(OnInitializedAsync);
+    }
+
+    public Smartphone GetSmartphone(string _device_key)
+    {
+       return ProductIService.GetSpecifySmartphone(_device_key);
+    }
+
+    
+
+    public async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userClaims = authState.User.Claims;
+        try
+        {
+            foreach (var claim in userClaims)
+            {
+                if (claim.Type == ClaimTypes.NameIdentifier)
+                {
+                    Customerid = claim.Value;
+
+                }
+            }
+        }
+        catch (Exception ex){}
+    }
+}

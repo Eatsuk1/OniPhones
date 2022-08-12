@@ -2,57 +2,10 @@
 @using DoAn1.Pages
 @using DoAn1.Data
 @inject DoAn1.Service.CustomerService CustomerIService
+@layout MainLayout0
 
-<!-- Header -->
-    <div id="header">
-        <div class="grid wide">
-            <div class="row">
-                <div class="col header__logo c-2">
-                    <img src="./assets/imgs/Logo-oniphone.png" alt="logo">
-                </div>
-                <div class="col c-6">
-                    <div class="header__searchbar">
-                        <img src="./assets/imgs/svg/magnifying-glass-solid.svg" alt="">
-                        <input type="search" name="" id="" placeholder="Bạn cần tìm gì?">
-                    </div>
-                </div>
-                <div class="col header__phone c-2">
-                        <div class="header__phone--icon">
-                            <a href="Tel:1800xxxx"><img src="./assets/imgs/svg/phone.svg" alt=""></a>
-                        </div>
-                        <div class="header__phone--sub">
-                            <div>
-                                <a href="Tel:1800xxxx">Gọi mua hàng</a>
-                            </div>
-                            <div>
-                                <a class="header__phone--number" href="Tel:1800xxxx">1800.xxxx</a>
-                            </div>
-                        </div>
-                </div>
-                
 
-                <div class="header__section col c-1">
-                    <div class="header__section--item">
-                        <img src="./assets/imgs/svg/shopping-cart.svg" alt="">
-                    </div>
-                    <div class="header__section--sub">
-                        <a href="">Giỏ hàng</a>
-                    </div>
-                </div>
-                <div class="header__section col c-1">
-                    <div class="header__section--item">
-                        <img src="./assets/imgs/svg/user.svg" alt="">
-                    </div>
-                    <div class="header__section--sub">
-                        <a href="">Cmember</a>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    
-    <div id="content">
+<div id="content">
         <div class="grid wide">
             <div class="row">
 
@@ -60,15 +13,15 @@
                     <div class="sideNav">
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/home.svg" alt="">
-                            <a class = "nav-link"  href="@customerid">
+                            <a class = "nav-link"  href="/Account/Main">
                             <span aria-hidden = "true"></span> Trang chủ
                             
                             </a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/clock.svg" alt="">
-                            <a class="nav-link" href="/@customerid/lichsumuahang">
-                <span aria-hidden="true"></span>Lịch sử mua hàng</a>
+                            <a class="nav-link" href="/Account/Order">
+                            <span aria-hidden="true"></span>Lịch sử mua hàng</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/location-pin.png" alt="">
@@ -81,32 +34,31 @@
                         </div>                        
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/gift.svg" alt="">
-                            <a href="">Ưu đãi của bạn</a>
+                            <a class = "nav-link" href="">Ưu đãi của bạn</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/wallet.png" alt="">
-                            <a href="">Tích lũy</a>
+                            <a class = "nav-link" href="">Tích lũy</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/user_solid.svg" alt="">
-                            <a class = "nav-link" href ="/@customerid/taikhoancuatoi" >
+                            <a class = "nav-link" href ="/Account/Edit" >
 
                              <span aria-hidden = "true"></span>Tài khoản của bạn</a>
                         </div>
                         <div class="sideNav__item">
-                            <img src="./assets/imgs/svg/message-square.svg" alt="">
-                            <a href="">Hỗ trợ</a>
-                        </div>
-                        <div class="sideNav__item">
                             <img src="./assets/imgs/svg/edit.svg" alt="">
-                            <a class = "nav-link" href ="/@customerid/phanhoi" >
+                            <a class = "nav-link" href ="/Account/Report" >
 
                              <span aria-hidden = "true"></span>
                             Góp ý - Phản hồi</a>
                         </div>
                         <div class="sideNav__item">
                             <img src="./assets/imgs/svg/log-out.svg" alt="">
-                            <a href="">Thoát tài khoản</a>
+                            <form method="post" action="Account/LogOut">
+				                <button type="submit" class="nav-link btn btn-link">Thoát tài khoản</button>
+			                </form>
+                           @* <a href="Account/Logout">Thoát tài khoản</a>*@
                         </div>
                     </div>
                 </div>
@@ -118,14 +70,12 @@
    
 
 @code {
-    Customer customer = new Customer();
+    
 
 
 
 
 
-    [Parameter]
-    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
 
    
 }

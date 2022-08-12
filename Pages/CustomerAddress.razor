@@ -1,28 +1,157 @@
 ﻿@page "/Account/Address"
 @using DoAn1.Data
 @using System.Security.Claims
-@inject DoAn1.Service.CustomerService CustomerIService
-@layout MainLayout1
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@using BlazorStrap
 @using DoAn1.Pages
+@inject DoAn1.Service.CustomerService CustomerIService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@layout MainLayout1
+
+<div class="col c-10 mt-16">
+    <div class="customer-address">
+        <div class="address">
+	        <p>Địa chỉ khách hàng</p>
+        </div>
+        <form class="address-details">
+	        @*chỗ này để foreach load địa chỉ*@
+	        <div class="address-display-showtime">
+                <div class="address-display">
+					@foreach(var address in Cus_Address)
+					{
+						<div class="address-display-list">
+							<div class="list-item-text c-8"> 
+								<p>@address</p> 
+							</div>
+							<div class="list-item-button">
+								<button type="button" class="btn add-address" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;font-style:italic; ">
+								Sửa địa chỉ
+								</button>
+								<button style=" font-style: italic; color: #DC3545;">Xóa</button>
+								</div>
+							
+						</div>
+					}
+                </div>
+			</div>
+            <!-- Button trigger modal -->
+			<div class="address-add">
+				<BSButton Color="BSColor.Danger" class="btn add-address" data-bs-toggle="modal" data-bs-target="#AddModal">
+					Thêm địa chỉ
+				</BSButton>
+			</div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="fixModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sửa địa chỉ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			<span>x</span>
+		</button>
+      </div>
+      <div class="modal-body">
+		  <div class="addform-section">
+			  <label for="input-item"> Tỉnh/Thành phố</label>
+				  <select name="input-item" id="input-item" required="">
+					  <option value="">Tỉnh / Thành phố</option>
+					  <option value="">Hà Nội</option>
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			  <label for="input-item"> Quận/Huyện</label>
+				  <select name="input-item" id="input-item" required="">
+					  <option value="">Quận / Huyện</option>
+					  <option value="">Hai Bà Trưng</option>
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			  <label for="input-item"> Phường/Xã</label>
+				  <select name="input-item" id="input-item" required="">
+					  <option value="">Phường / Xã</option>
+					  <option value="">Bách Khoa</option>
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			<label>Địa chỉ nhận hàng</label>
+			<div class="input-item">
+				<input type="text" placeholder="Địa chỉ nhận hàng" @*@bind-value = "detail_address"*@>
+			</div>
+		  </div>
+		  <input class="billing_address_1" name="" type="hidden" value="">
+		  <input class="billing_address_2" name="" type="hidden" value="">
+		  <input class="billing_address_3" name="" type="hidden" value="">
+		  <input class="billing_address_4" name="" type="hidden" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm địa chỉ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			<span>x</span>
+		</button>
+      </div>
+      <div class="modal-body">
+		  <div class="addform-section">
+			  <label for="input-item"> Tỉnh/Thành phố</label>
+				  <select name="input-item" id="input-item" required="">
+					  <option value="">Tỉnh / Thành phố</option>
+					  <option value="">Hà Nội</option>
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			  <label for="input-item"> Quận/Huyện</label>
+				  <select name="input-item" id="input-item" required="">
+					  <option value="">Quận / Huyện</option>
+					  <option value="">Hai Bà Trưng</option>
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			  <label for="input-item"> Phường/Xã</label>
+				  <select name="input-item" id="input-item" required="">
+					  <option value="">Phường / Xã</option>
+					  <option value="">Bách Khoa</option>
+				  </select>
+		  </div>
+		  <div class="addform-section">
+			<label>Địa chỉ nhận hàng</label>
+			<div class="input-item">
+				<input type="text" placeholder="Địa chỉ nhận hàng" @*@bind-value = "detail_address"*@>
+			</div>
+		  </div>
+		  <input class="billing_address_1" name="" type="hidden" value="">
+		  <input class="billing_address_2" name="" type="hidden" value="">
+		  <input class="billing_address_3" name="" type="hidden" value="">
+		  <input class="billing_address_4" name="" type="hidden" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-
-<h3>CustomerAddress</h3>
-
-
-    @foreach(string address in Cus_Address.address)
-{
-    <p>@address</p>
-    
-}
 
 
 
 
 
 @code {
-    Customer Cus_Address = new Customer();
+
+	public List<string> Cus_Address{ get; set; }
 
 
 

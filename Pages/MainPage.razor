@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using DoAn1.Data
+@using DoAn1.Models
 @using System.Security.Claims
 @using DoAn1.Service
-@inject DoAn1.Service.ProductService ProductIService
+@inject ProductService ProductIService
 @inject CustomerService CustomerIService
+@inject SubHeaderService SubHeaderIService
 @layout MainLayout0
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -19,24 +21,23 @@
                 <div class="col c-2 mt-16">   
                     <div class="left_menu">
                         <div class="dropdown_menu">
-                            <a class="#">Điện thoại
+                            <a class="#">Điện thoại</a>
                             <div class="dropdown_container">
-                                <a href="/phone/Apple">Apple</a>
-                                <a href="/phone/Samsung">Samsung</a>
-                                <a href="/phone/Xiaomi">Xiaomi</a>
-                                <a href="/phone/Oppo">Oppo</a>
+                                @foreach(var item in brand)
+                                {
+                                    <a href="/search/result/@item.Brand">@item.Brand</a>
+                                }
                             </div>
-                            </a>
+                           
 
                         </div>
 
                         <div class="dropdown_menu">
-                            <p>Máy tính bảng</p>
+                            <a>Máy tính bảng</a>
                             <div class="dropdown_container">
                                 <a href="/tablet/Apple">Apple</a>
                                 <a href="/tablet/Apple">Samsung</a>
                                 <a href="/tablet/Xiaomi">Xiaomi</a>
-                            
                             </div>
 
                         </div>
@@ -104,116 +105,31 @@
                         <div class="product_list">
                             <div class="list-product">
                                 
-                                <div id="01" class="product_info-container c-2">
+                                
+                        @foreach(var phone in smartphone)
+                        {
+                            <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-max-01.jpg">
+                                        <a href="/@phone.key" class="product_link">
+                                            <div class="item-product_image">
+                                                <a href="/@phone.key">
+                                                    <img src="@phone.device_image">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="/@phone.key">
+                                                    <p>@phone.device_name</p>
+                                                </a>
+                                            </div>
+                                            <div class="item-product_price">
+                                                <p>@phone.default_price</p>
+                                            </div>
+                                            
                                         </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>iPhone 13 Promax</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>20.290.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
                                     </div>
                                 </div>
+                        }
 
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-z-fold3-5g.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy Z Fold 3</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>32.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a73-5g.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy A73</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>12.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s22-ultra-5g.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy S22 Ultra</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>30.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-
-                                <div id="01" class="product_info-container c-2">
-                                    <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/xiaomi-12.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Xiaomi 12</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>14.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
-                                    </div>
-                                </div>
-                                          
 
                             </div>
 
@@ -222,7 +138,7 @@
                 </div>
 
                 <div class="col c-12 mt16">
-                    <div class="product"></div>
+                    <div class="product">
                         <div class="product_title">
                             <a href="#" class="c-5 box-title_title">
                                 <h2>Máy tính bảng</h2>
@@ -240,113 +156,108 @@
                         <div class="product_list">
                             <div class="list-product">
                                 
-                                <div id="01" class="product_info-container c-2">
+                                <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-129-2021.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>iPad Pro 12.9</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>17.790.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
+                                      
+                                            <div class="item-product_image">
+                                                <a href="#">
+                                                    <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-129-2021.jpg">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="#">
+                                                    iPad Pro 12.9
+                                                </a>
+                                            </div>
+                                            <div class="item-product_price">
+                                                <p>17.790.000</p>
+                                            </div>
+                                       
+                                        
                                     </div>
                                 </div>
 
-                                <div id="01" class="product_info-container c-2">
+                                <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-2022-new.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>iPad Air 2022</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>16.690.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
+                                        
+                                            <div class="item-product_image">
+                                                <a href="#">
+                                                    <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-2022-new.jpg">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="#">
+                                                    <p>iPad Air 2022</p>
+                                                </a>
+                                            </div>
+                                            <div class="item-product_price">
+                                                <p>16.690.000</p>
+                                            </div>
+                                            
+                                       
                                     </div>
                                 </div>
 
-                                <div id="01" class="product_info-container c-2">
+                                <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/xiaomi-pad-5.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>MiPad 5</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>8.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
+                                        
+                                            <div class="item-product_image">
+                                                <a href="#">
+                                                    <img src="https://fdn2.gsmarena.com/vv/bigpic/xiaomi-pad-5.jpg">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="#">
+                                                    <p>MiPad 5</p>
+                                                </a>
+                                                </div>
+                                            <div class="item-product_price">
+                                                <p>8.990.000</p>
+                                            </div>
+                                        
+                                        
                                     </div>
                                 </div>
 
-                                <div id="01" class="product_info-container c-2">
+                                <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy Tab S8</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>20.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
+                                       
+                                            <div class="item-product_image">
+                                                <a href="#">
+                                                    <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8.jpg">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="#">
+                                                    <p>Galaxy Tab S8</p>
+                                                </a>
+                                            </div>
+                                            <div class="item-product_price">
+                                                <p>20.990.000</p>
+                                            </div>
+                                    
+                                        
                                     </div>
                                 </div>
 
-                                <div id="01" class="product_info-container c-2">
+                                <div class="product_info-container c-2">
                                     <div class="product_info">
-                                    <a href="#" class="product_link">
-                                    <div class="item-product_image">
-                                        <a href="#">
-                                            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8-ultra.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-product_name"></div>
-                                        <a href="#">
-                                            <p>Galaxy Tab S8 Ultra</p>
-                                        </a>
-                                    <div class="item-product_price">
-                                        <p>30.990.000</p>
-                                    </div>
-                                    <div class="item-product_rating">
-                                        <!-- <p>Đánh giá</p> -->
-                                    </div>
-                                    </a>
+                                      
+                                            <div class="item-product_image">
+                                                <a href="#">
+                                                    <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s8-ultra.jpg">
+                                                </a>
+                                            </div>
+                                            <div class="item-product_name">
+                                                <a href="#">
+                                                    <p>Galaxy Tab S8 Ultra</p>
+                                                </a>
+                                            </div>
+                                            <div class="item-product_price">
+                                                <p>30.990.000</p>
+                                            </div>
+                                    
+                                        
                                     </div>
                                 </div>
                                           
@@ -355,13 +266,13 @@
 
                         </div>
 
-                </div>
+                    </div>
                                                     
-
-            </div>
-
+                </div>
         </div>
- </div>
+
+    </div>
+</div>
 
 
  <footer class="bg-light text-lg-start">
@@ -463,20 +374,20 @@
 
 
 
-   @code {
-       List<Smartphone> smartphone = new List<Smartphone>();
-       
-       protected override async Task OnInitializedAsync()
-       {
-           
-         GetSmartphone();
+@code {
+    List<Smartphone> smartphone = new();
+
+    List<SubHeader> brand = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetSmartphone();
     }
 
     private void GetSmartphone()
     {
         smartphone = ProductIService.GetSmartphones();
+        brand = SubHeaderIService.GetBrandOnly();
     }
 
-       
-
-   }
+}

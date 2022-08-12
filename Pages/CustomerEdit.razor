@@ -1,6 +1,13 @@
-﻿@page "/{customerid}/taikhoancuatoi"
+﻿@page "/Account/Edit"
 @using DoAn1.Data
-@layout MainLayout1      
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Components.Authorization
+@using DoAn1.Shared
+@inject DoAn1.Service.CustomerService CustomerIService
+@layout MainLayout1
+@inject AuthenticationStateProvider AuthenticationStateProvider    
     
     <div class="col c-10 mt-16">
         <div class="member">
@@ -10,19 +17,19 @@
                     <p>Xin chào</p>
                 </div>
                 <div class="member__info--name">
-                    <p>Dự Nguyễn Trọng</p>
+                    <p>@customer.Name</p>
                 </div>
             </div>
             <div class="member__section">
                 <div class="member__section--item">
                     <p>Sinh nhật</p>
                     <img src="./assets/imgs/svg/cake.png" alt="">
-                    <p>Chưa cập nhật</p>
+                    <p>@customer.Birthday</p>
                 </div>
                 <div class="member__section--item">
                     <p>Số điện thoại</p>
                     <img src="./assets/imgs/svg/smartphone.png" alt="">
-                    <p>Chưa cập nhật</p>
+                    <p>@customer.PhoneNumber</p>
                 </div>
                 <div class="member__section--item">
                     <p>Hạng thành viên</p>
@@ -32,7 +39,7 @@
                 <div class="member__section--item">
                     <p>Ngày tham gia</p>
                     <img src="./assets/imgs/svg/calendar.svg" alt="">
-                    <p>17/05/2022</p>
+                    <p>@customer.JoinedDay</p>
                 </div>                            
                 <div class="member__section--item">
                     <p>Coin tích lũy</p>
@@ -41,7 +48,44 @@
                 </div>
             </div>
             <div class="member__update">
-                <button type="button">Cập nhật thông tin</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#fixModal" style="text-align: left;">
+                    Cập nhật thông tin
+                </button>
+                <div class="modal fade" id="fixModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			                <span>x</span>
+		                </button>
+                        </div>
+                        <div class="modal-body">
+		                    <div class="addform-section">
+			                    <label for="input-item"> Họ và tên </label>
+				                    <input type="text" placeholder="Họ và tên" @*@bind-value = "detail_address"*@>
+		                    </div>
+		                    <div class="addform-section">
+			                    <label for="birthday"> Ngày sinh </label>
+				                    <input type="date" id="birthday" name="birthday">
+		                    </div>
+		                    <div class="addform-section">
+			                    <label for="input-item"> Số điện thoại </label>
+				                    <input type="text" placeholder="Số điện thoại" @*@bind-value = "detail_address"*@>
+		                    </div>
+		                    
+		                    <input class="billing_address_1" name="" type="hidden" value="">
+		                    <input class="billing_address_2" name="" type="hidden" value="">
+		                    <input class="billing_address_3" name="" type="hidden" value="">
+		                    <input class="billing_address_4" name="" type="hidden" value="">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu lại</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>   
@@ -49,5 +93,27 @@
 
 @code {
     [Parameter]
-    public string customerid { get; set; } = "627e792d5571cc484d050b6e";
+    public string Customerid { get; set; }
+
+    public Customer customer = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetClaims();
+        customer = CustomerIService.GetCustomerInfo(Customerid);
+        
+    }
+
+    public async Task GetClaims()
+	{
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+	    var userClaims = authState.User.Claims;
+	    foreach (var claim in userClaims)
+	    {
+	        if (claim.Type == ClaimTypes.NameIdentifier)
+	        {
+		        Customerid= claim.Value;
+	        }
+	    }
+	}
 }
